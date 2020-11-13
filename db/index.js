@@ -31,7 +31,7 @@ function findbyParameters(filter, query, callback) {
 }
 
 function findOneAndUpdate(conditions, update, options, callback) {
-
+  BookingModel.findOneAndUpdate(conditions, update, options, callback)
 }
 
 exports.insertMany = insertMany;
