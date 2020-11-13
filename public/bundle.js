@@ -210,6 +210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -253,7 +255,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
       message: '',
       financing: false
     };
+    _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleReset = _this.handleReset.bind(_assertThisInitialized(_this));
+    _this.toggleFinancing = _this.toggleFinancing.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -261,15 +266,39 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {}
   }, {
+    key: "handleInput",
+    value: function handleInput(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+      console.log(event.target.name, this.state[event.target.name]);
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
       event.preventDefault();
       this.props.submit(this.state);
+      this.handleReset();
+    }
+  }, {
+    key: "handleReset",
+    value: function handleReset() {
+      Array.from(document.querySelectorAll('input')).forEach(function (input) {
+        return input.value = '';
+      });
+      this.setState({});
+    }
+  }, {
+    key: "toggleFinancing",
+    value: function toggleFinancing() {
+      var checked = !this.state.financing;
+      this.setState({
+        financing: checked
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var label = '';
+      var finLabel = '';
 
       if (this.props.view === 'info') {
         label = 'Request Info';
@@ -277,9 +306,27 @@ var Form = /*#__PURE__*/function (_React$Component) {
         label = 'Schedule a Tour';
       }
 
+      if (this.state.financing) {
+        finLabel = 'A licensed lender will contact you shortly.';
+      } else {
+        finLabel = 'I want to talk about financing.';
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, label)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "name",
+        onChange: this.handleInput
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "email",
+        onChange: this.handleInput
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "phone",
+        onChange: this.handleInput
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        onClick: this.toggleFinancing
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, label)));
     }
   }]);
 
