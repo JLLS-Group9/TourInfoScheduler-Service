@@ -1,3 +1,4 @@
+const db = require('./db/index.js')
 const faker = require('faker')
 
 const s3BaseURL = 'https://s3-us-west-1.amazonaws.com/trulia.tour.scheduler/'
@@ -7,7 +8,7 @@ const availTimes = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '1
 var createBookingInfo = function() {
   let bookingType = Math.random() <= 0.5 ? "In-person" : "Video Chat";
   let dateObj = faker.date.between('2020-11-13', '2020-12-01').toISOString().split('T')[0];
-  let finBool = Math.random() <= 0.5 ? true : false;
+  let finBool = (Math.random() <= 0.5)
   var booking = {
     type: bookingType,
     date: dateObj,
@@ -17,8 +18,9 @@ var createBookingInfo = function() {
   return booking;
 }
 
+
 var createRequestInfo = function() {
-  let finBool = Math.random() <= 0.5 ? true : false;
+  let finBool = (Math.random() <= 0.5);
   var request = {
     name: faker.name.findName(),
     email: faker.internet.email(),
@@ -35,7 +37,7 @@ var createAgentInfo = function () {
     name: faker.name.findName(),
     email: faker.internet.email(),
     phone: faker.phone.phoneNumberFormat(),
-    reviewsScore: (Math.random() * 5).toFixed(2),
+    reviewsScore: (Math.random() * 5).toFixed(1),
     reviewsCount: Math.floor(Math.random() * 20),
     recentSales: Math.floor(Math.random() * 20),
     Picture: `${s3BaseURL}${agentPicture}.jpg`,
@@ -67,6 +69,9 @@ var createRecord = function(id) {
   let dataStr = {
     propertyId: id,
     address: faker.address.streetAddress(),
+    city: faker.address.city(),
+    state: faker.address.state(),
+    zipCode: faker.address.zipCode(),
     listingAgent: faker.name.findName(),
     propertyType: propertyType,
     bookings: createList('bookings'),
@@ -84,9 +89,16 @@ var seedData = (num) => {
     created++;
   }
 
+  db.insertMany(entries, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log('insertion complete!', data)
+    }
+  })
 
 }
 
-
+seedData(100)
 
 
