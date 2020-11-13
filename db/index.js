@@ -22,8 +22,18 @@ const bookingSchema = new mongoose.Schema({
 
 const BookingModel = mongoose.model('Booking', bookingSchema);
 
-function insertMany(stories, callback) {
-  BookingModel.insertMany(stories, callback)
+function insertMany(bookings, callback) {
+  BookingModel.insertMany(bookings, callback)
+}
+
+function findbyParameters(filter, query, callback) {
+  BookingModel.find(filter, null, query, callback)
+}
+
+function findOneAndUpdate(conditions, update, options, callback) {
+
 }
 
 exports.insertMany = insertMany;
+exports.findbyParameters = findbyParameters;
+exports.findOneAndUpdate = findOneAndUpdate;

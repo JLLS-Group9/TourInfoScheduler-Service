@@ -8,6 +8,29 @@ class App extends React.Component {
     }
   }
 
+  retrievePropertyInfo (id) {
+    axios.get(`/api/homes/${id}/bookings`)
+    .then((response) => {
+      console.log(response.data)
+    })
+  }
+
+  scheduleTour (id) {
+    axios.put(`/api/homes/${id}/scheduleTour`)
+    .then((response) => {
+
+    })
+  }
+
+
+  requestInfo (id) {
+    axios.put(`/api/homes/${id}/requestInfo`)
+    .then((response) => {
+
+    })
+  }
+
+
 
   render() {
     return (

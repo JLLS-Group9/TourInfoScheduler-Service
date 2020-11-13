@@ -137,6 +137,23 @@ var App = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: "retrievePropertyInfo",
+    value: function retrievePropertyInfo(id) {
+      axios.get("/api/homes/".concat(id, "/bookings")).then(function (response) {
+        console.log(response.data);
+      });
+    }
+  }, {
+    key: "scheduleTour",
+    value: function scheduleTour(id) {
+      axios.post("/api/homes/".concat(id, "/scheduleTour")).then(function (response) {});
+    }
+  }, {
+    key: "requestInfo",
+    value: function requestInfo(id) {
+      axios.post("/api/homes/".concat(id, "/requestInfo")).then(function (response) {});
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World, this is the App of TourInfo");
