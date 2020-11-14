@@ -7,7 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentView: 'schedule',
-      property: []
+      property: {}
     }
 
     this.submitRequest = this.submitRequest.bind(this)
@@ -21,30 +21,33 @@ class App extends React.Component {
     console.log('retrieving info')
     axios.get(`/api/homes/${id}/bookings`)
     .then((response) => {
-      console.log(response.data)
       this.setState ({
-        property: response.data
+        property: response.data[0]
       })
     })
   }
 
-  scheduleTour (id) {
-    axios.put(`/api/homes/${id}/scheduleTour`)
+  scheduleTour (input) {
+    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`)
     .then((response) => {
 
     })
   }
 
-  requestInfo (id) {
-    axios.put(`/api/homes/${id}/requestInfo`)
+  requestInfo (input) {
+    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`)
     .then((response) => {
 
     })
   }
 
-  submitRequest(event) {
-    console.log('request submitted!')
-    this.requestInfo();
+  submitRequest(input) {
+    if (this.state.currentView === 'schedule') {
+      this.scheduleTour(input);
+    } else {
+      this.requestInfo(input);
+    }
+    console.log('request submitted!', this.state.property.propertyId)
   }
 
 

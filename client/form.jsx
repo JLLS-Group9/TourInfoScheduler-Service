@@ -16,7 +16,6 @@ class Form extends React.Component {
 
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleReset = this.handleReset.bind(this)
     this.toggleFinancing = this.toggleFinancing.bind(this)
   }
 
@@ -33,19 +32,19 @@ class Form extends React.Component {
 
   handleSubmit () {
     event.preventDefault()
+    console.log('handling submit')
     this.props.submit(this.state)
     this.handleReset()
   }
 
   handleReset() {
-    Array.from(document.querySelectorAll('input')).forEach(
-      input => input.value = '')
-    this.setState ({
-    })
-
+    console.log('entering handleReset')
+    // let forms = Array.from(document.querySelectorAll('input'))
+    // console.log(forms)
   }
 
   toggleFinancing () {
+    console.log('toggling financing')
     let checked = !this.state.financing;
     this.setState({
       financing: checked
@@ -55,10 +54,22 @@ class Form extends React.Component {
   render () {
     let label = '';
     let finLabel = '';
+    let scheduleDisplay;
+    let infoDisplay;
     if (this.props.view === 'info') {
       label = 'Request Info'
+      infoDisplay =
+      <span>
+      <input name="message" onChange={this.handleInput}></input><label>Message</label>
+      </span>
     } else {
       label = 'Schedule a Tour'
+      scheduleDisplay =
+          <span>
+          <input name="type" onChange={this.handleInput}></input><label>Tour Type</label>
+          <input name="date" onChange={this.handleInput}></input><label>Date</label>
+          <input name="time" onChange={this.handleInput}></input><label>Time</label>
+          </span>
     }
 
     if (this.state.financing) {
@@ -68,14 +79,15 @@ class Form extends React.Component {
     }
 
 
-
     return (
       <form onSubmit={this.handleSubmit}>
+        {scheduleDisplay}
         <input name="name" onChange={this.handleInput}></input><label>Name</label>
         <input name="email" onChange={this.handleInput}></input><label>Email</label>
         <input name="phone" onChange={this.handleInput}></input><label>Phone</label>
+        {infoDisplay}
         <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>
-        <button><label>{label}</label></button>
+        <button type="submit">{label}</button>
       </form>
     )
   }
