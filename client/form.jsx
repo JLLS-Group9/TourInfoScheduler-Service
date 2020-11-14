@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './style.css'
-// import Agents from './agentsList.jsx'
+import Agents from './agentsList.jsx'
 
 class Form extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Form extends React.Component {
     return rows;
   }
 
-  renderCondtl(schedule) {
+  renderConditional(schedule) {
     if (!schedule) {
       console.log('check should indicate info')
       return (
@@ -67,12 +67,17 @@ class Form extends React.Component {
       </span>)
     } else {
       console.log('check should indicate schedule')
+      let scheduler = [];
+      let buttons = ['In-Person', 'Video']
+      scheduler.push(<label key="tourType">Tour Type</label>);
+      buttons.forEach((element, index) => scheduler.push(
+      <button name="type" key={index} onClick={this.handleInput}>{element}</button>))
+      return scheduler;
     }
   }
 
   render() {
     const {
-      property,
       property: { agentsInfo, booking, requestInfo },
       toggle,
       view
@@ -90,10 +95,6 @@ class Form extends React.Component {
     } else {
       scheduleDisplay =
         <span>
-          <label>Tour Type</label><select name="type">
-            <option value="In Person">In Person</option>
-            <option value="In Person">Video</option>
-          </select>
           <input name="date" onChange={this.handleInput}></input><label>Date</label>
           <input name="time" onChange={this.handleInput}></input><label>Time</label>
         </span>
@@ -107,16 +108,16 @@ class Form extends React.Component {
 
     return (
       <div>
-        <button onClick={() => { toggle() }}>Schedule a Tour</button>
-        <button onClick={() => { toggle() }}>Request Info</button>
+        <button name="schedule" onClick={() => { toggle(event) }}>Schedule a Tour</button>
+        <button name="info" onClick={() => { toggle(event) }}>Request Info</button>
         <form onSubmit={this.handleSubmit}>
+          {isScheduleOn ? this.renderConditional(isScheduleOn) : null}
           {scheduleDisplay}
-          {isScheduleOn ? this.renderCondtl(isScheduleOn) : null}
           {this.renderStandardInputs()}
-          {isScheduleOn ? null : this.renderCondtl(isScheduleOn)}
+          {isScheduleOn ? null : this.renderConditional(isScheduleOn)}
           <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>
           <button type="submit">{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button>
-          {/* {isScheduleOn ? null : <Agents agents={agentsInfo} />} */}
+          {isScheduleOn ? null : <Agents agents={agentsInfo} />}
         </form>
       </div>
     )

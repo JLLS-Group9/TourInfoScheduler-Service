@@ -56,14 +56,11 @@ class App extends React.Component {
     }
   }
 
-  toggleView() {
-    if (this.state.currentView === 'schedule') {
+  toggleView(event) {
+    let click = event.target.name;
+    if (this.state.currentView !== click) {
       this.setState({
-        currentView: 'info'
-      })
-    } else {
-      this.setState ({
-        currentView: 'schedule'
+        currentView: click
       })
     }
     console.log('toggleView', this.state.currentView)
