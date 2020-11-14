@@ -7,7 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentView: 'schedule',
-      property: {}
+      property: {},
     }
 
     this.submitRequest = this.submitRequest.bind(this)
@@ -73,8 +73,8 @@ class App extends React.Component {
     return (
       <div>
         Hello World, this is the App of TourInfo front-end
-        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo}
-          toggle={this.toggleView} />
+        <Form submit={this.submitRequest} view={this.state.currentView} property={this.state.property}
+          toggle={this.toggleView}/>
       </div>
     )
   }

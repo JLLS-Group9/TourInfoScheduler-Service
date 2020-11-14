@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './style.css'
+// import Agents from './agentsList.jsx'
 
 class Form extends React.Component {
   constructor(props) {
@@ -20,18 +21,14 @@ class Form extends React.Component {
     this.toggleFinancing = this.toggleFinancing.bind(this)
   }
 
-  componentDidMount () {
-
-  }
-
   handleInput(event) {
-    this.setState ({
-      [event.target.name] : event.target.value
+    this.setState({
+      [event.target.name]: event.target.value
     })
     console.log(event.target.name, this.state[event.target.name])
   }
 
-  handleSubmit () {
+  handleSubmit() {
     event.preventDefault()
     console.log('Form- handle submit', this.state)
     this.props.submit(this.state)
@@ -44,7 +41,7 @@ class Form extends React.Component {
     // console.log(forms)
   }
 
-  toggleFinancing () {
+  toggleFinancing() {
     console.log('toggling financing')
     let checked = !this.state.financing;
     this.setState({
@@ -52,36 +49,57 @@ class Form extends React.Component {
     })
   }
 
-  render () {
-    let label = '';
+  renderStandardInputs() {
+    let params = ['name', 'phone', 'email'];
+    let rows = [];
+    for (let i = 0; i < params.length; i++) {
+      rows.push(<span key={i}><input name={params[i]} className={styles.test} onChange={this.handleInput}></input><label>{params[i].charAt(0).toUpperCase() + params[i].slice(1)}</label></span>)
+    }
+    return rows;
+  }
+
+  renderCondtl(schedule) {
+    if (!schedule) {
+      console.log('check should indicate info')
+      return (
+      <span>
+        <textarea name="message" onChange={this.handleInput}></textarea><label>Message</label>
+      </span>)
+    } else {
+      console.log('check should indicate schedule')
+    }
+  }
+
+  render() {
+    const {
+      property,
+      property: { agentsInfo, booking, requestInfo },
+      toggle,
+      view
+    } = this.props;
+
+    const {
+      financing,
+    } = this.state;
+
+    let isScheduleOn = view === 'schedule' ? true : false;
     let finLabel = '';
     let scheduleDisplay;
-    let infoDisplay;
-    let picDisplay;
-    if (this.props.view === 'info') {
-      label = 'Request Info'
-      infoDisplay =
-      <span>
-      <input name="message" onChange={this.handleInput}></input><label>Message</label>
-      </span>
-      picDisplay =
-      <span>
-        <img src={this.props.agents[0].Picture}></img>
-        <img src={this.props.agents[1].Picture}></img>
-        <img src={this.props.agents[2].Picture}></img>
-        <img src={this.props.agents[3].Picture}></img>
-      </span>
+
+    if (!isScheduleOn) {
     } else {
-      label = 'Schedule a Tour'
       scheduleDisplay =
-          <span>
-          <input name="type" onChange={this.handleInput}></input><label>Tour Type</label>
+        <span>
+          <label>Tour Type</label><select name="type">
+            <option value="In Person">In Person</option>
+            <option value="In Person">Video</option>
+          </select>
           <input name="date" onChange={this.handleInput}></input><label>Date</label>
           <input name="time" onChange={this.handleInput}></input><label>Time</label>
-          </span>
+        </span>
     }
 
-    if (this.state.financing) {
+    if (financing) {
       finLabel = 'A licensed lender will contact you shortly.'
     } else {
       finLabel = 'I want to talk about financing.'
@@ -89,17 +107,17 @@ class Form extends React.Component {
 
     return (
       <div>
-        <button onClick={() => {this.props.toggle()}}></button>
-      <form onSubmit={this.handleSubmit}>
-        {scheduleDisplay}
-        <input name="name" className={styles.test} onChange={this.handleInput}></input><label>Name</label>
-        <input name="email" className={styles.test} onChange={this.handleInput}></input><label>Email</label>
-        <input name="phone" className={styles.test}  onChange={this.handleInput}></input><label>Phone</label>
-        {infoDisplay}
-        <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>
-        <button type="submit">{label}</button>
-        {picDisplay}
-      </form>
+        <button onClick={() => { toggle() }}>Schedule a Tour</button>
+        <button onClick={() => { toggle() }}>Request Info</button>
+        <form onSubmit={this.handleSubmit}>
+          {scheduleDisplay}
+          {isScheduleOn ? this.renderCondtl(isScheduleOn) : null}
+          {this.renderStandardInputs()}
+          {isScheduleOn ? null : this.renderCondtl(isScheduleOn)}
+          <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>
+          <button type="submit">{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button>
+          {/* {isScheduleOn ? null : <Agents agents={agentsInfo} />} */}
+        </form>
       </div>
     )
   }

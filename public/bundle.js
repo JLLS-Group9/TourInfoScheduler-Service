@@ -211,7 +211,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World, this is the App of TourInfo front-end", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         submit: this.submitRequest,
         view: this.state.currentView,
-        agents: this.state.property.agentsInfo,
+        property: this.state.property,
         toggle: this.toggleView
       }));
     }
@@ -261,7 +261,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
-
+ // import Agents from './agentsList.jsx'
 
 var Form = /*#__PURE__*/function (_React$Component) {
   _inherits(Form, _React$Component);
@@ -291,9 +291,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
     key: "handleInput",
     value: function handleInput(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
@@ -323,37 +320,60 @@ var Form = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+    key: "renderStandardInputs",
+    value: function renderStandardInputs() {
+      var params = ['name', 'phone', 'email'];
+      var rows = [];
 
-      var label = '';
-      var finLabel = '';
-      var scheduleDisplay;
-      var infoDisplay;
-      var picDisplay;
+      for (var i = 0; i < params.length; i++) {
+        rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          key: i
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          name: params[i],
+          className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
+          onChange: this.handleInput
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, params[i].charAt(0).toUpperCase() + params[i].slice(1))));
+      }
 
-      if (this.props.view === 'info') {
-        label = 'Request Info';
-        infoDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return rows;
+    }
+  }, {
+    key: "renderCondtl",
+    value: function renderCondtl(schedule) {
+      if (!schedule) {
+        console.log('check should indicate info');
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
           name: "message",
           onChange: this.handleInput
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
-        picDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.agents[0].Picture
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.agents[1].Picture
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.agents[2].Picture
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.agents[3].Picture
-        }));
       } else {
-        label = 'Schedule a Tour';
-        scheduleDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          name: "type",
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Tour Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        console.log('check should indicate schedule');
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          property = _this$props.property,
+          _this$props$property = _this$props.property,
+          agentsInfo = _this$props$property.agentsInfo,
+          booking = _this$props$property.booking,
+          requestInfo = _this$props$property.requestInfo,
+          toggle = _this$props.toggle,
+          view = _this$props.view;
+      var financing = this.state.financing;
+      var isScheduleOn = view === 'schedule' ? true : false;
+      var finLabel = '';
+      var scheduleDisplay;
+
+      if (!isScheduleOn) {} else {
+        scheduleDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Tour Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          name: "type"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "In Person"
+        }, "In Person"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "In Person"
+        }, "Video")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           name: "date",
           onChange: this.handleInput
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -362,7 +382,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Time"));
       }
 
-      if (this.state.financing) {
+      if (financing) {
         finLabel = 'A licensed lender will contact you shortly.';
       } else {
         finLabel = 'I want to talk about financing.';
@@ -370,28 +390,20 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          _this2.props.toggle();
+          toggle();
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Schedule a Tour"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          toggle();
+        }
+      }, "Request Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, scheduleDisplay, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "name",
-        className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
-        onChange: this.handleInput
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "email",
-        className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
-        onChange: this.handleInput
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "phone",
-        className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
-        onChange: this.handleInput
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Phone"), infoDisplay, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, scheduleDisplay, isScheduleOn ? this.renderCondtl(isScheduleOn) : null, this.renderStandardInputs(), isScheduleOn ? null : this.renderCondtl(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         onClick: this.toggleFinancing
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
-      }, label), picDisplay));
+      }, isScheduleOn ? 'Schedule a Tour' : 'Request Info')));
     }
   }]);
 
