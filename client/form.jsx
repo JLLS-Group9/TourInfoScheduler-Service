@@ -66,10 +66,10 @@ class Form extends React.Component {
       </span>
       picDisplay =
       <span>
-        <img url={this.props.agents[0].Picture}></img>
-        <img url={this.props.agents[1].Picture}></img>
-
-
+        <img src={this.props.agents[0].Picture}></img>
+        <img src={this.props.agents[1].Picture}></img>
+        <img src={this.props.agents[2].Picture}></img>
+        <img src={this.props.agents[3].Picture}></img>
       </span>
     } else {
       label = 'Schedule a Tour'

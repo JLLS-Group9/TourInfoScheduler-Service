@@ -340,9 +340,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
           onChange: this.handleInput
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
         picDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          url: this.props.agents[0].Picture
+          src: this.props.agents[0].Picture
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          url: this.props.agents[1].Picture
+          src: this.props.agents[1].Picture
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.agents[2].Picture
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.agents[3].Picture
         }));
       } else {
         label = 'Schedule a Tour';
