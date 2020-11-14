@@ -24,6 +24,7 @@ class App extends React.Component {
       this.setState ({
         property: response.data[0]
       })
+      console.log(response.data[0])
     })
   }
 
@@ -56,7 +57,7 @@ class App extends React.Component {
     return (
       <div>
         Hello World, this is the App of TourInfo front-end
-        <Form submit={this.submitRequest} view={this.state.currentView} />
+        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo} />
       </div>
     )
   }
