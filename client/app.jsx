@@ -11,6 +11,7 @@ class App extends React.Component {
     }
 
     this.submitRequest = this.submitRequest.bind(this)
+    this.toggleView = this.toggleView.bind(this)
   }
 
   componentDidMount() {
@@ -36,13 +37,16 @@ class App extends React.Component {
   }
 
   requestInfo (input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`)
+    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`, {
+      input
+    })
     .then((response) => {
 
     })
   }
 
   submitRequest(input) {
+    console.log(input)
     if (this.state.currentView === 'schedule') {
       this.scheduleTour(input);
     } else {
@@ -51,13 +55,25 @@ class App extends React.Component {
     console.log('request submitted!', this.state.property.propertyId)
   }
 
-
+  toggleView() {
+    if (this.state.currentView === 'schedule') {
+      this.setState({
+        currentView: 'info'
+      })
+    } else {
+      this.setState ({
+        currentView: 'schedule'
+      })
+    }
+    console.log('toggleView', this.state.currentView)
+  }
 
   render() {
     return (
       <div>
         Hello World, this is the App of TourInfo front-end
-        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo} />
+        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo}
+          toggle={this.toggleView} />
       </div>
     )
   }

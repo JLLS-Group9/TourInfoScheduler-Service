@@ -142,6 +142,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       property: {}
     };
     _this.submitRequest = _this.submitRequest.bind(_assertThisInitialized(_this));
+    _this.toggleView = _this.toggleView.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -172,11 +173,15 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "requestInfo",
     value: function requestInfo(input) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/requestInfo")).then(function (response) {});
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/requestInfo"), {
+        input: input
+      }).then(function (response) {});
     }
   }, {
     key: "submitRequest",
     value: function submitRequest(input) {
+      console.log(input);
+
       if (this.state.currentView === 'schedule') {
         this.scheduleTour(input);
       } else {
@@ -186,12 +191,28 @@ var App = /*#__PURE__*/function (_React$Component) {
       console.log('request submitted!', this.state.property.propertyId);
     }
   }, {
+    key: "toggleView",
+    value: function toggleView() {
+      if (this.state.currentView === 'schedule') {
+        this.setState({
+          currentView: 'info'
+        });
+      } else {
+        this.setState({
+          currentView: 'schedule'
+        });
+      }
+
+      console.log('toggleView', this.state.currentView);
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World, this is the App of TourInfo front-end", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         submit: this.submitRequest,
         view: this.state.currentView,
-        agents: this.state.property.agentsInfo
+        agents: this.state.property.agentsInfo,
+        toggle: this.toggleView
       }));
     }
   }]);
@@ -293,12 +314,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
       // console.log(forms)
     }
   }, {
-    key: "toggleForm",
-    value: function toggleForm() {
-      console.log('toggle form');
-      var view = this.props.view;
-    }
-  }, {
     key: "toggleFinancing",
     value: function toggleFinancing() {
       console.log('toggling financing');
@@ -310,6 +325,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var label = '';
       var finLabel = '';
       var scheduleDisplay;
@@ -347,9 +364,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
         finLabel = 'I want to talk about financing.';
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.props.toggle();
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null), scheduleDisplay, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, scheduleDisplay, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         name: "name",
         className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
         onChange: this.handleInput
@@ -366,7 +387,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         onClick: this.toggleFinancing
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
-      }, label), picDisplay);
+      }, label), picDisplay));
     }
   }]);
 

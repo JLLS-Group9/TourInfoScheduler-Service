@@ -44,12 +44,6 @@ class Form extends React.Component {
     // console.log(forms)
   }
 
-  toggleForm() {
-    console.log('toggle form')
-    let view = this.props.view;
-
-  }
-
   toggleFinancing () {
     console.log('toggling financing')
     let checked = !this.state.financing;
@@ -92,10 +86,10 @@ class Form extends React.Component {
       finLabel = 'I want to talk about financing.'
     }
 
-
     return (
+      <div>
+        <button onClick={() => {this.props.toggle()}}></button>
       <form onSubmit={this.handleSubmit}>
-        <button></button>
         {scheduleDisplay}
         <input name="name" className={styles.test} onChange={this.handleInput}></input><label>Name</label>
         <input name="email" className={styles.test} onChange={this.handleInput}></input><label>Email</label>
@@ -105,6 +99,7 @@ class Form extends React.Component {
         <button type="submit">{label}</button>
         {picDisplay}
       </form>
+      </div>
     )
   }
 }
