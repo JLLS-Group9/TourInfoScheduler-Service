@@ -168,7 +168,9 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "scheduleTour",
     value: function scheduleTour(input) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/scheduleTour")).then(function (response) {});
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/scheduleTour"), {
+        input: input
+      }).then(function (response) {});
     }
   }, {
     key: "requestInfo",
@@ -187,8 +189,6 @@ var App = /*#__PURE__*/function (_React$Component) {
       } else {
         this.requestInfo(input);
       }
-
-      console.log('request submitted!', this.state.property.propertyId);
     }
   }, {
     key: "toggleView",
@@ -303,7 +303,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit() {
       event.preventDefault();
-      console.log('handling submit');
+      console.log('Form- handle submit', this.state);
       this.props.submit(this.state);
       this.handleReset();
     }

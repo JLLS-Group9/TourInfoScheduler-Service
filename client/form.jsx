@@ -33,7 +33,7 @@ class Form extends React.Component {
 
   handleSubmit () {
     event.preventDefault()
-    console.log('handling submit')
+    console.log('Form- handle submit', this.state)
     this.props.submit(this.state)
     this.handleReset()
   }
@@ -68,6 +68,7 @@ class Form extends React.Component {
       <span>
         <img url={this.props.agents[0].Picture}></img>
         <img url={this.props.agents[1].Picture}></img>
+
 
       </span>
     } else {

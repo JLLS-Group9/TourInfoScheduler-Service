@@ -30,7 +30,9 @@ class App extends React.Component {
   }
 
   scheduleTour (input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`)
+    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`, {
+      input
+    })
     .then((response) => {
 
     })
@@ -52,7 +54,6 @@ class App extends React.Component {
     } else {
       this.requestInfo(input);
     }
-    console.log('request submitted!', this.state.property.propertyId)
   }
 
   toggleView() {

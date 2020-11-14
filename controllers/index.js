@@ -16,8 +16,8 @@ module.exports = {
 //need to update scheduleTour and RequestInfo
 
   scheduleTour:  (req, res) => {
-    console.log('request for tour schedule ' + req.params)
-    db.findOneAndUpdate({propertyId: req.params.id}, null, (err, data) => {
+    console.log('request for tour schedule ' + JSON.stringify(req.body))
+    db.findOneAndUpdate({propertyId: req.params.id}, {$push: {bookings: req.body.input}}, null, (err, data) => {
       if (err) {
         res.status(400).send(err)
       } else {
@@ -27,8 +27,8 @@ module.exports = {
   },
 
   requestInfo: (req, res) => {
-    console.log('request for info home number ' + req.params)
-    db.findOneAndUpdate({propertyId: req.params.id}, null, (err, data) => {
+    console.log('request for info home number ' + JSON.stringify(req.body))
+    db.findOneAndUpdate({propertyId: req.params.id}, {$push: {requestInfo: req.body.input}}, null, (err, data) => {
       if (err) {
         res.status(400).send(err)
       } else {

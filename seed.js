@@ -48,8 +48,8 @@ var createAgentInfo = function () {
 var createList = (type) => {
   let list = [];
   let total = type === 'agents' ? 4
-              : type === 'bookings' ? Math.floor(Math.random() * 25)
-              : Math.floor(Math.random() * 25)
+              : type === 'bookings' ? Math.floor(Math.random() * 0)
+              : Math.floor(Math.random() * 0)
   for (let i = 0; i < total; i++) {
     if (type === 'agents') {
       list.push(createAgentInfo())

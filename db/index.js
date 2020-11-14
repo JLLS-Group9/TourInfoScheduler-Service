@@ -15,9 +15,9 @@ const bookingSchema = new mongoose.Schema({
   zipCode: String,
   listingAgent: String,
   propertyType: String,
-  bookings: Object,
-  requestInfo: Object,
-  agentsInfo: Object,
+  bookings: Array,
+  requestInfo: Array,
+  agentsInfo: Array,
 });
 
 const BookingModel = mongoose.model('Booking', bookingSchema);
