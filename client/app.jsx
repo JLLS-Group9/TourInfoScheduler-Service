@@ -7,10 +7,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentView: 'schedule',
-      property: []
+      property: {}
     }
 
     this.submitRequest = this.submitRequest.bind(this)
+    this.toggleView = this.toggleView.bind(this)
   }
 
   componentDidMount() {
@@ -21,39 +22,59 @@ class App extends React.Component {
     console.log('retrieving info')
     axios.get(`/api/homes/${id}/bookings`)
     .then((response) => {
-      console.log(response.data)
       this.setState ({
-        property: response.data
+        property: response.data[0]
       })
+      console.log(response.data[0])
     })
   }
 
-  scheduleTour (id) {
-    axios.put(`/api/homes/${id}/scheduleTour`)
+  scheduleTour (input) {
+    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`, {
+      input
+    })
     .then((response) => {
 
     })
   }
 
-  requestInfo (id) {
-    axios.put(`/api/homes/${id}/requestInfo`)
+  requestInfo (input) {
+    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`, {
+      input
+    })
     .then((response) => {
 
     })
   }
 
-  submitRequest(event) {
-    console.log('request submitted!')
-    this.requestInfo();
+  submitRequest(input) {
+    console.log(input)
+    if (this.state.currentView === 'schedule') {
+      this.scheduleTour(input);
+    } else {
+      this.requestInfo(input);
+    }
   }
 
-
+  toggleView() {
+    if (this.state.currentView === 'schedule') {
+      this.setState({
+        currentView: 'info'
+      })
+    } else {
+      this.setState ({
+        currentView: 'schedule'
+      })
+    }
+    console.log('toggleView', this.state.currentView)
+  }
 
   render() {
     return (
       <div>
         Hello World, this is the App of TourInfo front-end
-        <Form submit={this.submitRequest} view={this.state.currentView} />
+        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo}
+          toggle={this.toggleView} />
       </div>
     )
   }

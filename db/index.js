@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/trulia', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/trulia', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -15,9 +15,9 @@ const bookingSchema = new mongoose.Schema({
   zipCode: String,
   listingAgent: String,
   propertyType: String,
-  bookings: Object,
-  requestInfo: Object,
-  agentsInfo: Object,
+  bookings: Array,
+  requestInfo: Array,
+  agentsInfo: Array,
 });
 
 const BookingModel = mongoose.model('Booking', bookingSchema);
