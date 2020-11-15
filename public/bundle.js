@@ -101,7 +101,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var Agents = function Agents(_ref) {
   var agents = _ref.agents;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "These are the agents.");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, agents.map(function (agent, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: agent.picture
+    }));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Agents);

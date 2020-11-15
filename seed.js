@@ -40,7 +40,7 @@ var createAgentInfo = function () {
     reviewsScore: (Math.random() * 5).toFixed(1),
     reviewsCount: Math.floor(Math.random() * 20),
     recentSales: Math.floor(Math.random() * 20),
-    Picture: `${seedURL}${agentPicture}.jpg`,
+    picture: `${seedURL}${agentPicture}.jpg`,
     }
   return agent;
 }
