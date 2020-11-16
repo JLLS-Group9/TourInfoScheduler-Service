@@ -101,6 +101,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var populateStars = function populateStars(score) {
+  var starBar = [];
+
+  for (var i = 0; i < 5; i++) {
+    if (i >= score) {
+      starBar.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: i,
+        className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].unfilledStar
+      }, "\u2605"));
+    } else {
+      starBar.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: i,
+        className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].filledStar
+      }, "\u2605"));
+    }
+  }
+
+  return starBar;
+};
+
 var Agents = function Agents(_ref) {
   var agents = _ref.agents;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, agents.map(function (agent, index) {
@@ -113,7 +133,7 @@ var Agents = function Agents(_ref) {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].contactCard
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: agent.picture
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, agent.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), agent.phone, agent.recentSales, " Recent Sales", agent.reviewsScore, "(", agent.reviewsCount, ")"));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, agent.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), agent.phone, agent.recentSales, ' ', "Recent Sales", populateStars(agent.reviewsScore), "(", agent.reviewsCount, ")"));
   }));
 };
 
@@ -185,6 +205,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/* eslint-disable no-console */
 
 
 
@@ -232,23 +253,30 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "scheduleTour",
     value: function scheduleTour(input) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/scheduleTour"), {
+      var property = this.state.property;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(property.propertyId, "/scheduleTour"), {
         input: input
-      }).then(function (response) {});
+      }).then(function (response) {
+        console.log('schedule response', response);
+      });
     }
   }, {
     key: "requestInfo",
     value: function requestInfo(input) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(this.state.property.propertyId, "/requestInfo"), {
+      var property = this.state.property;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/homes/".concat(property.propertyId, "/requestInfo"), {
         input: input
-      }).then(function (response) {});
+      }).then(function (response) {
+        console.log(response);
+      });
     }
   }, {
     key: "submitRequest",
     value: function submitRequest(input) {
+      var currentView = this.state.currentView;
       console.log(input);
 
-      if (this.state.currentView === 'schedule') {
+      if (currentView === 'schedule') {
         this.scheduleTour(input);
       } else {
         this.requestInfo(input);
@@ -257,23 +285,27 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "toggleView",
     value: function toggleView(event) {
+      var currentView = this.state.currentView;
       var click = event.target.name;
 
-      if (this.state.currentView !== click) {
+      if (currentView !== click) {
         this.setState({
           currentView: click
         });
       }
 
-      console.log('toggleView', this.state.currentView);
+      console.log('toggleView', currentView);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this$state = this.state,
+          currentView = _this$state.currentView,
+          property = _this$state.property;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World, this is the App of TourInfo front-end", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         submit: this.submitRequest,
-        view: this.state.currentView,
-        property: this.state.property,
+        view: currentView,
+        property: property,
         toggle: this.toggleView
       }));
     }
@@ -283,6 +315,71 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./client/dateCarousel.jsx":
+/*!*********************************!*\
+  !*** ./client/dateCarousel.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dateStyles.css */ "./client/dateStyles.css");
+
+
+
+var retrieveDates = function retrieveDates() {
+  var now = new Date();
+  var startDate = new Date();
+
+  if (now.getHours() >= 19) {
+    startDate.setDate(now.getDate() + 1);
+  }
+
+  var endDate = new Date();
+  endDate.setDate(startDate.getDate() + 6);
+  console.log(startDate, endDate);
+};
+
+var Dates = function Dates(_ref) {
+  var agents = _ref.agents;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dates Carousel", retrieveDates());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Dates);
+
+/***/ }),
+
+/***/ "./client/dateStyles.css":
+/*!*******************************!*\
+  !*** ./client/dateStyles.css ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_dateStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./dateStyles.css */ "./node_modules/css-loader/dist/cjs.js?!./client/dateStyles.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -299,6 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./client/style.css");
 /* harmony import */ var _agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./agentsList.jsx */ "./client/agentsList.jsx");
+/* harmony import */ var _dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dateCarousel.jsx */ "./client/dateCarousel.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -322,6 +420,10 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/* eslint-disable no-console */
+
+/* eslint-disable no-plusplus */
 
 
 
@@ -363,9 +465,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      event.preventDefault();
+      var submit = this.props.submit;
       console.log('Form- handle submit', this.state);
-      this.props.submit(this.state);
+      submit(this.state);
       this.handleReset();
     }
   }, {
@@ -377,15 +479,16 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "toggleFinancing",
     value: function toggleFinancing() {
+      var financing = this.state.financing;
       console.log('toggling financing');
-      var checked = !this.state.financing;
+      var checked = !financing;
       this.setState({
         financing: checked
       });
     }
   }, {
     key: "renderStandardInputs",
-    value: function renderStandardInputs() {
+    value: function renderStandardInputs(finLabel, isScheduleOn) {
       var params = ['name', 'phone', 'email'];
       var rows = [];
 
@@ -399,6 +502,15 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, params[i].charAt(0).toUpperCase() + params[i].slice(1))));
       }
 
+      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        key: "checkbox",
+        onClick: this.toggleFinancing
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        key: "fin"
+      }, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, isScheduleOn ? 'Schedule a Tour' : 'Request Info')]);
       return rows;
     }
   }, {
@@ -412,22 +524,22 @@ var Form = /*#__PURE__*/function (_React$Component) {
           name: "message",
           onChange: this.handleInput
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
-      } else {
-        console.log('check should indicate schedule');
-        var scheduler = [];
-        var buttons = ['In-Person', 'Video'];
-        scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          key: "tourType"
-        }, "Tour Type"));
-        buttons.forEach(function (element, index) {
-          return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            name: "type",
-            key: index,
-            onClick: _this2.handleInput
-          }, element));
-        });
-        return scheduler;
       }
+
+      console.log('check should indicate schedule');
+      var scheduler = [];
+      var buttons = ['In-Person', 'Video'];
+      scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        key: "tourType"
+      }, "Tour Type"));
+      buttons.forEach(function (element, index) {
+        return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          name: "type",
+          key: index,
+          onClick: _this2.handleInput
+        }, element));
+      });
+      return scheduler;
     }
   }, {
     key: "renderTimeDropdown",
@@ -461,15 +573,14 @@ var Form = /*#__PURE__*/function (_React$Component) {
         '9:00 PM': 1
       };
       var timeDropdown = [];
-      console.log('bookings', bookings);
+      var todaysDate = new Date();
+      console.log(todaysDate.getHours() + 2);
 
       if (bookings) {
         for (var i = 0; i < bookings.length; i++) {
-          console.log('found date', bookings.date, bookings.time, selectedDate);
-
-          if (bookings.date === selectedDate) {
-            if (availableTimes[bookings.time]) {
-              delete availableTimes[bookings.time];
+          if (bookings[i].date === selectedDate) {
+            if (availableTimes[bookings[i].time]) {
+              delete availableTimes[bookings[i].time];
             }
           }
         }
@@ -495,14 +606,24 @@ var Form = /*#__PURE__*/function (_React$Component) {
           toggle = _this$props.toggle,
           view = _this$props.view;
       var financing = this.state.financing;
-      var isScheduleOn = view === 'schedule' ? true : false;
+      var isScheduleOn = view === 'schedule';
       var finLabel = '';
-      var scheduleDisplay;
+      var formDisplay = [];
 
       if (financing) {
         finLabel = 'A licensed lender will contact you shortly.';
       } else {
         finLabel = 'I want to talk about financing.';
+      }
+
+      if (isScheduleOn) {
+        formDisplay = [this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          name: "time"
+        }, ' ', this.renderTimeDropdown('2020-11-22', bookings), ' '), this.renderStandardInputs(finLabel, isScheduleOn)];
+      } else {
+        formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          agents: agentsInfo
+        })];
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -517,16 +638,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }
       }, "Request Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, isScheduleOn ? this.renderConditional(isScheduleOn) : null, scheduleDisplay, isScheduleOn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        name: "time"
-      }, " ", this.renderTimeDropdown('2020-11-20', bookings), " ") : null, this.renderStandardInputs(), isScheduleOn ? null : this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "checkbox",
-        onClick: this.toggleFinancing
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
-      }, isScheduleOn ? 'Schedule a Tour' : 'Request Info'), isScheduleOn ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        agents: agentsInfo
-      })));
+      }, formDisplay));
     }
   }]);
 
@@ -2435,12 +2547,36 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  display: none;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  display: inline-block;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 120px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"contactCard": "_3dfF5SUJWnKtGL1_50HYsH",
-	"picture": "_3WjeoPXrJ0mcvtyx-QPgFM"
+	"picture": "_3WjeoPXrJ0mcvtyx-QPgFM",
+	"filledStar": "_1FUT3f2xodciqXL4UkoNEP",
+	"unfilledStar": "_14hl_-fQXFOD9MxrB_kNNm"
 };
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/dateStyles.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/dateStyles.css ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "", ""]);
+// Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
 

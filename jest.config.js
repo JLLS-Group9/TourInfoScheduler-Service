@@ -1,15 +1,25 @@
 /*
+
  * For a detailed explanation regarding each configuration property, visit:
+
  * https://jestjs.io/docs/en/configuration.html
+
  */
 
 module.exports = {
+
   clearMocks: true,
+
   coverageDirectory: 'coverage',
+
   // An array of file extensions your modules use
+
   moduleFileExtensions: [
+
     'js',
-    'jsx'
+
+    'jsx',
+
   ],
 
   setupFilesAfterEnv: ['jest-enzyme'],
@@ -17,13 +27,19 @@ module.exports = {
   testEnvironment: 'enzyme',
 
   // Options that will be passed to the testEnvironment
+
   testEnvironmentOptions: {
-    enzymeAdapter: 'react16'
+
+    enzymeAdapter: 'react16',
+
   },
 
   // A map from regular expressions to paths to transformers
+
   transform: {
-    '^.+\\.jsx$': 'babel-jest'
+
+    '^.+\\.jsx$': 'babel-jest',
+
   },
 
 };

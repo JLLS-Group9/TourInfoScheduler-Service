@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import Form from './form.jsx';
@@ -12,7 +13,7 @@ class App extends React.Component {
 
     this.submitRequest = this.submitRequest.bind(this);
     this.toggleView = this.toggleView.bind(this);
-    this.retrievePropertyInfo = this.retrievePropertyInfo.bind(this)
+    this.retrievePropertyInfo = this.retrievePropertyInfo.bind(this);
   }
 
   componentDidMount() {
@@ -31,26 +32,29 @@ class App extends React.Component {
   }
 
   scheduleTour(input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`, {
+    const { property } = this.state;
+    axios.put(`/api/homes/${property.propertyId}/scheduleTour`, {
       input,
     })
       .then((response) => {
-
+        console.log('schedule response', response);
       });
   }
 
   requestInfo(input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`, {
+    const { property } = this.state;
+    axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
       input,
     })
       .then((response) => {
-
+        console.log(response);
       });
   }
 
   submitRequest(input) {
+    const { currentView } = this.state;
     console.log(input);
-    if (this.state.currentView === 'schedule') {
+    if (currentView === 'schedule') {
       this.scheduleTour(input);
     } else {
       this.requestInfo(input);
@@ -58,23 +62,28 @@ class App extends React.Component {
   }
 
   toggleView(event) {
+    const { currentView } = this.state;
     const click = event.target.name;
-    if (this.state.currentView !== click) {
+    if (currentView !== click) {
       this.setState({
         currentView: click,
       });
     }
-    console.log('toggleView', this.state.currentView);
+    console.log('toggleView', currentView);
   }
 
   render() {
+    const {
+      currentView,
+      property,
+    } = this.state;
     return (
       <div>
         Hello World, this is the App of TourInfo front-end
         <Form
           submit={this.submitRequest}
-          view={this.state.currentView}
-          property={this.state.property}
+          view={currentView}
+          property={property}
           toggle={this.toggleView}
         />
       </div>
