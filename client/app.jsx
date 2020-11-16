@@ -64,6 +64,7 @@ class App extends React.Component {
   toggleView(event) {
     const { currentView } = this.state;
     const click = event.target.name;
+    event.stopPropagation();
     if (currentView !== click) {
       this.setState({
         currentView: click,

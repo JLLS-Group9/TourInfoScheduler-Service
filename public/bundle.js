@@ -127,9 +127,17 @@ var Agents = function Agents(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: index,
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].picture
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].photo
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].thumbnail,
+      id: index,
       src: agent.picture
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].caption
+    }, index ? 'Premier' : 'Listing'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].caption
+    }, 'Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].contactCard
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: agent.picture
@@ -287,6 +295,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function toggleView(event) {
       var currentView = this.state.currentView;
       var click = event.target.name;
+      event.stopPropagation();
 
       if (currentView !== click) {
         this.setState({
@@ -333,22 +342,43 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var retrieveDates = function retrieveDates() {
+var retrieveDates = function retrieveDates(eventListener) {
   var now = new Date();
   var startDate = new Date();
+  var tempDate = new Date();
+  var dateHTML = []; // if past 5PM pacific time, then default start date to next day
 
   if (now.getHours() >= 19) {
     startDate.setDate(now.getDate() + 1);
+  } // create array of next 6 days
+
+
+  for (var i = 0; i < 6; i++) {
+    tempDate.setDate(startDate.getDate() + i);
+    var month = tempDate.toLocaleString('default', {
+      month: 'short'
+    });
+    var weekday = tempDate.toLocaleString('default', {
+      weekday: 'short'
+    });
+    var currentDate = "".concat(tempDate.getFullYear(), "-").concat(tempDate.getMonth() + 1, "-").concat(tempDate.getDate());
+    console.log(tempDate);
+    dateHTML.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      key: i,
+      value: currentDate,
+      onClick: function onClick() {
+        return eventListener(event);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, weekday), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, tempDate.getDate()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, month)));
   }
 
-  var endDate = new Date();
-  endDate.setDate(startDate.getDate() + 6);
-  console.log(startDate, endDate);
+  return dateHTML;
 };
 
 var Dates = function Dates(_ref) {
-  var agents = _ref.agents;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dates Carousel", retrieveDates());
+  var toggleDates = _ref.toggleDates;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, retrieveDates(toggleDates));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Dates);
@@ -453,6 +483,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.toggleFinancing = _this.toggleFinancing.bind(_assertThisInitialized(_this));
+    _this.toggleDates = _this.toggleDates.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -460,12 +491,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "handleInput",
     value: function handleInput(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
-      console.log(event.target.name, this.state[event.target.name]);
+      console.log('handle input', event.target.name);
     }
   }, {
     key: "handleSubmit",
-    value: function handleSubmit() {
+    value: function handleSubmit(event) {
       var submit = this.props.submit;
+      event.preventDefault();
       console.log('Form- handle submit', this.state);
       submit(this.state);
       this.handleReset();
@@ -487,44 +519,25 @@ var Form = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "renderStandardInputs",
-    value: function renderStandardInputs(finLabel, isScheduleOn) {
-      var params = ['name', 'phone', 'email'];
-      var rows = [];
-
-      for (var i = 0; i < params.length; i++) {
-        rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          key: i
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          name: params[i],
-          className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, params[i].charAt(0).toUpperCase() + params[i].slice(1))));
-      }
-
-      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "checkbox",
-        key: "checkbox",
-        onClick: this.toggleFinancing
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        key: "fin"
-      }, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
-      }, isScheduleOn ? 'Schedule a Tour' : 'Request Info')]);
-      return rows;
+    key: "toggleDates",
+    value: function toggleDates(event) {
+      this.setState({
+        date: event.target.value
+      });
+      console.log(event.target.value);
     }
   }, {
-    key: "renderConditional",
-    value: function renderConditional(schedule) {
+    key: "renderMessageBox",
+    value: function renderMessageBox() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        name: "message",
+        onChange: this.handleInput
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
+    }
+  }, {
+    key: "renderScheduler",
+    value: function renderScheduler() {
       var _this2 = this;
-
-      if (!schedule) {
-        console.log('check should indicate info');
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-          name: "message",
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
-      }
 
       console.log('check should indicate schedule');
       var scheduler = [];
@@ -535,6 +548,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
       buttons.forEach(function (element, index) {
         return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           name: "type",
+          type: "button",
+          value: element,
           key: index,
           onClick: _this2.handleInput
         }, element));
@@ -596,6 +611,37 @@ var Form = /*#__PURE__*/function (_React$Component) {
       return timeDropdown;
     }
   }, {
+    key: "renderStandardInputs",
+    value: function renderStandardInputs(finLabel, isScheduleOn) {
+      var params = ['name', 'phone', 'email'];
+      var rows = [];
+
+      for (var i = 0; i < params.length; i++) {
+        rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: i
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          name: params[i],
+          className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
+          onChange: this.handleInput
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, params[i].charAt(0).toUpperCase() + params[i].slice(1))));
+      }
+
+      if (!isScheduleOn) {
+        rows.push(this.renderMessageBox());
+      }
+
+      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        key: "checkbox",
+        onClick: this.toggleFinancing
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        key: "fin"
+      }, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, isScheduleOn ? 'Schedule a Tour' : 'Request Info'))]);
+      return rows;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -605,7 +651,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
           requestInfo = _this$props$property.requestInfo,
           toggle = _this$props.toggle,
           view = _this$props.view;
-      var financing = this.state.financing;
+      var _this$state = this.state,
+          financing = _this$state.financing,
+          date = _this$state.date;
       var isScheduleOn = view === 'schedule';
       var finLabel = '';
       var formDisplay = [];
@@ -617,21 +665,25 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }
 
       if (isScheduleOn) {
-        formDisplay = [this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        formDisplay = [this.renderScheduler(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          toggleDates: this.toggleDates
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
           name: "time"
-        }, ' ', this.renderTimeDropdown('2020-11-22', bookings), ' '), this.renderStandardInputs(finLabel, isScheduleOn)];
+        }, ' ', this.renderTimeDropdown(date, bookings), ' ')), this.renderStandardInputs(finLabel, isScheduleOn)];
       } else {
-        formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
           agents: agentsInfo
         })];
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
         name: "schedule",
         onClick: function onClick() {
           toggle(event);
         }
       }, "Schedule a Tour"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
         name: "info",
         onClick: function onClick() {
           toggle(event);
@@ -2547,13 +2599,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 120px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 100px;\r\n  height: 75px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n  bottom: 100%;\r\n  left: 50%;\r\n}\r\n\r\n._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: hidden;\r\n  width: 75px;\r\n  background-color: white;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: relative;\r\n  z-index: 1;\r\n    top: -5px;\r\n  left: 105%;\r\n}\r\n\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: visible;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}\r\n\r\nspan._3WjeoPXrJ0mcvtyx-QPgFM {\r\n  vertical-align: top;\r\n  display: inline-block;\r\n  text-align: center;\r\n  width: 50px;\r\n  overflow: hidden;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n}\r\n\r\n._20eEvR6pcMJSLzRfJr_fEf {\r\n  width: 70%;\r\n  height: 70%;\r\n  overflow: hidden;\r\n  background-color: white;\r\n  border-radius: 10px;\r\n  background: white;\r\n  padding: 5px;\r\n}\r\n\r\n.Ujc9rie6ENUDmonH5bsNP {\r\n  display: block;\r\n  font-size: 12px;\r\n  color: grey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI img {\r\n  transition: transform .5s ease;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI:hover img {\r\n  transform: scale(1.2);\r\n}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"contactCard": "_3dfF5SUJWnKtGL1_50HYsH",
 	"picture": "_3WjeoPXrJ0mcvtyx-QPgFM",
 	"filledStar": "_1FUT3f2xodciqXL4UkoNEP",
-	"unfilledStar": "_14hl_-fQXFOD9MxrB_kNNm"
+	"unfilledStar": "_14hl_-fQXFOD9MxrB_kNNm",
+	"photo": "_3G7F2jOFlc0VXTISjLxNUI",
+	"thumbnail": "_20eEvR6pcMJSLzRfJr_fEf",
+	"caption": "Ujc9rie6ENUDmonH5bsNP"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

@@ -22,17 +22,19 @@ class Form extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleFinancing = this.toggleFinancing.bind(this);
+    this.toggleDates = this.toggleDates.bind(this);
   }
 
   handleInput(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(event.target.name, this.state[event.target.name]);
+    console.log('handle input', event.target.name);
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     const { submit } = this.props;
+    event.preventDefault();
     console.log('Form- handle submit', this.state);
     submit(this.state);
     this.handleReset();
@@ -53,39 +55,29 @@ class Form extends React.Component {
     });
   }
 
-  renderStandardInputs(finLabel, isScheduleOn) {
-    const params = ['name', 'phone', 'email'];
-    let rows = [];
-    for (let i = 0; i < params.length; i++) {
-      rows.push(<span key={i}>
-        <input name={params[i]} className={styles.test} onChange={this.handleInput} />
-        <label>{params[i].charAt(0).toUpperCase() + params[i].slice(1)}</label>
-      </span>);
-    }
-    rows = rows.concat([
-      <input type="checkbox" key="checkbox" onClick={this.toggleFinancing} />,
-      <label key="fin">{finLabel}</label>,
-      <button type="submit">{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button>,
-    ]);
-    return rows;
+  toggleDates(event) {
+    this.setState({
+      date: event.target.value,
+    });
+    console.log(event.target.value);
   }
 
-  renderConditional(schedule) {
-    if (!schedule) {
-      console.log('check should indicate info');
-      return (
-        <span>
-          <textarea name="message" onChange={this.handleInput} />
-          <label>Message</label>
-        </span>
-      );
-    }
+  renderMessageBox() {
+    return (
+      <span>
+        <textarea name="message" onChange={this.handleInput} />
+        <label>Message</label>
+      </span>
+    );
+  }
+
+  renderScheduler() {
     console.log('check should indicate schedule');
     const scheduler = [];
     const buttons = ['In-Person', 'Video'];
     scheduler.push(<label key="tourType">Tour Type</label>);
     buttons.forEach((element, index) => scheduler.push(
-      <button name="type" key={index} onClick={this.handleInput}>{element}</button>,
+      <button name="type" type="button" value={element} key={index} onClick={this.handleInput}>{element}</button>,
     ));
     return scheduler;
   }
@@ -113,6 +105,26 @@ class Form extends React.Component {
     return timeDropdown;
   }
 
+  renderStandardInputs(finLabel, isScheduleOn) {
+    const params = ['name', 'phone', 'email'];
+    let rows = [];
+    for (let i = 0; i < params.length; i++) {
+      rows.push(<div key={i}>
+        <input name={params[i]} className={styles.test} onChange={this.handleInput} />
+        <label>{params[i].charAt(0).toUpperCase() + params[i].slice(1)}</label>
+      </div>);
+    }
+    if (!isScheduleOn) {
+      rows.push(this.renderMessageBox());
+    }
+    rows = rows.concat([
+      <input type="checkbox" key="checkbox" onClick={this.toggleFinancing} />,
+      <label key="fin">{finLabel}</label>,
+      <div><button type="submit">{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button></div>,
+    ]);
+    return rows;
+  }
+
   render() {
     const {
       property: { agentsInfo, bookings, requestInfo },
@@ -122,6 +134,7 @@ class Form extends React.Component {
 
     const {
       financing,
+      date,
     } = this.state;
 
     const isScheduleOn = view === 'schedule';
@@ -136,27 +149,28 @@ class Form extends React.Component {
 
     if (isScheduleOn) {
       formDisplay = [
-        this.renderConditional(isScheduleOn),
-        <Dates />,
-        <select name="time">
-          {' '}
-          {this.renderTimeDropdown('2020-11-22', bookings)}
-          {' '}
-        </select>,
+        this.renderScheduler(),
+        <Dates toggleDates={this.toggleDates} />,
+        <div>
+          <select name="time">
+            {' '}
+            {this.renderTimeDropdown(date, bookings)}
+            {' '}
+          </select>
+        </div>,
         this.renderStandardInputs(finLabel, isScheduleOn),
       ];
     } else {
       formDisplay = [
         this.renderStandardInputs(finLabel, isScheduleOn),
-        this.renderConditional(isScheduleOn),
         <Agents agents={agentsInfo} />,
       ];
     }
 
     return (
       <div>
-        <button name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
-        <button name="info" onClick={() => { toggle(event); }}>Request Info</button>
+        <button type="button" name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
+        <button type="button" name="info" onClick={() => { toggle(event); }}>Request Info</button>
         <form onSubmit={this.handleSubmit}>
           {formDisplay}
         </form>

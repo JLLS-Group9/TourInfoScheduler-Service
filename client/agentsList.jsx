@@ -17,8 +17,11 @@ const Agents = ({ agents }) => (
   <span>
     {agents.map((agent, index) => (
       <span key={index} className={ags.picture}>
-        <img src={agent.picture} />
-        <label>{index ? 'Premier Agent' : 'Listing Agent'}</label>
+        <span className={ags.photo}>
+          <img className={ags.thumbnail} id={index} src={agent.picture} />
+        </span>
+          <span className={ags.caption}>{index ? 'Premier' : 'Listing'}</span>
+          <span className={ags.caption}>{'Agent'}</span>
         <span className={ags.contactCard}>
           <img src={agent.picture} />
           <h1>{agent.name}</h1>

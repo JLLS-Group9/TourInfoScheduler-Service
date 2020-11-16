@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const db = require('../db/index.js');
 
 module.exports = {
