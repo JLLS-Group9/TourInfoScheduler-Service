@@ -97,20 +97,55 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agentsStyles.css */ "./client/agentsStyles.css");
+
 
 
 var Agents = function Agents(_ref) {
   var agents = _ref.agents;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, agents.map(function (agent, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      key: index,
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].picture
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: agent.picture
-    }));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].contactCard
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: agent.picture
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, agent.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), agent.phone, agent.recentSales, " Recent Sales", agent.reviewsScore, "(", agent.reviewsCount, ")"));
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Agents);
+
+/***/ }),
+
+/***/ "./client/agentsStyles.css":
+/*!*********************************!*\
+  !*** ./client/agentsStyles.css ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./agentsStyles.css */ "./node_modules/css-loader/dist/cjs.js?!./client/agentsStyles.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -171,21 +206,22 @@ var App = /*#__PURE__*/function (_React$Component) {
     };
     _this.submitRequest = _this.submitRequest.bind(_assertThisInitialized(_this));
     _this.toggleView = _this.toggleView.bind(_assertThisInitialized(_this));
+    _this.retrievePropertyInfo = _this.retrievePropertyInfo.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.retrievePropertyInfo(1);
+      this.retrievePropertyInfo();
     }
   }, {
     key: "retrievePropertyInfo",
-    value: function retrievePropertyInfo(id) {
+    value: function retrievePropertyInfo() {
       var _this2 = this;
 
       console.log('retrieving info');
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/homes/".concat(id, "/bookings")).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(window.location.href, "/bookings")).then(function (response) {
         _this2.setState({
           property: response.data[0]
         });
@@ -394,12 +430,67 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "renderTimeDropdown",
+    value: function renderTimeDropdown(selectedDate, bookings) {
+      var availableTimes = {
+        'Choose a time': 1,
+        '9:00 AM': 1,
+        '9:30 AM': 1,
+        '10:00 AM': 1,
+        '10:30 AM': 1,
+        '11:00 AM': 1,
+        '11:30 AM': 1,
+        '12:00 PM': 1,
+        '12:30 PM': 1,
+        '1:00 PM': 1,
+        '1:30 PM': 1,
+        '2:00 PM': 1,
+        '2:30 PM': 1,
+        '3:00 PM': 1,
+        '3:30 PM': 1,
+        '4:00 PM': 1,
+        '4:30 PM': 1,
+        '5:00 PM': 1,
+        '5:30 PM': 1,
+        '6:00 PM': 1,
+        '6:30 PM': 1,
+        '7:00 PM': 1,
+        '7:30 PM': 1,
+        '8:00 PM': 1,
+        '8:30 PM': 1,
+        '9:00 PM': 1
+      };
+      var timeDropdown = [];
+      console.log('bookings', bookings);
+
+      if (bookings) {
+        for (var i = 0; i < bookings.length; i++) {
+          console.log('found date', bookings.date, bookings.time, selectedDate);
+
+          if (bookings.date === selectedDate) {
+            if (availableTimes[bookings.time]) {
+              delete availableTimes[bookings.time];
+            }
+          }
+        }
+      }
+
+      for (var key in availableTimes) {
+        timeDropdown.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: key,
+          key: key
+        }, key));
+      }
+
+      return timeDropdown;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           _this$props$property = _this$props.property,
           agentsInfo = _this$props$property.agentsInfo,
-          booking = _this$props$property.booking,
+          bookings = _this$props$property.bookings,
           requestInfo = _this$props$property.requestInfo,
           toggle = _this$props.toggle,
           view = _this$props.view;
@@ -407,16 +498,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
       var isScheduleOn = view === 'schedule' ? true : false;
       var finLabel = '';
       var scheduleDisplay;
-
-      if (!isScheduleOn) {} else {
-        scheduleDisplay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          name: "date",
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          name: "time",
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Time"));
-      }
 
       if (financing) {
         finLabel = 'A licensed lender will contact you shortly.';
@@ -436,7 +517,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
         }
       }, "Request Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, isScheduleOn ? this.renderConditional(isScheduleOn) : null, scheduleDisplay, this.renderStandardInputs(), isScheduleOn ? null : this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, isScheduleOn ? this.renderConditional(isScheduleOn) : null, scheduleDisplay, isScheduleOn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "time"
+      }, " ", this.renderTimeDropdown('2020-11-20', bookings), " ") : null, this.renderStandardInputs(), isScheduleOn ? null : this.renderConditional(isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         onClick: this.toggleFinancing
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2333,6 +2416,32 @@ module.exports = {
   trim: trim,
   stripBOM: stripBOM
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/agentsStyles.css":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/agentsStyles.css ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  display: none;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  display: inline-block;\r\n}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"contactCard": "_3dfF5SUJWnKtGL1_50HYsH",
+	"picture": "_3WjeoPXrJ0mcvtyx-QPgFM"
+};
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),

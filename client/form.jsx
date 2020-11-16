@@ -76,9 +76,30 @@ class Form extends React.Component {
     }
   }
 
+  renderTimeDropdown(selectedDate, bookings) {
+    let availableTimes = {'Choose a time': 1, '9:00 AM': 1, '9:30 AM': 1, '10:00 AM': 1, '10:30 AM': 1, '11:00 AM': 1, '11:30 AM': 1, '12:00 PM': 1, '12:30 PM': 1, '1:00 PM': 1, '1:30 PM': 1, '2:00 PM': 1, '2:30 PM': 1, '3:00 PM': 1, '3:30 PM': 1, '4:00 PM': 1, '4:30 PM': 1, '5:00 PM': 1, '5:30 PM': 1, '6:00 PM': 1, '6:30 PM': 1, '7:00 PM': 1, '7:30 PM': 1, '8:00 PM': 1, '8:30 PM': 1,'9:00 PM': 1}
+    let timeDropdown = [];
+    console.log('bookings', bookings)
+    if (bookings) {
+      for (let i = 0; i < bookings.length; i++) {
+        console.log('found date', bookings.date, bookings.time, selectedDate)
+        if (bookings.date === selectedDate) {
+          if (availableTimes[bookings.time]) {
+            delete availableTimes[bookings.time];
+          }
+        }
+      }
+    }
+
+    for (let key in availableTimes) {
+      timeDropdown.push(<option value={key} key={key}>{key}</option>)
+    }
+    return timeDropdown;
+  }
+
   render() {
     const {
-      property: { agentsInfo, booking, requestInfo },
+      property: { agentsInfo, bookings, requestInfo },
       toggle,
       view
     } = this.props;
@@ -90,15 +111,6 @@ class Form extends React.Component {
     let isScheduleOn = view === 'schedule' ? true : false;
     let finLabel = '';
     let scheduleDisplay;
-
-    if (!isScheduleOn) {
-    } else {
-      scheduleDisplay =
-        <span>
-          <input name="date" onChange={this.handleInput}></input><label>Date</label>
-          <input name="time" onChange={this.handleInput}></input><label>Time</label>
-        </span>
-    }
 
     if (financing) {
       finLabel = 'A licensed lender will contact you shortly.'
@@ -113,6 +125,7 @@ class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
           {isScheduleOn ? this.renderConditional(isScheduleOn) : null}
           {scheduleDisplay}
+          {isScheduleOn ? <select name="time"> {this.renderTimeDropdown('2020-11-20', bookings)} </select> : null}
           {this.renderStandardInputs()}
           {isScheduleOn ? null : this.renderConditional(isScheduleOn)}
           <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>

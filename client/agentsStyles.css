@@ -1,0 +1,7 @@
+.contactCard {
+  display: none;
+}
+
+.picture:hover .contactCard {
+  display: inline-block;
+}
