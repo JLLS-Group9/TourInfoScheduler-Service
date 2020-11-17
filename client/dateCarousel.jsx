@@ -13,7 +13,7 @@ const retrieveDates = (eventListener) => {
   }
 
   // create array of next 6 days
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 7; i++) {
     tempDate.setDate(startDate.getDate() + i);
     const month = tempDate.toLocaleString('default', { month: 'short' });
     const weekday = tempDate.toLocaleString('default', { weekday: 'short' });
@@ -21,9 +21,9 @@ const retrieveDates = (eventListener) => {
     console.log(tempDate);
     dateHTML.push(
       <button type="button" key={i} value={currentDate} onClick={() => eventListener(event)}>
-        <span>{weekday}</span>
-        <span>{tempDate.getDate()}</span>
-        <span>{month}</span>
+        <div>{weekday}</div>
+        <div>{tempDate.getDate()}</div>
+        <div>{month}</div>
       </button>,
     );
   }
@@ -31,7 +31,7 @@ const retrieveDates = (eventListener) => {
 };
 
 const Dates = ({ toggleDates }) => (
-  <div>
+  <div className={dc.main}>
     {retrieveDates(toggleDates)}
   </div>
 );

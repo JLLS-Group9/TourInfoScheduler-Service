@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import Form from './form.jsx';
+import as from './appStyles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -79,8 +80,7 @@ class App extends React.Component {
       property,
     } = this.state;
     return (
-      <div>
-        Hello World, this is the App of TourInfo front-end
+      <div className={as.mainContainer}>
         <Form
           submit={this.submitRequest}
           view={currentView}

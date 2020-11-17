@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
 import React from 'react';
-import styles from './style.css';
+import styles from './formStyles.css';
 import Agents from './agentsList.jsx';
 import Dates from './dateCarousel.jsx';
+import Times from './timesDropDown.jsx';
+import Disclaimer from './disclaimer.jsx';
 
 class Form extends React.Component {
   constructor(props) {
@@ -63,11 +65,17 @@ class Form extends React.Component {
   }
 
   renderMessageBox() {
+    const { property: { address, city, state, zipCode } } = this.props;
+    const defaultMessage = `I am interested in ${address}, ${city}, ${state} ${zipCode}.`;
     return (
-      <span>
-        <textarea name="message" onChange={this.handleInput} />
-        <label>Message</label>
-      </span>
+      <div>
+        <textarea
+          className={styles.messageBox}
+          name="message"
+          onChange={this.handleInput}
+          value={defaultMessage}
+        />
+      </div>
     );
   }
 
@@ -75,52 +83,40 @@ class Form extends React.Component {
     console.log('check should indicate schedule');
     const scheduler = [];
     const buttons = ['In-Person', 'Video'];
-    scheduler.push(<label key="tourType">Tour Type</label>);
+    scheduler.push(<span name="tourType" className={styles.tourType}>Tour Type</span>);
     buttons.forEach((element, index) => scheduler.push(
       <button name="type" type="button" value={element} key={index} onClick={this.handleInput}>{element}</button>,
     ));
     return scheduler;
   }
 
-  renderTimeDropdown(selectedDate, bookings) {
-    const availableTimes = {
-      'Choose a time': 1, '9:00 AM': 1, '9:30 AM': 1, '10:00 AM': 1, '10:30 AM': 1, '11:00 AM': 1, '11:30 AM': 1, '12:00 PM': 1, '12:30 PM': 1, '1:00 PM': 1, '1:30 PM': 1, '2:00 PM': 1, '2:30 PM': 1, '3:00 PM': 1, '3:30 PM': 1, '4:00 PM': 1, '4:30 PM': 1, '5:00 PM': 1, '5:30 PM': 1, '6:00 PM': 1, '6:30 PM': 1, '7:00 PM': 1, '7:30 PM': 1, '8:00 PM': 1, '8:30 PM': 1, '9:00 PM': 1,
-    };
-    const timeDropdown = [];
-    const todaysDate = new Date();
-    console.log(todaysDate.getHours() + 2);
-    if (bookings) {
-      for (let i = 0; i < bookings.length; i++) {
-        if (bookings[i].date === selectedDate) {
-          if (availableTimes[bookings[i].time]) {
-            delete availableTimes[bookings[i].time];
-          }
-        }
-      }
-    }
-
-    for (const key in availableTimes) {
-      timeDropdown.push(<option value={key} key={key}>{key}</option>);
-    }
-    return timeDropdown;
-  }
-
   renderStandardInputs(finLabel, isScheduleOn) {
     const params = ['name', 'phone', 'email'];
     let rows = [];
     for (let i = 0; i < params.length; i++) {
-      rows.push(<div key={i}>
-        <input name={params[i]} className={styles.test} onChange={this.handleInput} />
-        <label>{params[i].charAt(0).toUpperCase() + params[i].slice(1)}</label>
-      </div>);
+      if (i < 2) {
+        rows.push(
+          <span key={i}>
+            <input name={params[i]} className={styles.formFields} onChange={this.handleInput}
+              placeholder={params[i].charAt(0).toUpperCase() + params[i].slice(1)}
+            />
+          </span>);
+      } else {
+        rows.push(
+          <div key={i}>
+            <input name={params[i]} className={styles.formEmail} onChange={this.handleInput}
+              placeholder={params[i].charAt(0).toUpperCase() + params[i].slice(1)}
+            />
+          </div>);
+      }
     }
     if (!isScheduleOn) {
       rows.push(this.renderMessageBox());
     }
     rows = rows.concat([
-      <input type="checkbox" key="checkbox" onClick={this.toggleFinancing} />,
-      <label key="fin">{finLabel}</label>,
-      <div><button type="submit">{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button></div>,
+      <span className={styles.finBox}><input type="checkbox" key="checkbox" onClick={this.toggleFinancing} /></span>,
+      <label key="fin" className={styles.finLabel}>{finLabel}</label>,
+      <div><button type="submit" className={styles.bigButton}>{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button></div>,
     ]);
     return rows;
   }
@@ -142,9 +138,9 @@ class Form extends React.Component {
     let formDisplay = [];
 
     if (financing) {
-      finLabel = 'A licensed lender will contact you shortly.';
+      finLabel = ' A licensed lender will contact you shortly.';
     } else {
-      finLabel = 'I want to talk about financing.';
+      finLabel = ' I want to talk about financing.';
     }
 
     if (isScheduleOn) {
@@ -152,25 +148,27 @@ class Form extends React.Component {
         this.renderScheduler(),
         <Dates toggleDates={this.toggleDates} />,
         <div>
-          <select name="time">
+          <select name="time" className={styles.Times}>
             {' '}
-            {this.renderTimeDropdown(date, bookings)}
+            <Times selectedDate={date} bookings={bookings} />
             {' '}
           </select>
         </div>,
         this.renderStandardInputs(finLabel, isScheduleOn),
+        <Disclaimer view={isScheduleOn} />,
       ];
     } else {
       formDisplay = [
         this.renderStandardInputs(finLabel, isScheduleOn),
+        <Disclaimer view={isScheduleOn} />,
         <Agents agents={agentsInfo} />,
       ];
     }
 
     return (
       <div>
-        <button type="button" name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
-        <button type="button" name="info" onClick={() => { toggle(event); }}>Request Info</button>
+        <button className={styles.topButtons} type="button" name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
+        <button className={styles.topButtons} type="button" name="info" onClick={() => { toggle(event); }}>Request Info</button>
         <form onSubmit={this.handleSubmit}>
           {formDisplay}
         </form>

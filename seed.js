@@ -41,7 +41,7 @@ const createAgentInfo = () => {
     name: faker.name.findName(),
     email: faker.internet.email(),
     phone: faker.phone.phoneNumberFormat(),
-    reviewsScore: (Math.random() * 5).toFixed(0),
+    reviewsScore: (Math.random() * 2 + 3).toFixed(0),
     reviewsCount: Math.floor(Math.random() * 100),
     recentSales: Math.floor(Math.random() * 20),
     picture: `${seedURL}${agentPicture}.jpg`,

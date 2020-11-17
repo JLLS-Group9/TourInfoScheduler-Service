@@ -191,6 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _form_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form.jsx */ "./client/form.jsx");
+/* harmony import */ var _appStyles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./appStyles.css */ "./client/appStyles.css");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -214,6 +215,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /* eslint-disable no-console */
+
 
 
 
@@ -311,7 +313,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           currentView = _this$state.currentView,
           property = _this$state.property;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World, this is the App of TourInfo front-end", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _appStyles_css__WEBPACK_IMPORTED_MODULE_3__["default"].mainContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         submit: this.submitRequest,
         view: currentView,
         property: property,
@@ -324,6 +328,34 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./client/appStyles.css":
+/*!******************************!*\
+  !*** ./client/appStyles.css ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_appStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./appStyles.css */ "./node_modules/css-loader/dist/cjs.js?!./client/appStyles.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_appStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_appStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -353,7 +385,7 @@ var retrieveDates = function retrieveDates(eventListener) {
   } // create array of next 6 days
 
 
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < 7; i++) {
     tempDate.setDate(startDate.getDate() + i);
     var month = tempDate.toLocaleString('default', {
       month: 'short'
@@ -370,7 +402,7 @@ var retrieveDates = function retrieveDates(eventListener) {
       onClick: function onClick() {
         return eventListener(event);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, weekday), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, tempDate.getDate()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, month)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, weekday), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, tempDate.getDate()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, month)));
   }
 
   return dateHTML;
@@ -378,7 +410,9 @@ var retrieveDates = function retrieveDates(eventListener) {
 
 var Dates = function Dates(_ref) {
   var toggleDates = _ref.toggleDates;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, retrieveDates(toggleDates));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].main
+  }, retrieveDates(toggleDates));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Dates);
@@ -413,6 +447,61 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./client/disclaimer.jsx":
+/*!*******************************!*\
+  !*** ./client/disclaimer.jsx ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./disclaimerStyles.css */ "./client/disclaimerStyles.css");
+
+
+
+var Disclaimer = function Disclaimer(scheduleBool) {
+  var view = scheduleBool ? 'Schedule A Tour' : 'Request a Tour';
+  var message = "By pressing ".concat(view, ", you agree that Trulia and real estate professionals may contact you via phone/text about your inquiry, which may involve the use of automated means. You are not required to consent as a condition of purchasing any property, goods or services. Message/data rates may apply. You also agree to our Terms of Use Trulia does not endorse any real estate professionals.");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].text
+  }, message);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Disclaimer);
+
+/***/ }),
+
+/***/ "./client/disclaimerStyles.css":
+/*!*************************************!*\
+  !*** ./client/disclaimerStyles.css ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./disclaimerStyles.css */ "./node_modules/css-loader/dist/cjs.js?!./client/disclaimerStyles.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./client/form.jsx":
 /*!*************************!*\
   !*** ./client/form.jsx ***!
@@ -424,9 +513,11 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./client/style.css");
+/* harmony import */ var _formStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formStyles.css */ "./client/formStyles.css");
 /* harmony import */ var _agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./agentsList.jsx */ "./client/agentsList.jsx");
 /* harmony import */ var _dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dateCarousel.jsx */ "./client/dateCarousel.jsx");
+/* harmony import */ var _timesDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./timesDropDown.jsx */ "./client/timesDropDown.jsx");
+/* harmony import */ var _disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./disclaimer.jsx */ "./client/disclaimer.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -454,6 +545,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 /* eslint-disable no-console */
 
 /* eslint-disable no-plusplus */
+
+
 
 
 
@@ -529,10 +622,18 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderMessageBox",
     value: function renderMessageBox() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      var _this$props$property = this.props.property,
+          address = _this$props$property.address,
+          city = _this$props$property.city,
+          state = _this$props$property.state,
+          zipCode = _this$props$property.zipCode;
+      var defaultMessage = "I am interested in ".concat(address, ", ").concat(city, ", ").concat(state, " ").concat(zipCode, ".");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].messageBox,
         name: "message",
-        onChange: this.handleInput
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Message"));
+        onChange: this.handleInput,
+        value: defaultMessage
+      }));
     }
   }, {
     key: "renderScheduler",
@@ -542,8 +643,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
       console.log('check should indicate schedule');
       var scheduler = [];
       var buttons = ['In-Person', 'Video'];
-      scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        key: "tourType"
+      scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        name: "tourType",
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourType
       }, "Tour Type"));
       buttons.forEach(function (element, index) {
         return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -557,87 +659,49 @@ var Form = /*#__PURE__*/function (_React$Component) {
       return scheduler;
     }
   }, {
-    key: "renderTimeDropdown",
-    value: function renderTimeDropdown(selectedDate, bookings) {
-      var availableTimes = {
-        'Choose a time': 1,
-        '9:00 AM': 1,
-        '9:30 AM': 1,
-        '10:00 AM': 1,
-        '10:30 AM': 1,
-        '11:00 AM': 1,
-        '11:30 AM': 1,
-        '12:00 PM': 1,
-        '12:30 PM': 1,
-        '1:00 PM': 1,
-        '1:30 PM': 1,
-        '2:00 PM': 1,
-        '2:30 PM': 1,
-        '3:00 PM': 1,
-        '3:30 PM': 1,
-        '4:00 PM': 1,
-        '4:30 PM': 1,
-        '5:00 PM': 1,
-        '5:30 PM': 1,
-        '6:00 PM': 1,
-        '6:30 PM': 1,
-        '7:00 PM': 1,
-        '7:30 PM': 1,
-        '8:00 PM': 1,
-        '8:30 PM': 1,
-        '9:00 PM': 1
-      };
-      var timeDropdown = [];
-      var todaysDate = new Date();
-      console.log(todaysDate.getHours() + 2);
-
-      if (bookings) {
-        for (var i = 0; i < bookings.length; i++) {
-          if (bookings[i].date === selectedDate) {
-            if (availableTimes[bookings[i].time]) {
-              delete availableTimes[bookings[i].time];
-            }
-          }
-        }
-      }
-
-      for (var key in availableTimes) {
-        timeDropdown.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          value: key,
-          key: key
-        }, key));
-      }
-
-      return timeDropdown;
-    }
-  }, {
     key: "renderStandardInputs",
     value: function renderStandardInputs(finLabel, isScheduleOn) {
       var params = ['name', 'phone', 'email'];
       var rows = [];
 
       for (var i = 0; i < params.length; i++) {
-        rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: i
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          name: params[i],
-          className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].test,
-          onChange: this.handleInput
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, params[i].charAt(0).toUpperCase() + params[i].slice(1))));
+        if (i < 2) {
+          rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            key: i
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            name: params[i],
+            className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formFields,
+            onChange: this.handleInput,
+            placeholder: params[i].charAt(0).toUpperCase() + params[i].slice(1)
+          })));
+        } else {
+          rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: i
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            name: params[i],
+            className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formEmail,
+            onChange: this.handleInput,
+            placeholder: params[i].charAt(0).toUpperCase() + params[i].slice(1)
+          })));
+        }
       }
 
       if (!isScheduleOn) {
         rows.push(this.renderMessageBox());
       }
 
-      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].finBox
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         key: "checkbox",
         onClick: this.toggleFinancing
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        key: "fin"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        key: "fin",
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].finLabel
       }, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
+        type: "submit",
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].bigButton
       }, isScheduleOn ? 'Schedule a Tour' : 'Request Info'))]);
       return rows;
     }
@@ -645,10 +709,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          _this$props$property = _this$props.property,
-          agentsInfo = _this$props$property.agentsInfo,
-          bookings = _this$props$property.bookings,
-          requestInfo = _this$props$property.requestInfo,
+          _this$props$property2 = _this$props.property,
+          agentsInfo = _this$props$property2.agentsInfo,
+          bookings = _this$props$property2.bookings,
+          requestInfo = _this$props$property2.requestInfo,
           toggle = _this$props.toggle,
           view = _this$props.view;
       var _this$state = this.state,
@@ -659,30 +723,40 @@ var Form = /*#__PURE__*/function (_React$Component) {
       var formDisplay = [];
 
       if (financing) {
-        finLabel = 'A licensed lender will contact you shortly.';
+        finLabel = ' A licensed lender will contact you shortly.';
       } else {
-        finLabel = 'I want to talk about financing.';
+        finLabel = ' I want to talk about financing.';
       }
 
       if (isScheduleOn) {
         formDisplay = [this.renderScheduler(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           toggleDates: this.toggleDates
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-          name: "time"
-        }, ' ', this.renderTimeDropdown(date, bookings), ' ')), this.renderStandardInputs(finLabel, isScheduleOn)];
+          name: "time",
+          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Times
+        }, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_timesDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          selectedDate: date,
+          bookings: bookings
+        }), ' ')), this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          view: isScheduleOn
+        })];
       } else {
-        formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          view: isScheduleOn
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_agentsList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
           agents: agentsInfo
         })];
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtons,
         type: "button",
         name: "schedule",
         onClick: function onClick() {
           toggle(event);
         }
       }, "Schedule a Tour"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtons,
         type: "button",
         name: "info",
         onClick: function onClick() {
@@ -698,6 +772,34 @@ var Form = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Form);
+
+/***/ }),
+
+/***/ "./client/formStyles.css":
+/*!*******************************!*\
+  !*** ./client/formStyles.css ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_formStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./formStyles.css */ "./node_modules/css-loader/dist/cjs.js?!./client/formStyles.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -722,31 +824,77 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ "./client/style.css":
-/*!**************************!*\
-  !*** ./client/style.css ***!
-  \**************************/
+/***/ "./client/timesDropDown.jsx":
+/*!**********************************!*\
+  !*** ./client/timesDropDown.jsx ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_5_1_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-1!./style.css */ "./node_modules/css-loader/dist/cjs.js?!./client/style.css");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ref_5_1_style_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _formStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formStyles.css */ "./client/formStyles.css");
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ref_5_1_style_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+var Times = function Times(_ref) {
+  var selectedDate = _ref.selectedDate,
+      bookings = _ref.bookings;
+  var availableTimes = {
+    'Choose a time': 1,
+    '9:00 AM': 1,
+    '9:30 AM': 1,
+    '10:00 AM': 1,
+    '10:30 AM': 1,
+    '11:00 AM': 1,
+    '11:30 AM': 1,
+    '12:00 PM': 1,
+    '12:30 PM': 1,
+    '1:00 PM': 1,
+    '1:30 PM': 1,
+    '2:00 PM': 1,
+    '2:30 PM': 1,
+    '3:00 PM': 1,
+    '3:30 PM': 1,
+    '4:00 PM': 1,
+    '4:30 PM': 1,
+    '5:00 PM': 1,
+    '5:30 PM': 1,
+    '6:00 PM': 1,
+    '6:30 PM': 1,
+    '7:00 PM': 1,
+    '7:30 PM': 1,
+    '8:00 PM': 1,
+    '8:30 PM': 1,
+    '9:00 PM': 1
+  };
+  var timeDropdown = [];
+  var todaysDate = new Date();
+  console.log(todaysDate.getHours() + 2);
+
+  if (bookings) {
+    for (var i = 0; i < bookings.length; i++) {
+      if (bookings[i].date === selectedDate) {
+        if (availableTimes[bookings[i].time]) {
+          delete availableTimes[bookings[i].time];
+        }
+      }
+    }
+  }
+
+  for (var key in availableTimes) {
+    timeDropdown.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: key,
+      key: key
+    }, key));
+  }
+
+  return timeDropdown;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Times);
 
 /***/ }),
 
@@ -2599,7 +2747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 100px;\r\n  height: 75px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n  bottom: 100%;\r\n  left: 50%;\r\n}\r\n\r\n._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: hidden;\r\n  width: 75px;\r\n  background-color: white;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: relative;\r\n  z-index: 1;\r\n    top: -5px;\r\n  left: 105%;\r\n}\r\n\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: visible;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}\r\n\r\nspan._3WjeoPXrJ0mcvtyx-QPgFM {\r\n  vertical-align: top;\r\n  display: inline-block;\r\n  text-align: center;\r\n  width: 50px;\r\n  overflow: hidden;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n}\r\n\r\n._20eEvR6pcMJSLzRfJr_fEf {\r\n  width: 70%;\r\n  height: 70%;\r\n  overflow: hidden;\r\n  background-color: white;\r\n  border-radius: 10px;\r\n  background: white;\r\n  padding: 5px;\r\n}\r\n\r\n.Ujc9rie6ENUDmonH5bsNP {\r\n  display: block;\r\n  font-size: 12px;\r\n  color: grey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI img {\r\n  transition: transform .5s ease;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI:hover img {\r\n  transform: scale(1.2);\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 100px;\r\n  height: 75px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n  bottom: 100%;\r\n  left: 50%;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: visible;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM {\r\n  vertical-align: top;\r\n  display: inline-block;\r\n  text-align: center;\r\n  width: 50px;\r\n  overflow: hidden;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n}\r\n\r\n._20eEvR6pcMJSLzRfJr_fEf {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n  background-color: white;\r\n  border-radius: 15px;\r\n  background: white;\r\n  padding: 5px;\r\n}\r\n\r\n.Ujc9rie6ENUDmonH5bsNP {\r\n  display: block;\r\n  font-size: 12px;\r\n  color: grey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI img {\r\n  transition: transform .5s ease;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI:hover img {\r\n  transform: scale(1.2);\r\n}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"contactCard": "_3dfF5SUJWnKtGL1_50HYsH",
@@ -2609,6 +2757,31 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"photo": "_3G7F2jOFlc0VXTISjLxNUI",
 	"thumbnail": "_20eEvR6pcMJSLzRfJr_fEf",
 	"caption": "Ujc9rie6ENUDmonH5bsNP"
+};
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/appStyles.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/appStyles.css ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".Rvjn7DrIpwcxBNoacvOfu {\r\n  width: 300px;\r\n  position: absolute;\r\n  padding: 10px;\r\n  overflow: hidden;\r\n  box-shadow: 0px 10px 20px 0px lightgrey;\r\n  border-radius: 5px;\r\n}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"mainContainer": "Rvjn7DrIpwcxBNoacvOfu"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -2630,17 +2803,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._2sh5FHd5xIbMprCIa9f8AA {\r\n  padding: 10px;\r\n  height: 100px;\r\n  border: 20px;\r\n  margin: 20px;\r\n}", ""]);
 // Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"main": "_2sh5FHd5xIbMprCIa9f8AA"
+};
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js?!./client/style.css":
-/*!**************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/style.css ***!
-  \**************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/disclaimerStyles.css":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/disclaimerStyles.css ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2652,10 +2828,43 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._18w-Rg0P4z0X2kP6qF20fx {\r\n  color: green;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3etPQaq63O2V5NYXuZVZi5 {\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 10px;\r\n  color: gray;\r\n  margin: 8px;\r\n  line-height: 1.5;\r\n}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"test": "_18w-Rg0P4z0X2kP6qF20fx"
+	"text": "_3etPQaq63O2V5NYXuZVZi5"
+};
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/formStyles.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./client/formStyles.css ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "._3E4EmdKYDrZPpzFoVNy0v8 {\r\n  color: lightgrey;\r\n  width: 40%;\r\n  height: 15px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  border: 2%;\r\n  margin: 2% 1.5% 1.5% ;\r\n  border-style: solid;\r\n}\r\n\r\n\r\n._2HyrOl-atIX5oouA-7psO- {\r\n  color: lightgrey;\r\n  width: 90%;\r\n  height: 15px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: auto;\r\n  border-style: solid;\r\n}\r\n\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3 {\r\n  width: 285px;\r\n  height: 40px;\r\n  background-color: \t#d93c23;\r\n  color: white;\r\n  font-size: 15px;\r\n  margin: 2%;\r\n  border-radius: 7px;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n  font-weight: bolder;\r\n}\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3:hover {\r\n  background-color: white;\r\n  color: #d93c23;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n}\r\n\r\n._2OMTgOwssSMn1jBYzHNDDj {\r\n  color: gray;\r\n  font-size: 12px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe {\r\n  border-color: none;\r\n  border-width: 10px;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe:hover {\r\n  border-color: black;\r\n}\r\n\r\n._3Ygy-OgJRuiUaE2gTnyYJS {\r\n  color: gray;\r\n  width: 88%;\r\n  height: 75px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: 3% 1.5%;\r\n  border-style: solid;\r\n}\r\n\r\n._1QTuHqvWj0_l2KpQyI3-OR {\r\n  color: gray;\r\n  font-size: 16px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  display: block;\r\n}\r\n\r\n._3-8mtro6olO4i-AZYNKt_m {\r\n  color: gray;\r\n  width: 90%;\r\n  height: 40px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: auto;\r\n  border-style: solid;\r\n}\r\n\r\n._3E4EmdKYDrZPpzFoVNy0v8:focus {\r\n  border-color: #007882;\r\n}\r\n\r\n.QgfnSztsyt-edqoqF3KPk {\r\n  width: 50%;\r\n  height: 40px;\r\n  background-color: \twhite;\r\n  border: none;\r\n  color: #007882;\r\n  font-size: 16px;\r\n  font-weight: bolder;\r\n  margin-bottom: 15px;\r\n}\r\n\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"formFields": "_3E4EmdKYDrZPpzFoVNy0v8",
+	"formEmail": "_2HyrOl-atIX5oouA-7psO-",
+	"bigButton": "_1nExBaQuPmFSq6rLw9zSw3",
+	"finLabel": "_2OMTgOwssSMn1jBYzHNDDj",
+	"finBox": "_2YZCfqYpdzf4p28TQ4lkZe",
+	"messageBox": "_3Ygy-OgJRuiUaE2gTnyYJS",
+	"tourType": "_1QTuHqvWj0_l2KpQyI3-OR",
+	"Times": "_3-8mtro6olO4i-AZYNKt_m",
+	"topButtons": "QgfnSztsyt-edqoqF3KPk"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

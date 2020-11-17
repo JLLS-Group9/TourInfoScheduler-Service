@@ -1,0 +1,116 @@
+.formFields {
+  color: lightgrey;
+  width: 40%;
+  height: 15px;
+  padding: 8px;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  border: 2%;
+  margin: 2% 1.5% 1.5% ;
+  border-style: solid;
+}
+
+
+.formEmail {
+  color: lightgrey;
+  width: 90%;
+  height: 15px;
+  padding: 8px;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  margin: auto;
+  border-style: solid;
+}
+
+
+.bigButton {
+  width: 285px;
+  height: 40px;
+  background-color: 	#d93c23;
+  color: white;
+  font-size: 15px;
+  margin: 2%;
+  border-radius: 7px;
+  border-color: #d93c23;
+  border-style: solid;
+  font-weight: bolder;
+}
+
+.bigButton:hover {
+  background-color: white;
+  color: #d93c23;
+  border-color: #d93c23;
+  border-style: solid;
+}
+
+.finLabel {
+  color: gray;
+  font-size: 12px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.finBox {
+  border-color: none;
+  border-width: 10px;
+}
+
+.finBox:hover {
+  border-color: black;
+}
+
+.messageBox {
+  color: gray;
+  width: 88%;
+  height: 75px;
+  padding: 8px;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  margin: 3% 1.5%;
+  border-style: solid;
+}
+
+.tourType {
+  color: gray;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: block;
+}
+
+.Times {
+  color: gray;
+  width: 90%;
+  height: 40px;
+  padding: 8px;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  margin: auto;
+  border-style: solid;
+}
+
+.formFields:focus {
+  border-color: #007882;
+}
+
+.topButtons {
+  width: 50%;
+  height: 40px;
+  background-color: 	white;
+  border: none;
+  color: #007882;
+  font-size: 16px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+
