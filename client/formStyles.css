@@ -56,6 +56,7 @@
   border-style: solid;
   outline: 0;
   margin: 0.5em;
+  transition: box-shadow 0.15s ease 0s, border-color 0.15s ease 0s;
 }
 
 
@@ -197,6 +198,7 @@ input:focus, textarea:focus, select:focus {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   outline: none;
+  z-index: 1;
 }
 
 .topButton {
@@ -212,10 +214,6 @@ input:focus, textarea:focus, select:focus {
   border-left: 1px solid lightgray;
   border-bottom: 1px solid transparent;
 }
-
-
-
-
 
 .messageBox {
   width: 90%;

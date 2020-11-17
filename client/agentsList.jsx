@@ -23,17 +23,28 @@ const Agents = ({ agents }) => (
           </div>
           <div className={ags.caption}>
             {index ? 'Premier' : 'Listing'}
+            {' '}
             Agent
           </div>
         </div>
         <div className={ags.contactCard}>
           <div className={ags.contactPicture}>
-            <img src={agent.picture} />
+            <div className={ags.pictureContainer}>
+              <img src={agent.picture} className={ags.contactThumbnail} />
+            </div>
           </div>
           <div className={ags.agentDetails}>
-            <h1>{agent.name}</h1>
-            <span>{index ? 'Premier Agent' : 'Listing Agent'}</span>
+            <span className={ags.agentNameWrapper}>
+              <span className={ags.agentName}>{agent.name}</span>
+            </span>
+            {' '}
+            <span className={ags.agentTitle}>
+              {index ? 'Premier Agent' : 'Listing Agent'}
+            </span>
+            {' '}
+            <span className={ags.agentPhone}>
             {agent.phone}
+            </span>
           </div>
           <div className={ags.reviews}>
             <span>
