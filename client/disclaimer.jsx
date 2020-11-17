@@ -8,7 +8,6 @@ const Disclaimer = (scheduleBool) => {
   return (
     <div className={ds.text}>
       {scheduleBool.view ? <span className={ds.advisory}>&#9888; Public Health Advisory</span> : null}
-      <br></br>
       {message}
     </div>
   );

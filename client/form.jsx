@@ -134,8 +134,8 @@ class Form extends React.Component {
     }
     rows = rows.concat([
       <div className={styles.finBox}>
-        <input type="checkbox" key="checkbox" onClick={this.toggleFinancing} />
-        <label key="fin" className={styles.finLabel}>{finLabel}</label>
+        <input type="checkbox" id="checkbox" key="checkbox" className={styles.finCheckBox} onClick={this.toggleFinancing} />
+        <label key="fin" for="checkbox" className={styles.finLabel}>{finLabel}</label>
       </div>,
       <div><button type="submit" className={styles.bigButton}>{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button></div>,
     ]);

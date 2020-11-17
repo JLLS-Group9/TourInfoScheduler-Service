@@ -1,31 +1,14 @@
 .AgentsContainer {
   display: flex;
   flex-direction: row;
+  padding: 0.75em 2.5em 0.75em 2.5em;
 }
 
-
-.contactCard {
-  visibility: hidden;
-  display: none;
-  background-color: white;
-  color: black;
+.picture {
+  flex: 1 1;
+  vertical-align: top;
   text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: -50%;
 }
-
-.picture:hover .contactCard img {
-  visibility: visible;
-}
-
-.picture:hover .contactCard {
-  visibility: visible;
-}
-
 
 .filledStar {
   color: #f2c430;
@@ -35,35 +18,64 @@
   color: #cdd1d4;
 }
 
-.picture {
-  vertical-align: top;
-  display: inline-block;
+
+.contactCard {
+  display: none;
+  flex-direction: row;
+  width: 200px;
+  font-size: 12px;
+  background-color: white;
+  color: black;
   text-align: center;
-  width: 50px;
-  overflow: hidden;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+  bottom: 100%;
+  left: -50%;
+}
+
+.agentDetails, .contactPicture, .reviews {
+  flex: 1 1;
+}
+
+
+.picture:hover .contactCard img {
+  visibility: visible;
+}
+
+.picture:hover .contactCard {
+  visibility: visible;
 }
 
 .photo {
-  width: 35px;
-  height: 35px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .thumbnail {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  background: white;
+}
+
+.thumbnailContainer {
   width: 35px;
   height: 35px;
   overflow: hidden;
-  background-color: white;
-  border-radius: 15px;
-  background: white;
-  padding: 5px;
 }
+
 
 .caption {
   display: block;
-  font-size: 12px;
+  width: 100%;
+  font-size: 10px;
   color: grey;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  line-height: 1.33;
+  margin: 0.25em 0 0.5em 0;
 }
 
 .photo img {
