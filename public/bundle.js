@@ -123,11 +123,13 @@ var populateStars = function populateStars(score) {
 
 var Agents = function Agents(_ref) {
   var agents = _ref.agents;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, agents.map(function (agent, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].AgentsContainer
+  }, agents.map(function (agent, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].picture
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].photo
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].thumbnail,
@@ -137,11 +139,11 @@ var Agents = function Agents(_ref) {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].caption
     }, index ? 'Premier' : 'Listing'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].caption
-    }, 'Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, 'Agent'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].contactCard
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: agent.picture
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, agent.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, index ? 'Premier Agent' : 'Listing Agent'), agent.phone, agent.recentSales, ' ', "Recent Sales", populateStars(agent.reviewsScore), "(", agent.reviewsCount, ")"));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, agent.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, index ? 'Premier Agent' : 'Listing Agent'), agent.phone, agent.recentSales, ' ', "Recent Sales", populateStars(agent.reviewsScore), "(", agent.reviewsCount, ")"));
   }));
 };
 
@@ -463,11 +465,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Disclaimer = function Disclaimer(scheduleBool) {
-  var view = scheduleBool ? 'Schedule A Tour' : 'Request a Tour';
+  var view = scheduleBool.view ? 'Schedule A Tour' : 'Request Info';
   var message = "By pressing ".concat(view, ", you agree that Trulia and real estate professionals may contact you via phone/text about your inquiry, which may involve the use of automated means. You are not required to consent as a condition of purchasing any property, goods or services. Message/data rates may apply. You also agree to our Terms of Use Trulia does not endorse any real estate professionals.");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].text
-  }, message);
+  }, scheduleBool.view ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].advisory
+  }, "\u26A0 Public Health Advisory") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), message);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Disclaimer);
@@ -564,7 +568,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      type: '',
+      type: 'In-Person',
       date: '',
       time: '',
       name: '',
@@ -584,7 +588,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
     key: "handleInput",
     value: function handleInput(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
-      console.log('handle input', event.target.name);
+      console.log('handle input', event.target.name, this.state[event.target.name]);
     }
   }, {
     key: "handleSubmit",
@@ -640,15 +644,21 @@ var Form = /*#__PURE__*/function (_React$Component) {
     value: function renderScheduler() {
       var _this2 = this;
 
-      console.log('check should indicate schedule');
+      console.log('check should indicate schedule', this.state.type);
+      var type = this.state.type;
       var scheduler = [];
       var buttons = ['In-Person', 'Video'];
-      scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        name: "tourType",
-        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourType
-      }, "Tour Type"));
+      var newStyle = [];
+
+      if (type === 'In-Person') {
+        newStyle.push(_formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].InPersonSelected, _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Video);
+      } else {
+        newStyle.push(_formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].InPerson, _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].VideoSelected);
+      }
+
       buttons.forEach(function (element, index) {
         return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: newStyle[index],
           name: "type",
           type: "button",
           value: element,
@@ -663,43 +673,41 @@ var Form = /*#__PURE__*/function (_React$Component) {
     value: function renderStandardInputs(finLabel, isScheduleOn) {
       var params = ['name', 'phone', 'email'];
       var rows = [];
-
-      for (var i = 0; i < params.length; i++) {
-        if (i < 2) {
-          rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            key: i
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            name: params[i],
-            className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formFields,
-            onChange: this.handleInput,
-            placeholder: params[i].charAt(0).toUpperCase() + params[i].slice(1)
-          })));
-        } else {
-          rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: i
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            name: params[i],
-            className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formEmail,
-            onChange: this.handleInput,
-            placeholder: params[i].charAt(0).toUpperCase() + params[i].slice(1)
-          })));
-        }
-      }
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: 0,
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].fieldsContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: params[0],
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formFields,
+        onChange: this.handleInput,
+        placeholder: params[0].charAt(0).toUpperCase() + params[0].slice(1)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: params[1],
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formFields,
+        onChange: this.handleInput,
+        placeholder: params[1].charAt(0).toUpperCase() + params[1].slice(1)
+      })));
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: params[2],
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formEmail,
+        onChange: this.handleInput,
+        placeholder: params[2].charAt(0).toUpperCase() + params[2].slice(1)
+      }));
 
       if (!isScheduleOn) {
         rows.push(this.renderMessageBox());
       }
 
-      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      rows = rows.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].finBox
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         key: "checkbox",
         onClick: this.toggleFinancing
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         key: "fin",
         className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].finLabel
-      }, finLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, finLabel)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].bigButton
       }, isScheduleOn ? 'Schedule a Tour' : 'Request Info'))]);
@@ -729,15 +737,20 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }
 
       if (isScheduleOn) {
-        formDisplay = [this.renderScheduler(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        formDisplay = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourTypeText
+        }, "Tour Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          name: "tourType",
+          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourType
+        }, this.renderScheduler()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           toggleDates: this.toggleDates
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
           name: "time",
           className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Times
         }, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_timesDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
           selectedDate: date,
           bookings: bookings
-        }), ' ')), this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }), ' '), this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
           view: isScheduleOn
         })];
       } else {
@@ -748,23 +761,30 @@ var Form = /*#__PURE__*/function (_React$Component) {
         })];
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtons,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].mainContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Header
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: isScheduleOn ? _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtonselected : _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButton,
         type: "button",
         name: "schedule",
         onClick: function onClick() {
           toggle(event);
         }
       }, "Schedule a Tour"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtons,
+        className: isScheduleOn ? _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButton : _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtonselected,
         type: "button",
         name: "info",
         onClick: function onClick() {
           toggle(event);
         }
-      }, "Request Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, formDisplay));
+      }, "Request Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Form
+      }, formDisplay)));
     }
   }]);
 
@@ -2747,9 +2767,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  width: 100px;\r\n  height: 75px;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n  bottom: 100%;\r\n  left: 50%;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: visible;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM {\r\n  vertical-align: top;\r\n  display: inline-block;\r\n  text-align: center;\r\n  width: 50px;\r\n  overflow: hidden;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n}\r\n\r\n._20eEvR6pcMJSLzRfJr_fEf {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n  background-color: white;\r\n  border-radius: 15px;\r\n  background: white;\r\n  padding: 5px;\r\n}\r\n\r\n.Ujc9rie6ENUDmonH5bsNP {\r\n  display: block;\r\n  font-size: 12px;\r\n  color: grey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI img {\r\n  transition: transform .5s ease;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI:hover img {\r\n  transform: scale(1.2);\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3B6ljvYp1jOW5dr3534Yst {\r\n  display: flex;\r\n  flex-direction: row;\r\n}\r\n\r\n\r\n._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: hidden;\r\n  display: none;\r\n  background-color: white;\r\n  color: black;\r\n  text-align: center;\r\n  padding: 5px 0;\r\n  border-radius: 6px;\r\n  position: absolute;\r\n  z-index: 1;\r\n  bottom: 100%;\r\n  left: -50%;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH img {\r\n  visibility: visible;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM:hover ._3dfF5SUJWnKtGL1_50HYsH {\r\n  visibility: visible;\r\n}\r\n\r\n\r\n._1FUT3f2xodciqXL4UkoNEP {\r\n  color: #f2c430;\r\n}\r\n\r\n._14hl_-fQXFOD9MxrB_kNNm {\r\n  color: #cdd1d4;\r\n}\r\n\r\n._3WjeoPXrJ0mcvtyx-QPgFM {\r\n  vertical-align: top;\r\n  display: inline-block;\r\n  text-align: center;\r\n  width: 50px;\r\n  overflow: hidden;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n}\r\n\r\n._20eEvR6pcMJSLzRfJr_fEf {\r\n  width: 35px;\r\n  height: 35px;\r\n  overflow: hidden;\r\n  background-color: white;\r\n  border-radius: 15px;\r\n  background: white;\r\n  padding: 5px;\r\n}\r\n\r\n.Ujc9rie6ENUDmonH5bsNP {\r\n  display: block;\r\n  font-size: 12px;\r\n  color: grey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI img {\r\n  transition: transform .5s ease;\r\n}\r\n\r\n._3G7F2jOFlc0VXTISjLxNUI:hover img {\r\n  transform: scale(1.2);\r\n}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
+	"AgentsContainer": "_3B6ljvYp1jOW5dr3534Yst",
 	"contactCard": "_3dfF5SUJWnKtGL1_50HYsH",
 	"picture": "_3WjeoPXrJ0mcvtyx-QPgFM",
 	"filledStar": "_1FUT3f2xodciqXL4UkoNEP",
@@ -2778,7 +2799,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".Rvjn7DrIpwcxBNoacvOfu {\r\n  width: 300px;\r\n  position: absolute;\r\n  padding: 10px;\r\n  overflow: hidden;\r\n  box-shadow: 0px 10px 20px 0px lightgrey;\r\n  border-radius: 5px;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\r\n\r\nhtml, body, div, span, applet, object, iframe,\r\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\r\na, abbr, acronym, address, big, cite, code,\r\ndel, dfn, em, img, ins, kbd, q, s, samp,\r\nsmall, strike, strong, sub, sup, tt, var,\r\nb, u, i, center,\r\ndl, dt, dd, ol, ul, li,\r\nfieldset, form, label, legend,\r\ntable, caption, tbody, tfoot, thead, tr, th, td,\r\narticle, aside, canvas, details, embed,\r\nfigure, figcaption, footer, header, hgroup,\r\nmenu, nav, output, ruby, section, summary,\r\ntime, mark, audio, video {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle, aside, details, figcaption, figure,\r\nfooter, header, hgroup, menu, nav, section {\r\n\tdisplay: block;\r\n}\r\nbody {\r\n\tline-height: 1;\r\n}\r\nol, ul {\r\n\tlist-style: none;\r\n}\r\nblockquote, q {\r\n\tquotes: none;\r\n}\r\nblockquote:before, blockquote:after,\r\nq:before, q:after {\r\n\tcontent: '';\r\n\tcontent: none;\r\n}\r\ntable {\r\n\tborder-collapse: collapse;\r\n\tborder-spacing: 0;\r\n}\r\n\r\n.Rvjn7DrIpwcxBNoacvOfu {\r\n  display: flex;\r\n  width: 300px;\r\n  flex-direction: column;\r\n  margin: 1em auto;\r\n}\r\n\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": "Rvjn7DrIpwcxBNoacvOfu"
@@ -2828,10 +2849,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3etPQaq63O2V5NYXuZVZi5 {\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 10px;\r\n  color: gray;\r\n  margin: 8px;\r\n  line-height: 1.5;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._3etPQaq63O2V5NYXuZVZi5 {\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 10px;\r\n  color: gray;\r\n  margin: 1em;\r\n  line-height: 1.5;\r\n}\r\n\r\n._1kI3hkZV-k8_SpflF9sKkr {\r\n  color: #007882;\r\n  font-size: 16px;\r\n  margin: 0.25em;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"text": "_3etPQaq63O2V5NYXuZVZi5"
+	"text": "_3etPQaq63O2V5NYXuZVZi5",
+	"advisory": "_1kI3hkZV-k8_SpflF9sKkr"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -2853,18 +2875,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._3E4EmdKYDrZPpzFoVNy0v8 {\r\n  color: lightgrey;\r\n  width: 40%;\r\n  height: 15px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  border: 2%;\r\n  margin: 2% 1.5% 1.5% ;\r\n  border-style: solid;\r\n}\r\n\r\n\r\n._2HyrOl-atIX5oouA-7psO- {\r\n  color: lightgrey;\r\n  width: 90%;\r\n  height: 15px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: auto;\r\n  border-style: solid;\r\n}\r\n\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3 {\r\n  width: 285px;\r\n  height: 40px;\r\n  background-color: \t#d93c23;\r\n  color: white;\r\n  font-size: 15px;\r\n  margin: 2%;\r\n  border-radius: 7px;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n  font-weight: bolder;\r\n}\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3:hover {\r\n  background-color: white;\r\n  color: #d93c23;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n}\r\n\r\n._2OMTgOwssSMn1jBYzHNDDj {\r\n  color: gray;\r\n  font-size: 12px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe {\r\n  border-color: none;\r\n  border-width: 10px;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe:hover {\r\n  border-color: black;\r\n}\r\n\r\n._3Ygy-OgJRuiUaE2gTnyYJS {\r\n  color: gray;\r\n  width: 88%;\r\n  height: 75px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: 3% 1.5%;\r\n  border-style: solid;\r\n}\r\n\r\n._1QTuHqvWj0_l2KpQyI3-OR {\r\n  color: gray;\r\n  font-size: 16px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  display: block;\r\n}\r\n\r\n._3-8mtro6olO4i-AZYNKt_m {\r\n  color: gray;\r\n  width: 90%;\r\n  height: 40px;\r\n  padding: 8px;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 14px;\r\n  margin: auto;\r\n  border-style: solid;\r\n}\r\n\r\n._3E4EmdKYDrZPpzFoVNy0v8:focus {\r\n  border-color: #007882;\r\n}\r\n\r\n.QgfnSztsyt-edqoqF3KPk {\r\n  width: 50%;\r\n  height: 40px;\r\n  background-color: \twhite;\r\n  border: none;\r\n  color: #007882;\r\n  font-size: 16px;\r\n  font-weight: bolder;\r\n  margin-bottom: 15px;\r\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._21HHgdjDdsoXewK9EA0PWv {\r\n  display: flex;\r\n  width: 300px;\r\n  flex-direction: column;\r\n  margin: 1em auto;\r\n}\r\n\r\n._3a6ukMFjG5_ZclqWWJ_-SN {\r\n  display: flex;\r\n  width: 300px;\r\n}\r\n\r\n._1FQ9xP31f4ASguvZnKFC_3 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 298px;\r\n  position: absolute;\r\n  overflow: hidden;\r\n  box-shadow: 0px 10px 20px 0px lightgrey;\r\n  border-bottom-right-radius: 5px;\r\n  border-bottom-left-radius: 5px;\r\n  margin-top: 0;\r\n  border-color: lightgray;\r\n  border-style: solid;\r\n  border-width: 0px 1px 1px 1px;\r\n}\r\n\r\n._2J_Hc1vpe24y2Z_osDtfmm {\r\n  display: flex;\r\n  flex-direction: row;\r\n}\r\n\r\n._3E4EmdKYDrZPpzFoVNy0v8 {\r\n  width: 50%;\r\n  padding: 0.25em;\r\n  font-size: 16px;\r\n  margin: 0.5em;\r\n  background-color: #FFFFFF;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  border-style: solid;\r\n  outline: 0;\r\n  transition: box-shadow 0.15s ease 0s, border-color 0.15s ease 0s;\r\n}\r\n\r\n\r\n._2HyrOl-atIX5oouA-7psO- {\r\n  color: lightgrey;\r\n  flex: 1 1;\r\n  padding: 0.25em;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 16px;\r\n  border-style: solid;\r\n  outline: 0;\r\n  margin: 0.5em;\r\n}\r\n\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3 {\r\n  flex: 1 1;\r\n  width: 285px;\r\n  height: 40px;\r\n  background-color: #d93c23;\r\n  color: white;\r\n  font-size: 16px;\r\n  margin: 0.5em;\r\n  border-radius: 7px;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n  font-weight: bolder;\r\n}\r\n\r\n._1nExBaQuPmFSq6rLw9zSw3:hover {\r\n  background-color: white;\r\n  color: #d93c23;\r\n  border-color: #d93c23;\r\n  border-style: solid;\r\n}\r\n\r\n._2OMTgOwssSMn1jBYzHNDDj {\r\n  color: gray;\r\n  font-size: 12px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe {\r\n  border-color: none;\r\n  border-width: 10px;\r\n}\r\n\r\n/* fix financing check box */\r\n._2YZCfqYpdzf4p28TQ4lkZe:checked {\r\n  color: #007882;\r\n}\r\n\r\n._2YZCfqYpdzf4p28TQ4lkZe:hover {\r\n  transform: scale 1.05;\r\n}\r\n\r\n\r\n._1QTuHqvWj0_l2KpQyI3-OR {\r\n  display: flex;\r\n  flex-direction: row;\r\n  color: gray;\r\n  font-size: 16px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._3A0zbmN3ptW9CIljxWqYPn {\r\n  margin: 0.5em;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._2tr3OObSPJXI5gRJ1zv7NS, ._18l-M3cN98IQstFZpOHN-p, ._2NW5ML_augTgvlkbLSooki, ._2O82lHtJkmWVIvrl714WJn {\r\n  flex: 1 1;\r\n  font-weight: bolder;\r\n  padding: 0.5em;\r\n  background-color: white;\r\n  border-color: lightgrey;\r\n  border-style: solid;\r\n  outline: 0;\r\n  font-size: 16px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n}\r\n\r\n._2tr3OObSPJXI5gRJ1zv7NS, ._2NW5ML_augTgvlkbLSooki {\r\n  border-top-right-radius: 5px;\r\n  border-bottom-right-radius: 5px;\r\n  margin: 0.5em 0.5em 0.5em 0em;\r\n}\r\n\r\n._18l-M3cN98IQstFZpOHN-p, ._2O82lHtJkmWVIvrl714WJn {\r\n  border-top-left-radius: 5px;\r\n  border-bottom-left-radius: 5px;\r\n  margin: 0.5em 0 0.5em 0.5em;\r\n}\r\n\r\n._2NW5ML_augTgvlkbLSooki, ._2O82lHtJkmWVIvrl714WJn {\r\n  background-color: #007882;\r\n  color: white;\r\n  border-color: #007882;\r\n}\r\n\r\n._2tr3OObSPJXI5gRJ1zv7NS:hover, ._18l-M3cN98IQstFZpOHN-p:hover {\r\n  background-color: lightgray;\r\n}\r\n\r\n\r\n._3-8mtro6olO4i-AZYNKt_m {\r\n  flex: 1 1;\r\n  color: gray;\r\n  font-size: 16px;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  height: 40px;\r\n  padding: 0.25em;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  border-style: solid;\r\n  margin: 0.5em;\r\n}\r\n\r\n._2BhvW9wWhB7zFn9NUEZQxy {\r\n  display: flex;\r\n}\r\n\r\n.uyln0gCdwwiKzulWMvOS9, ._3L-J6WzeaQh38G6QPjYJ6u {\r\n  flex: 1 1;\r\n  font-size: 16px;\r\n  height: 40px;\r\n  color: #007882;\r\n  background-color: #FFFFFF;\r\n  border-top-right-radius: 5px;\r\n  border-top-left-radius: 5px;\r\n  outline: none;\r\n}\r\n\r\n.uyln0gCdwwiKzulWMvOS9 {\r\n  border-top: 1px solid transparent;\r\n  border-right: 1px solid transparent;\r\n  border-left: 1px solid transparent;\r\n  border-bottom: 1px solid lightgray;\r\n}\r\n\r\n._3L-J6WzeaQh38G6QPjYJ6u {\r\n  border-top: 1px solid lightgray;\r\n  border-right: 1px solid lightgray;\r\n  border-left: 1px solid lightgray;\r\n  border-bottom: 1px solid transparent;\r\n}\r\n\r\n\r\ninput:focus, textarea:focus, select:focus {\r\n  border-color: #007882;\r\n  outline: 0;\r\n  box-shadow: #008278 0px 0px 0px 2px;\r\n}\r\n\r\n\r\n._3Ygy-OgJRuiUaE2gTnyYJS {\r\n  width: 90%;\r\n  height: 100px;\r\n  margin: 0.5em;\r\n  color: gray;\r\n  border-color: white;\r\n  border-radius: 5px;\r\n  border-color: lightgrey;\r\n  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\r\n  font-size: 16px;\r\n  border-style: solid;\r\n  outline: 0;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
+	"mainContainer": "_21HHgdjDdsoXewK9EA0PWv",
+	"formContainer": "_3a6ukMFjG5_ZclqWWJ_-SN",
+	"Form": "_1FQ9xP31f4ASguvZnKFC_3",
+	"fieldsContainer": "_2J_Hc1vpe24y2Z_osDtfmm",
 	"formFields": "_3E4EmdKYDrZPpzFoVNy0v8",
 	"formEmail": "_2HyrOl-atIX5oouA-7psO-",
 	"bigButton": "_1nExBaQuPmFSq6rLw9zSw3",
 	"finLabel": "_2OMTgOwssSMn1jBYzHNDDj",
 	"finBox": "_2YZCfqYpdzf4p28TQ4lkZe",
-	"messageBox": "_3Ygy-OgJRuiUaE2gTnyYJS",
 	"tourType": "_1QTuHqvWj0_l2KpQyI3-OR",
+	"tourTypeText": "_3A0zbmN3ptW9CIljxWqYPn",
+	"Video": "_2tr3OObSPJXI5gRJ1zv7NS",
+	"InPerson": "_18l-M3cN98IQstFZpOHN-p",
+	"VideoSelected": "_2NW5ML_augTgvlkbLSooki",
+	"InPersonSelected": "_2O82lHtJkmWVIvrl714WJn",
 	"Times": "_3-8mtro6olO4i-AZYNKt_m",
-	"topButtons": "QgfnSztsyt-edqoqF3KPk"
+	"Header": "_2BhvW9wWhB7zFn9NUEZQxy",
+	"topButton": "uyln0gCdwwiKzulWMvOS9",
+	"topButtonselected": "_3L-J6WzeaQh38G6QPjYJ6u",
+	"messageBox": "_3Ygy-OgJRuiUaE2gTnyYJS"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 

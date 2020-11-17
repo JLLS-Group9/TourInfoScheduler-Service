@@ -14,18 +14,18 @@ const populateStars = (score) => {
 };
 
 const Agents = ({ agents }) => (
-  <span>
+  <div className={ags.AgentsContainer}>
     {agents.map((agent, index) => (
-      <span key={index} className={ags.picture}>
-        <span className={ags.photo}>
+      <div key={index} className={ags.picture}>
+        <div className={ags.photo}>
           <img className={ags.thumbnail} id={index} src={agent.picture} />
-        </span>
+        </div>
           <span className={ags.caption}>{index ? 'Premier' : 'Listing'}</span>
           <span className={ags.caption}>{'Agent'}</span>
-        <span className={ags.contactCard}>
+        <div className={ags.contactCard}>
           <img src={agent.picture} />
           <h1>{agent.name}</h1>
-          <label>{index ? 'Premier Agent' : 'Listing Agent'}</label>
+          <span>{index ? 'Premier Agent' : 'Listing Agent'}</span>
           {agent.phone}
           {agent.recentSales}
           {' '}
@@ -34,10 +34,10 @@ const Agents = ({ agents }) => (
           (
           {agent.reviewsCount}
           )
-        </span>
-      </span>
+        </div>
+      </div>
     ))}
-  </span>
+  </div>
 );
 
 export default Agents;

@@ -2,6 +2,12 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 10px;
   color: gray;
-  margin: 8px;
+  margin: 1em;
   line-height: 1.5;
+}
+
+.advisory {
+  color: #007882;
+  font-size: 16px;
+  margin: 0.25em;
 }
