@@ -14,12 +14,12 @@ const populateStars = (score) => {
   return starBar;
 };
 
-const Agents = ({ agents }) => (
+const Agents = ({ selectedAgent, agents, toggleAgent }) => (
   <div className={ags.AgentsContainer}>
     {agents.map((agent, index) => (
       <div key={index} className={ags.picture}>
-        <div className={ags.photo}>
-          <div className={ags.thumbnailContainer}>
+        <div className={ags.photo} onClick={()=> {toggleAgent(agent)}} value={agent.name}>
+          <div className={ags.thumbnailContainerUnselected} >
             <img className={ags.thumbnail} id={index} src={agent.picture} />
           </div>
           <div className={ags.caption}>

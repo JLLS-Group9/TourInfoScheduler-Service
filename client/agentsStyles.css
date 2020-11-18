@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   flex: 1 1;
-  padding-right: 0.25em;
+  padding-right: 0.5em;
   color: gray;
 }
 
@@ -45,12 +45,13 @@
 .agentNameWrapper, .agentTitle, .agentPhone {
   flex: 1 1;
   text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
 .reviews {
   flex: 1 1;
-  padding-right: 5em;
+  padding-right: 3em;
   padding-left: 0.25em;
   color: lightgray;
 }
@@ -83,10 +84,10 @@
   align-items: center;
 }
 
-.thumbnailContainer {
+.thumbnailContainerUnselected, .thumbnailContainerSelected {
   width: 35px;
   height: 35px;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -94,6 +95,7 @@
   width: 100%;
   background-color: white;
   background: white;
+  cursor: pointer;
 }
 
 .caption {
@@ -114,8 +116,6 @@
   transform: scale(1.2);
 }
 
-
-
 .contactCard {
   display: none;
   flex-direction: row;
@@ -127,7 +127,7 @@
   text-align: center;
   line-height: 1.5;
   border-radius: 6px;
-  position: relative;
+  position: absolute;
   z-index: 1;
   bottom: 100%;
   left: 50%;
@@ -140,15 +140,6 @@
   display: flex;
 }
 
-/* test case */
-.photo:hover .caption {
-  color:green;
-}
-
-/* .photo:focus .thumbnailContainer {
-  color: #007882;
-} */
-
 .contactCard::after {
   content: '';
   display: block;
@@ -158,4 +149,9 @@
   top: 100%;
   left: 50%;
   margin-left: -1em;
+
+  border-top: 1em solid white;
+  border-bottom: 1em solid transparent;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
 }

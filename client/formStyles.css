@@ -15,7 +15,6 @@
   flex-direction: column;
   width: 298px;
   position: absolute;
-  overflow: hidden;
   box-shadow: 0px 10px 20px 0px lightgrey;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -105,20 +104,22 @@ input:focus, textarea:focus, select:focus {
 
 .finCheckBox {
 	-webkit-appearance: none;
-	background-color: #fafafa;
 	border: 1px solid #cacece;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 	padding: 2px 3px 2px 3px;
 	border-radius: 3px;
 	display: inline;
-	position: relative;
+  position: relative;
+  margin: 0.5em 0.5em 0.5em 0.75em;
 }
 
 .finCheckBox:checked {
-  content: "\2713";
+  content: '\2713';
+  justify-content: center;
+  text-align: center;
   font-size: 15px;
-  color: #f3f3f3;
-  color: #007882;
+  color: white;
+  background-color:  #007882;
 }
 
 .tourType {
@@ -175,7 +176,7 @@ input:focus, textarea:focus, select:focus {
 
 .Times {
   flex: 1 1;
-  color: gray;
+  color: black;
   font-size: 16px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   height: 40px;
@@ -184,6 +185,7 @@ input:focus, textarea:focus, select:focus {
   border-color: lightgrey;
   border-style: solid;
   margin: 0.5em;
+  font-weight: bolder;
 }
 
 .Header {

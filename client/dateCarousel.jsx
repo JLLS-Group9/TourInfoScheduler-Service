@@ -23,7 +23,6 @@ const retrieveDates = (date, eventListener) => {
     ${tempDate.getDate()}
     ${month}
     `;
-    console.log(currentDate, date, currentDate===date)
 
     if (currentDate === date) {
       dateHTML.push(
@@ -49,16 +48,23 @@ const retrieveDates = (date, eventListener) => {
 const Dates = ({ selectedDate, toggleDates, dateView }) => (
   <div className={dc.main}>
     <div className={dc.carousel}>
-      <input type="radio" id="left" name="carousel" checked="checked" className={dc.carousel_activator} />
+      <input type="radio" id="left" name="carousel" className={dc.carousel_activator} />
       <input type="radio" id="right" name="carousel" className={dc.carousel_activator} />
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="right" className={[dc.carousel__control, dc['carousel__control--backward']].join(' ')}></label>
-      &#8249;
+      <label htmlFor="right"
+        className={
+          `${dc.carousel__control} ${dc['carousel__control--backward']}
+          ${dateView === 'right' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
+        &#8249;
+      </label>
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="left" className={[dc.carousel__control, dc['carousel__control--forward']].join(' ')}></label>
-      &#8250;
+      <label htmlFor="left" className={ `${dc.carousel__control}
+          ${dc['carousel__control--forward']}
+          ${dateView === 'left' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
+        &#8250;
+      </label>
     </div>
     <div className={dc.carousel__screen}>
       <div className={dc.carousel__track}>

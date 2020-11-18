@@ -20,6 +20,7 @@ class Form extends React.Component {
       phone: '',
       email: '',
       message: '',
+      agent: '',
       financing: false,
     };
 
@@ -27,6 +28,7 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleFinancing = this.toggleFinancing.bind(this);
     this.toggleDates = this.toggleDates.bind(this);
+    this.toggleAgent = this.toggleAgent.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +42,7 @@ class Form extends React.Component {
 
     placeholderDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
 
-    this.setState ({
+    this.setState({
       date: placeholderDate,
     });
   }
@@ -82,6 +84,12 @@ class Form extends React.Component {
     console.log(event.target.value);
   }
 
+  toggleAgent(agent) {
+    this.setState ({
+      agent: agent.name,
+    });
+  }
+
   renderMessageBox() {
     const {
       property: {
@@ -89,6 +97,7 @@ class Form extends React.Component {
       },
     } = this.props;
     const defaultMessage = `I am interested in ${address}, ${city}, ${state} ${zipCode}.`;
+
     return (
       <div>
         <textarea
@@ -172,6 +181,7 @@ class Form extends React.Component {
       date,
       dateView,
       type,
+      agent,
     } = this.state;
 
     const isScheduleOn = view === 'schedule';
@@ -203,7 +213,7 @@ class Form extends React.Component {
       formDisplay = [
         this.renderStandardInputs(finLabel, isScheduleOn),
         <Disclaimer view={isScheduleOn} />,
-        <Agents agents={agentsInfo} />,
+        <Agents agents={agentsInfo} toggleAgent={this.toggleAgent} selectedAgent={agent} />,
       ];
     }
 

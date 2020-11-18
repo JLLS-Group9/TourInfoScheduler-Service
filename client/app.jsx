@@ -64,6 +64,7 @@ class App extends React.Component {
       financing: input.financing,
       phone: input.phone,
       message: input.message,
+      agent: input.agent,
     };
     console.log(request, input);
     axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
