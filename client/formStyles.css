@@ -123,13 +123,13 @@ input:focus, textarea:focus, select:focus {
 .tourType {
   display: flex;
   flex-direction: row;
-  color: gray;
   font-size: 16px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .tourTypeText {
   margin: 0.5em;
+  color: gray;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 

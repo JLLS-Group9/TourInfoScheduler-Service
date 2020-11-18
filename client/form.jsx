@@ -13,6 +13,7 @@ class Form extends React.Component {
     super(props);
     this.state = {
       type: 'In-Person',
+      dateView: 'left',
       date: '',
       time: '',
       name: '',
@@ -153,6 +154,8 @@ class Form extends React.Component {
     const {
       financing,
       date,
+      dateView,
+      type,
     } = this.state;
 
     const isScheduleOn = view === 'schedule';
@@ -171,10 +174,10 @@ class Form extends React.Component {
         <div name="tourType" className={styles.tourType}>
           {this.renderScheduler()}
         </div>,
-        <Dates toggleDates={this.toggleDates} />,
+        <Dates selectedDate={date} toggleDates={this.toggleDates} dateView={dateView} />,
         <select name="time" className={styles.Times}>
           {' '}
-          <Times selectedDate={date} bookings={bookings} />
+          <Times selectedDate={date} bookings={bookings} type={type} />
           {' '}
         </select>,
         this.renderStandardInputs(finLabel, isScheduleOn),

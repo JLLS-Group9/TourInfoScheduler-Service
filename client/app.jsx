@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
@@ -34,6 +35,7 @@ class App extends React.Component {
 
   scheduleTour(input) {
     const { property } = this.state;
+    console.log('scheduler', property);
     axios.put(`/api/homes/${property.propertyId}/scheduleTour`, {
       input,
     })
