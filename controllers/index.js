@@ -19,7 +19,7 @@ module.exports = {
 
   scheduleTour: (req, res) => {
     console.log(`request for tour schedule ${JSON.stringify(req.body)}`);
-    db.findOneAndUpdate({ propertyId: req.params.id }, { $push: { bookings: req.body.input } },
+    db.findOneAndUpdate({ propertyId: req.params.id }, { $push: { bookings: req.body.request } },
       null, (err, data) => {
         if (err) {
           res.status(400).send(err);
@@ -31,7 +31,7 @@ module.exports = {
 
   requestInfo: (req, res) => {
     console.log(`request for info home number ${JSON.stringify(req.body)}`);
-    db.findOneAndUpdate({ propertyId: req.params.id }, { $push: { requestInfo: req.body.input } },
+    db.findOneAndUpdate({ propertyId: req.params.id }, { $push: { requestInfo: req.body.request } },
       null, (err, data) => {
         if (err) {
           res.status(400).send(err);

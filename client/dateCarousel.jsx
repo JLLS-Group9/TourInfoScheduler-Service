@@ -19,18 +19,29 @@ const retrieveDates = (date, eventListener) => {
     const month = tempDate.toLocaleString('default', { month: 'short' });
     const weekday = tempDate.toLocaleString('default', { weekday: 'short' });
     const currentDate = `${tempDate.getFullYear()}-${tempDate.getMonth() + 1}-${tempDate.getDate()}`;
+    let dateName = `${weekday}
+    ${tempDate.getDate()}
+    ${month}
+    `;
+    console.log(currentDate, date, currentDate===date)
 
-    dateHTML.push(
-      <div className={dc.democontent}>
-        <button type="button" key={i} className={dc.dateUnselected} value={currentDate} onClick={() => eventListener(event)}>
-          <span className={dc.details}>{weekday}</span>
-          {' '}
-          <span className={dc.details}>{tempDate.getDate()}</span>
-          {' '}
-          <span className={dc.details}>{month}</span>
-        </button>
-      </div>,
-    );
+    if (currentDate === date) {
+      dateHTML.push(
+        <div className={dc.democontent}>
+          <button type="button" key={i} className={dc.dateSelected} value={currentDate} onClick={() => eventListener(event)}>
+            {dateName}
+          </button>
+        </div>,
+      );
+    } else {
+      dateHTML.push(
+        <div className={dc.democontent}>
+          <button type="button" key={i} className={dc.dateUnselected} value={currentDate} onClick={() => eventListener(event)}>
+            {dateName}
+          </button>
+        </div>,
+      );
+    }
   }
   return dateHTML;
 };
@@ -38,15 +49,15 @@ const retrieveDates = (date, eventListener) => {
 const Dates = ({ selectedDate, toggleDates, dateView }) => (
   <div className={dc.main}>
     <div className={dc.carousel}>
-      <input type="radio" id="left" name="activator" checked="checked" className={dc.carousel_activator} />
-      <input type="radio" id="right" name="activator" className={dc.carousel_activator} />
+      <input type="radio" id="left" name="carousel" checked="checked" className={dc.carousel_activator} />
+      <input type="radio" id="right" name="carousel" className={dc.carousel_activator} />
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="right" className={dc.carousel__control}></label>
+      <label htmlFor="right" className={[dc.carousel__control, dc['carousel__control--backward']].join(' ')}></label>
       &#8249;
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="left" className={dc.carousel__control}></label>
+      <label htmlFor="left" className={[dc.carousel__control, dc['carousel__control--forward']].join(' ')}></label>
       &#8250;
     </div>
     <div className={dc.carousel__screen}>

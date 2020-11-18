@@ -72,6 +72,7 @@
   border-color: #d93c23;
   border-style: solid;
   font-weight: bolder;
+  outline: 0;
 }
 
 .bigButton:hover {

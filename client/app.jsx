@@ -34,23 +34,46 @@ class App extends React.Component {
   }
 
   scheduleTour(input) {
-    const { property } = this.state;
-    console.log('scheduler', property);
-    axios.put(`/api/homes/${property.propertyId}/scheduleTour`, {
-      input,
+    const { property: { propertyId } } = this.state;
+    console.log('scheduler', propertyId, input);
+    const request = {
+      email: input.email,
+      financing: input.financing,
+      name: input.name,
+      phone: input.phone,
+      date: input.date,
+      type: input.type,
+      time: input.time,
+    };
+    axios.put(`/api/homes/${propertyId}/scheduleTour`, {
+      request,
     })
       .then((response) => {
-        console.log('schedule response', response);
+        this.setState({
+          property: response.data,
+        });
+        console.log(response);
       });
   }
 
   requestInfo(input) {
     const { property } = this.state;
+    const request = {
+      name: input.name,
+      email: input.email,
+      financing: input.financing,
+      phone: input.phone,
+      message: input.message,
+    };
+    console.log(request, input)
     axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
-      input,
+      request,
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        this.setState ({
+          property: response.data,
+        });
       });
   }
 

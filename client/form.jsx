@@ -191,7 +191,7 @@ class Form extends React.Component {
           {this.renderScheduler()}
         </div>,
         <Dates selectedDate={date} toggleDates={this.toggleDates} dateView={dateView} />,
-        <select name="time" className={styles.Times}>
+        <select name="time" className={styles.Times} onChange={this.handleInput}>
           {' '}
           <Times selectedDate={date} bookings={bookings} type={type} />
           {' '}

@@ -27,6 +27,7 @@
   padding-bottom: 1em;
   text-align: left;
   letter-spacing: 0.1em;
+  overflow: hidden;
 }
 
 .agentDetails {
@@ -43,7 +44,6 @@
 
 .agentNameWrapper, .agentTitle, .agentPhone {
   flex: 1 1;
-
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -115,13 +115,14 @@
 }
 
 
+
 .contactCard {
-  display: flex;
+  display: none;
   flex-direction: row;
   width: 350px;
   font-size: 12px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: blue;
+  background-color: white;
   color: black;
   text-align: center;
   line-height: 1.5;
@@ -130,17 +131,29 @@
   z-index: 1;
   bottom: 100%;
   left: 50%;
+  box-shadow: 0px 5px 5px 0px lightgrey;
   transform: translateX(-50%);
+  margin-bottom: 1em;
 }
 
-.thumbnail:hover .thumbnailContainer:hover .picture:hover .AgentsContainer:hover .photo:hover .contactCard {
+.picture:hover .contactCard {
   display: flex;
-  visibility: visible;
 }
+
+/* test case */
+.photo:hover .caption {
+  color:green;
+}
+
+/* .photo:focus .thumbnailContainer {
+  color: #007882;
+} */
 
 .contactCard::after {
   content: '';
   display: block;
+  height: 0;
+  width: 0;
   position: absolute;
   top: 100%;
   left: 50%;

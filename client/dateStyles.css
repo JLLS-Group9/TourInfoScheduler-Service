@@ -19,6 +19,17 @@
   outline: 0;
   border-color: lightgray;
   border-style: solid;
+  background-color: white;
+}
+
+.dateSelected {
+  margin-right: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  outline: 0;
+  border-color: #007882;
+  border-style: solid;
+  background-color: white;
 }
 
 .details {
@@ -34,10 +45,6 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
-}
-
-.carousel__activator {
-  display: none;
 }
 
 .carousel__controls {
@@ -72,6 +79,7 @@
   width: 25px;
   z-index: 1;
 }
+
 .carousel__control:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
