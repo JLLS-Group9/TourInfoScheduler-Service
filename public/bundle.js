@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _agentsStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agentsStyles.css */ "./client/agentsStyles.css");
+/* eslint-disable no-plusplus */
 
 
 
@@ -390,6 +391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dateStyles.css */ "./client/dateStyles.css");
+/* eslint-disable no-plusplus */
 
 
 
@@ -563,6 +565,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/* eslint-disable import/extensions */
+
 /* eslint-disable no-console */
 
 /* eslint-disable no-plusplus */
@@ -725,7 +729,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         onClick: this.toggleFinancing
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         key: "fin",
-        "for": "checkbox",
+        htmlFor: "checkbox",
         className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].finLabel
       }, finLabel)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -857,6 +861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.jsx */ "./client/app.jsx");
+/* eslint-disable import/extensions */
 
 
 
@@ -875,8 +880,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _formStyles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formStyles.css */ "./client/formStyles.css");
-
+/* eslint-disable no-plusplus */
 
 
 var Times = function Times(_ref) {

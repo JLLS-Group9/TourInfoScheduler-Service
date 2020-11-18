@@ -1,5 +1,5 @@
 import React from 'react';
-import ds from './disclaimerStyles.css'
+import ds from './disclaimerStyles.css';
 
 const Disclaimer = (scheduleBool) => {
   const view = scheduleBool.view ? 'Schedule A Tour' : 'Request Info';

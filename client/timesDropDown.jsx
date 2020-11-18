@@ -1,5 +1,5 @@
+/* eslint-disable no-plusplus */
 import React from 'react';
-import fs from './formStyles.css'
 
 const Times = ({ selectedDate, bookings }) => {
   const availableTimes = {
@@ -22,6 +22,6 @@ const Times = ({ selectedDate, bookings }) => {
     timeDropdown.push(<option value={key} key={key}>{key}</option>);
   }
   return timeDropdown;
-}
+};
 
 export default Times;
