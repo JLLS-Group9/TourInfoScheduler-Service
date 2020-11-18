@@ -29,6 +29,22 @@ class Form extends React.Component {
     this.toggleDates = this.toggleDates.bind(this);
   }
 
+  componentDidMount() {
+    const now = new Date();
+    const startDate = new Date();
+    let placeholderDate = '';
+    // if past 5PM pacific time, then default start date to next day
+    if (now.getHours() >= 17 || (now.getHours() >= 16 && now.getMinutes() >= 30)) {
+      startDate.setDate(now.getDate() + 1);
+    }
+
+    placeholderDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+
+    this.setState ({
+      date: placeholderDate,
+    });
+  }
+
   handleInput(event) {
     this.setState({
       [event.target.name]: event.target.value,

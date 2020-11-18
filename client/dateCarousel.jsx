@@ -9,7 +9,7 @@ const retrieveDates = (date, eventListener) => {
   const dateHTML = [];
 
   // if past 5PM pacific time, then default start date to next day
-  if (now.getHours() >= 17 || (now.getHours() >= 16 && now.getHours() >= 30)) {
+  if (now.getHours() >= 17 || (now.getHours() >= 16 && now.getMinutes() >= 30)) {
     startDate.setDate(now.getDate() + 1);
   }
 

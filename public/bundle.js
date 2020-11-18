@@ -404,7 +404,7 @@ var retrieveDates = function retrieveDates(date, eventListener) {
   var tempDate = new Date();
   var dateHTML = []; // if past 5PM pacific time, then default start date to next day
 
-  if (now.getHours() >= 17 || now.getHours() >= 16 && now.getHours() >= 30) {
+  if (now.getHours() >= 17 || now.getHours() >= 16 && now.getMinutes() >= 30) {
     startDate.setDate(now.getDate() + 1);
   } // create array of next 6 days
 
@@ -649,6 +649,22 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Form, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var now = new Date();
+      var startDate = new Date();
+      var placeholderDate = ''; // if past 5PM pacific time, then default start date to next day
+
+      if (now.getHours() >= 17 || now.getHours() >= 16 && now.getMinutes() >= 30) {
+        startDate.setDate(now.getDate() + 1);
+      }
+
+      placeholderDate = "".concat(startDate.getFullYear(), "-").concat(startDate.getMonth() + 1, "-").concat(startDate.getDate());
+      this.setState({
+        date: placeholderDate
+      });
+    }
+  }, {
     key: "handleInput",
     value: function handleInput(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
@@ -936,6 +952,7 @@ var Times = function Times(_ref) {
       bookings = _ref.bookings,
       type = _ref.type;
   var availableTimes = {
+    0: 'Choose a time',
     900: '9:00 AM',
     930: '9:30 AM',
     1000: '10:00 AM',
@@ -958,27 +975,43 @@ var Times = function Times(_ref) {
     1830: '6:30 PM',
     1900: '7:00 PM'
   };
+  var newAvailable = {};
   var timeDropdown = [];
-  var todaysDate = new Date();
-  console.log('timeDropdown today time cutoff', todaysDate.getHours() + 2);
+  var today = new Date();
+  console.log('timeDropdown today time cutoff', today);
+  var formattedDate = "".concat(today.getFullYear(), "-").concat(today.getMonth() + 1, "-").concat(today.getDate());
+
+  if (selectedDate === formattedDate) {
+    console.log('chosen date is today');
+    var time = "".concat(today.getHours() + 2).concat(today.getMinutes());
+
+    for (var key in availableTimes) {
+      if (key !== '0' && parseInt(key) <= parseInt(time)) {
+        delete availableTimes[key];
+      } else {
+        newAvailable[availableTimes[key]] = 1;
+      }
+    }
+  }
+
+  console.log(newAvailable);
 
   if (bookings) {
     for (var i = 0; i < bookings.length; i++) {
-      console.log(bookings);
-
-      if (bookings[i].date === selectedDate) {
-        if (availableTimes[bookings[i].time]) {
-          delete availableTimes[bookings[i].time];
+      // console.log(bookings[i].date, selectedDate);
+      if (bookings[i].date === selectedDate && bookings[i].type === type) {
+        if (newAvailable[bookings[i].time]) {
+          delete newAvailable[bookings[i].time];
         }
       }
     }
   }
 
-  for (var key in availableTimes) {
+  for (var _key in newAvailable) {
     timeDropdown.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-      value: key,
-      key: key
-    }, availableTimes[key]));
+      value: _key,
+      key: _key
+    }, _key));
   }
 
   return timeDropdown;
