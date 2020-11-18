@@ -65,13 +65,13 @@ class App extends React.Component {
       phone: input.phone,
       message: input.message,
     };
-    console.log(request, input)
+    console.log(request, input);
     axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
       request,
     })
       .then((response) => {
         console.log(response.data);
-        this.setState ({
+        this.setState({
           property: response.data,
         });
       });

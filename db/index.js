@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/trulia', {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connect('mongodb://localhost/trulia', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log(`we're connected!`)
+db.once('open', () => {
+  console.log('we\'re connected!');
 });
 
 const bookingSchema = new mongoose.Schema({
@@ -23,15 +24,15 @@ const bookingSchema = new mongoose.Schema({
 const BookingModel = mongoose.model('Booking', bookingSchema);
 
 function insertMany(bookings, callback) {
-  BookingModel.insertMany(bookings, callback)
+  BookingModel.insertMany(bookings, callback);
 }
 
 function findbyParameters(filter, query, callback) {
-  BookingModel.find(filter, null, query, callback)
+  BookingModel.find(filter, null, query, callback);
 }
 
 function findOneAndUpdate(conditions, update, options, callback) {
-  BookingModel.findOneAndUpdate(conditions, update, options, callback)
+  BookingModel.findOneAndUpdate(conditions, update, options, callback);
 }
 
 exports.insertMany = insertMany;
