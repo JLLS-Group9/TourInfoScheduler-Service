@@ -77,17 +77,21 @@ class Form extends React.Component {
     });
   }
 
-  toggleDates(event) {
+  toggleDates(selectedDate) {
     this.setState({
-      date: event.target.value,
+      date: selectedDate,
     });
-    console.log(event.target.value);
+    console.log(selectedDate);
   }
 
   toggleAgent(agent) {
     this.setState ({
       agent: agent.name,
     });
+  }
+
+  toggleSliderView() {
+    console.log('click!')
   }
 
   renderMessageBox() {

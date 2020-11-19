@@ -19,24 +19,24 @@ const retrieveDates = (date, eventListener) => {
     const month = tempDate.toLocaleString('default', { month: 'short' });
     const weekday = tempDate.toLocaleString('default', { weekday: 'short' });
     const currentDate = `${tempDate.getFullYear()}-${tempDate.getMonth() + 1}-${tempDate.getDate()}`;
-    let dateName = `${weekday}
-    ${tempDate.getDate()}
-    ${month}
-    `;
 
     if (currentDate === date) {
       dateHTML.push(
-        <div className={dc.democontent}>
-          <button type="button" key={i} className={dc.dateSelected} value={currentDate} onClick={() => eventListener(event)}>
-            {dateName}
+        <div className={dc.buttonContainer}>
+          <button type="button" key={i} className={`${dc.dateButton} ${dc.dateButtonSelected}`} value={currentDate} onClick={() => eventListener(currentDate)}>
+            <span className={dc.buttonDetails}>{weekday}</span>
+            <span className={`${dc.buttonDetails} ${dc.dateSpecific}`}>{tempDate.getDate()}</span>
+            <span className={dc.buttonDetails}>{month}</span>
           </button>
         </div>,
       );
     } else {
       dateHTML.push(
-        <div className={dc.democontent}>
-          <button type="button" key={i} className={dc.dateUnselected} value={currentDate} onClick={() => eventListener(event)}>
-            {dateName}
+        <div className={dc.buttonContainer}>
+          <button type="button" key={i} className={`${dc.dateButton} ${dc.dateButtonUnselected}`} value={currentDate} onClick={() => eventListener(currentDate)}>
+            <span className={dc.buttonDetails}>{weekday}</span>
+            <span className={`${dc.buttonDetails} ${dc.dateSpecific}`}>{tempDate.getDate()}</span>
+            <span className={dc.buttonDetails}>{month}</span>
           </button>
         </div>,
       );
@@ -60,7 +60,7 @@ const Dates = ({ selectedDate, toggleDates, dateView }) => (
       </label>
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="left" className={ `${dc.carousel__control}
+      <label htmlFor="left" className={`${dc.carousel__control}
           ${dc['carousel__control--forward']}
           ${dateView === 'left' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
         &#8250;

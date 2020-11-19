@@ -62,3 +62,14 @@
 .advisory:hover .hiddenDisclaimer {
   display: block;
 }
+
+.button {
+  color: #007882;
+  font-size: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  outline: 0;
+  background-color: transparent;
+  border: 0;
+  margin: -0.75em;
+  cursor: pointer;
+}

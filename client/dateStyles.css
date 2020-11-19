@@ -1,36 +1,58 @@
 .main {
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  padding: 1em 0.25em 1em 0.25em;
   border: 20px;
   position: relative;
 }
 
+
 .carousel__item {
-  flex: 0 0 25%;
-  display: flex;
+  display: inline-flex;
+  vertical-align: top;
+  white-space: normal;
   flex-direction: row;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 25%;
+  width: 100%;
+}
+
+.buttonDetails {
+  flex: 1 1;
+  padding: 0.2em;
+}
+
+.dateSpecific {
+  font-weight: bolder;
 }
 
 
-.dateUnselected {
-  margin-right: 1em;
-  padding: 1em;
+.dateButton {
+  display: flex;
+  flex-direction: column;
+  font-size : 14px;
+  margin-right: 0.25em;
+  margin-left: 0.25em;
+  padding: 0.5em;
   border-radius: 9px;
   outline: 0;
+  border-style: solid;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.dateButtonUnselected{
   border-color: lightgray;
-  border-style: solid;
-  background-color: white;
 }
 
-.dateSelected {
-  margin-right: 1em;
-  padding: 1em;
-  border-radius: 9px;
-  outline: 0;
+.dateButtonSelected {
   border-color: #007882;
-  border-style: solid;
-  background-color: white;
 }
 
 .carousel_activator {
@@ -85,11 +107,11 @@
   box-shadow: 0 2px 10px 0 rgba(33, 34, 36, 0.3);
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-
 }
 
 .carousel__screen {
   /* overflow: hidden; */
+  width: 100%;
 }
 
 .carousel__control__selected {
@@ -109,10 +131,4 @@
   transition: all 0.5s ease 0s;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-}
-
-.carousel__item {
-  display: inline-flex;
-  vertical-align: top;
-  white-space: normal;
 }
