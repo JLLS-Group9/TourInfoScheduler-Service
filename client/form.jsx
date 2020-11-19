@@ -29,6 +29,7 @@ class Form extends React.Component {
     this.toggleFinancing = this.toggleFinancing.bind(this);
     this.toggleDates = this.toggleDates.bind(this);
     this.toggleAgent = this.toggleAgent.bind(this);
+    this.toggleSliderView = this.toggleSliderView.bind(this);
   }
 
   componentDidMount() {
@@ -85,13 +86,27 @@ class Form extends React.Component {
   }
 
   toggleAgent(agent) {
-    this.setState ({
+    this.setState({
       agent: agent.name,
     });
   }
 
   toggleSliderView() {
+    const dateContainer = document.getElementById('track');
+    console.log(dateContainer.clientWidth )
+    const { dateView } = this.state;
     console.log('click!')
+    if (dateView === 'left') {
+      this.setState({
+        dateView: 'right',
+      });
+      dateContainer.style.transform = `translateX(-${dateContainer.clientWidth * 0.75}px)`;
+    } else {
+      this.setState({
+        dateView: 'left',
+      });
+      dateContainer.style.transform = 'translateX(0px)';
+    }
   }
 
   renderMessageBox() {
@@ -204,7 +219,7 @@ class Form extends React.Component {
         <div name="tourType" className={styles.tourType}>
           {this.renderScheduler()}
         </div>,
-        <Dates selectedDate={date} toggleDates={this.toggleDates} dateView={dateView} />,
+        <Dates selectedDate={date} toggleDates={this.toggleDates} dateView={dateView} slideDates={this.toggleSliderView} />,
         <select name="time" className={styles.Times} onChange={this.handleInput}>
           {' '}
           <Times selectedDate={date} bookings={bookings} type={type} />

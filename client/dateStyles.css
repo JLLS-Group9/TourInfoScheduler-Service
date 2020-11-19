@@ -55,10 +55,6 @@
   border-color: #007882;
 }
 
-.carousel_activator {
-  display: none;
-}
-
 .carousel {
   margin-left: auto;
   margin-right: auto;
@@ -73,13 +69,15 @@
   right: 16px;
   left: 16px;
   bottom: 0;
+  vertical-align: middle
 }
 
 .carousel__control--backward {
   display: none;
-  top: 45%;
+  top: 40%;
   position: absolute;
-  margin: -0.5em;
+  border: 1px solid lightgray;
+  vertical-align: middle;
 }
 
 .carousel__control--forward {
@@ -87,11 +85,12 @@
   position: absolute;
   top: 40%;
   left: 90%;
+  border: 1px solid lightgray;
+  vertical-align: middle;
 }
 
 .carousel__control {
   cursor: pointer;
-  align-items: center;
   background-color: #fff;
   color: #3d414a;
   border-radius: 100%;
@@ -101,29 +100,29 @@
   transition: 0.3s all;
   width: 25px;
   z-index: 1;
+  outline: 0;
 }
 
 .carousel__control:hover {
-  box-shadow: 0 2px 10px 0 rgba(33, 34, 36, 0.3);
+  box-shadow: 0 1px 5px 0 lightgray;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
 }
 
+.carousel__control:active {
+  background-color: lightgray;
+  transition: all 0.1s ease 0s;
+}
+
 .carousel__screen {
-  /* overflow: hidden; */
+  overflow: hidden;
   width: 100%;
 }
 
 .carousel__control__selected {
   display: inline;
-  background-color:green;
+  background-color:white;
 }
-
-.carousel__control__selected {
-  display: inline;
-  background-color:green;
-}
-
 
 
 .carousel__track {

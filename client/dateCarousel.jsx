@@ -45,29 +45,30 @@ const retrieveDates = (date, eventListener) => {
   return dateHTML;
 };
 
-const Dates = ({ selectedDate, toggleDates, dateView }) => (
+const Dates = ({ selectedDate, toggleDates, dateView, slideDates }) => (
   <div className={dc.main}>
-    <div className={dc.carousel}>
-      <input type="radio" id="left" name="carousel" className={dc.carousel_activator} />
-      <input type="radio" id="right" name="carousel" className={dc.carousel_activator} />
-    </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="right"
+      <button
+        type="button"
+        onClick={slideDates}
         className={
           `${dc.carousel__control} ${dc['carousel__control--backward']}
           ${dateView === 'right' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
         &#8249;
-      </label>
+      </button>
     </div>
     <div className={dc.carousel__controls}>
-      <label htmlFor="left" className={`${dc.carousel__control}
+      <button
+        type="button"
+        onClick={slideDates}
+        className={`${dc.carousel__control}
           ${dc['carousel__control--forward']}
           ${dateView === 'left' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
         &#8250;
-      </label>
+      </button>
     </div>
     <div className={dc.carousel__screen}>
-      <div className={dc.carousel__track}>
+      <div id="track" className={dc.carousel__track}>
         <div className={dc.carousel__item}>{retrieveDates(selectedDate, toggleDates)}</div>
       </div>
     </div>
