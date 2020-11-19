@@ -47,6 +47,10 @@
   align-items: center;
 }
 
+.dateButton:hover {
+  background-color: #f5f6f7;
+}
+
 .dateButtonUnselected{
   border-color: lightgray;
 }

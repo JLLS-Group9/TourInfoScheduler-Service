@@ -12,7 +12,7 @@ const Disclaimer = (scheduleBool) => {
   const popupMessageDisclaimer = `Real estate professionals include the real estate agents and brokers, mortgage lenders and loan officers, property managers, and other professionals you interact with through Trulia.`
   const publicHealthDisclaimer = `In-person tours may not currently allow for safe social distancing or comply with public health orders.`
   const terms = `Terms of Use`;
-  const lastSentence = `. Trulia does not endorse any`;
+  const lastSentence = `. Trulia does not endorse any `;
 
   const message = `By pressing ${view}, you agree that Trulia and real estate professionals may contact you via phone/text about your inquiry, which may involve the use of automated means. You are not required to consent as a condition of purchasing any property, goods or services. Message/data rates may apply. You also agree to our `;
 
