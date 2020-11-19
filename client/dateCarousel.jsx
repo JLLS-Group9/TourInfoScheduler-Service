@@ -45,7 +45,9 @@ const retrieveDates = (date, eventListener) => {
   return dateHTML;
 };
 
-const Dates = ({ selectedDate, toggleDates, dateView, slideDates }) => (
+const Dates = ({
+  selectedDate, toggleDates, dateView, slideDates,
+}) => (
   <div className={dc.main}>
     <div className={dc.carousel__controls}>
       <button
@@ -53,8 +55,12 @@ const Dates = ({ selectedDate, toggleDates, dateView, slideDates }) => (
         onClick={slideDates}
         className={
           `${dc.carousel__control} ${dc['carousel__control--backward']}
-          ${dateView === 'right' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
-        &#8249;
+          ${dateView === 'right' ? dc.carousel__control__selected : dc.carousel__control__unselected}`
+}
+      >
+        <span className={dc.carousel__btn__container}>
+          &#8249;
+        </span>
       </button>
     </div>
     <div className={dc.carousel__controls}>
@@ -63,8 +69,12 @@ const Dates = ({ selectedDate, toggleDates, dateView, slideDates }) => (
         onClick={slideDates}
         className={`${dc.carousel__control}
           ${dc['carousel__control--forward']}
-          ${dateView === 'left' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}>
-        &#8250;
+          ${dateView === 'left' ? dc.carousel__control__selected : dc.carousel__control__unselected}`}
+      >
+        <span className={dc.carousel__btn__container}>
+          &#8250;
+
+        </span>
       </button>
     </div>
     <div className={dc.carousel__screen}>

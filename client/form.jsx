@@ -93,9 +93,9 @@ class Form extends React.Component {
 
   toggleSliderView() {
     const dateContainer = document.getElementById('track');
-    console.log(dateContainer.clientWidth )
+    console.log(dateContainer.clientWidth);
     const { dateView } = this.state;
-    console.log('click!')
+    console.log('click!');
     if (dateView === 'left') {
       this.setState({
         dateView: 'right',
@@ -219,7 +219,8 @@ class Form extends React.Component {
         <div name="tourType" className={styles.tourType}>
           {this.renderScheduler()}
         </div>,
-        <Dates selectedDate={date} toggleDates={this.toggleDates} dateView={dateView} slideDates={this.toggleSliderView} />,
+        <Dates selectedDate={date} toggleDates={this.toggleDates}
+          dateView={dateView} slideDates={this.toggleSliderView} />,
         <select name="time" className={styles.Times} onChange={this.handleInput}>
           {' '}
           <Times selectedDate={date} bookings={bookings} type={type} />
