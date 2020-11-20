@@ -9,7 +9,7 @@ module.exports = {
       if (err) {
         res.status(400).send(err);
       } else {
-        console.log(data)
+        console.log(data);
         res.header('Content-Type', 'application/json').send(JSON.stringify(data, 0, 2));
       }
     });

@@ -525,10 +525,12 @@ var Dates = function Dates(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__btn__container
   }, "\u203A"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__screen
+    className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__screen,
+    key: "carousel_screen"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "track",
-    className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__track
+    className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__track,
+    key: "track"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: _dateStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].carousel__item
   }, retrieveDates(selectedDate, toggleDates)))));
@@ -595,19 +597,25 @@ var Disclaimer = function Disclaimer(scheduleBool) {
   var lastSentence = '. Trulia does not endorse any ';
   var message = "By pressing ".concat(view, ", you agree that Trulia and real estate professionals may contact you via phone/text about your inquiry, which may involve the use of automated means. You are not required to consent as a condition of purchasing any property, goods or services. Message/data rates may apply. You also agree to our ");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].text
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].text,
+    key: "disclaimerText"
   }, scheduleBool.view ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].advisory
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].advisory,
+    key: "disclaimerAdvisory"
   }, "\u26A0 Public Health Advisory", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].hiddenDisclaimer
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].hiddenDisclaimer,
+    key: "hiddenDisclaimer"
   }, publicHealthDisclaimer)) : null, message, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     onClick: truliaTerms,
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].button
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].button,
+    key: "truliaButton"
   }, terms), lastSentence, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].popUp
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].popUp,
+    key: "datePopups"
   }, popupMessage, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].hiddenDisclaimer
+    className: _disclaimerStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].hiddenDisclaimer,
+    key: "secondDisclaimer"
   }, popupMessageDisclaimer)));
 };
 
@@ -930,25 +938,31 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
       if (isScheduleOn) {
         formDisplay = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourTypeText
+          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourTypeText,
+          key: "type"
         }, "Tour Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           name: "tourType",
-          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourType
+          className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].tourType,
+          key: "tourType"
         }, this.renderScheduler()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dateCarousel_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           selectedDate: date,
           toggleDates: this.toggleDates,
           dateView: dateView,
-          slideDates: this.toggleSliderView
+          slideDates: this.toggleSliderView,
+          key: "dates"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
           name: "time",
           className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Times,
-          onChange: this.handleInput
+          onChange: this.handleInput,
+          key: "dropdownContainer"
         }, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_timesDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
           selectedDate: date,
           bookings: bookings,
-          type: type
+          type: type,
+          key: "times"
         }), ' '), this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          view: isScheduleOn
+          view: isScheduleOn,
+          key: "Disclaimer"
         })];
       } else {
         formDisplay = [this.renderStandardInputs(finLabel, isScheduleOn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_disclaimer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -979,10 +993,12 @@ var Form = /*#__PURE__*/function (_React$Component) {
           toggle(event);
         }
       }, "Request Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formContainer
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].formContainer,
+        key: "formContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
-        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Form
+        className: _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].Form,
+        key: "form"
       }, formDisplay)));
     }
   }]);

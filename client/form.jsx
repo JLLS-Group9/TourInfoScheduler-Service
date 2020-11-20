@@ -215,19 +215,19 @@ class Form extends React.Component {
 
     if (isScheduleOn) {
       formDisplay = [
-        <span className={styles.tourTypeText}>Tour Type</span>,
-        <div name="tourType" className={styles.tourType}>
+        <span className={styles.tourTypeText} key="type">Tour Type</span>,
+        <div name="tourType" className={styles.tourType} key="tourType">
           {this.renderScheduler()}
         </div>,
         <Dates selectedDate={date} toggleDates={this.toggleDates}
-          dateView={dateView} slideDates={this.toggleSliderView} />,
-        <select name="time" className={styles.Times} onChange={this.handleInput}>
+          dateView={dateView} slideDates={this.toggleSliderView} key="dates" />,
+        <select name="time" className={styles.Times} onChange={this.handleInput} key="dropdownContainer">
           {' '}
-          <Times selectedDate={date} bookings={bookings} type={type} />
+          <Times selectedDate={date} bookings={bookings} type={type} key="times" />
           {' '}
         </select>,
         this.renderStandardInputs(finLabel, isScheduleOn),
-        <Disclaimer view={isScheduleOn} />,
+        <Disclaimer view={isScheduleOn} key="Disclaimer" />,
       ];
     } else {
       formDisplay = [
@@ -243,8 +243,8 @@ class Form extends React.Component {
           <button className={isScheduleOn ? styles.topButtonselected : styles.topButton} type="button" name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
           <button className={isScheduleOn ? styles.topButton : styles.topButtonselected} type="button" name="info" onClick={() => { toggle(event); }}>Request Info</button>
         </div>
-        <div className={styles.formContainer}>
-          <form onSubmit={this.handleSubmit} className={styles.Form}>
+        <div className={styles.formContainer} key="formContainer">
+          <form onSubmit={this.handleSubmit} className={styles.Form} key="form">
             {formDisplay}
           </form>
         </div>

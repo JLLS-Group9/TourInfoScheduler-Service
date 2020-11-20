@@ -18,8 +18,8 @@ const Agents = ({ selectedAgent, agents, toggleAgent }) => (
   <div className={ags.AgentsContainer}>
     {agents.map((agent, index) => (
       <div key={index} className={ags.picture}>
-        <div className={ags.photo} onClick={()=> {toggleAgent(agent)}} value={agent.name}>
-          <div className={ags.thumbnailContainerUnselected} >
+        <div className={ags.photo} onClick={() => { toggleAgent(agent); }} value={agent.name}>
+          <div className={ags.thumbnailContainerUnselected}>
             <img className={ags.thumbnail} id={index} src={agent.picture} />
           </div>
           <div className={ags.caption}>
@@ -44,7 +44,7 @@ const Agents = ({ selectedAgent, agents, toggleAgent }) => (
             </span>
             {' '}
             <span className={ags.agentPhone}>
-            {agent.phone}
+              {agent.phone}
             </span>
           </div>
           <div className={ags.reviews}>

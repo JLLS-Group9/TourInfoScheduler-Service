@@ -77,8 +77,8 @@ const Dates = ({
         </span>
       </button>
     </div>
-    <div className={dc.carousel__screen}>
-      <div id="track" className={dc.carousel__track}>
+    <div className={dc.carousel__screen} key="carousel_screen">
+      <div id="track" className={dc.carousel__track} key="track">
         <div className={dc.carousel__item}>{retrieveDates(selectedDate, toggleDates)}</div>
       </div>
     </div>

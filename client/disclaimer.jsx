@@ -17,23 +17,23 @@ const Disclaimer = (scheduleBool) => {
   const message = `By pressing ${view}, you agree that Trulia and real estate professionals may contact you via phone/text about your inquiry, which may involve the use of automated means. You are not required to consent as a condition of purchasing any property, goods or services. Message/data rates may apply. You also agree to our `;
 
   return (
-    <div className={ds.text}>
+    <div className={ds.text} key="disclaimerText">
       {scheduleBool.view ? (
-        <div className={ds.advisory}>
+        <div className={ds.advisory} key="disclaimerAdvisory">
           &#9888; Public Health Advisory
-          <div className={ds.hiddenDisclaimer}>
+          <div className={ds.hiddenDisclaimer} key="hiddenDisclaimer">
             {publicHealthDisclaimer}
           </div>
         </div>
       ) : null}
       {message}
       {' '}
-      <button type="button" onClick={truliaTerms} className={ds.button}>{terms}</button>
+      <button type="button" onClick={truliaTerms} className={ds.button} key="truliaButton">{terms}</button>
       {lastSentence}
-      <div className={ds.popUp}>
+      <div className={ds.popUp} key="datePopups">
         {popupMessage}
         {' '}
-        <div className={ds.hiddenDisclaimer}>
+        <div className={ds.hiddenDisclaimer} key="secondDisclaimer">
           {popupMessageDisclaimer}
         </div>
       </div>
