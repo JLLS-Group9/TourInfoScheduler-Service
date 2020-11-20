@@ -853,6 +853,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
       buttons.forEach(function (element, index) {
         return scheduler.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: newStyle[index],
+          id: element,
           name: "type",
           type: "button",
           value: element,
@@ -982,6 +983,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: isScheduleOn ? _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtonselected : _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButton,
         type: "button",
         name: "schedule",
+        id: "schedule",
         onClick: function onClick() {
           toggle(event);
         }
@@ -989,6 +991,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: isScheduleOn ? _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButton : _formStyles_css__WEBPACK_IMPORTED_MODULE_1__["default"].topButtonselected,
         type: "button",
         name: "info",
+        id: "info",
         onClick: function onClick() {
           toggle(event);
         }

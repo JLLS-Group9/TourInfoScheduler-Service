@@ -141,7 +141,7 @@ class Form extends React.Component {
       newStyle.push(styles.InPerson, styles.VideoSelected);
     }
     buttons.forEach((element, index) => scheduler.push(
-      <button className={newStyle[index]} name="type" type="button" value={element} key={index} onClick={this.handleInput}>{element}</button>,
+      <button className={newStyle[index]} id={element} name="type" type="button" value={element} key={index} onClick={this.handleInput}>{element}</button>,
     ));
     return scheduler;
   }
@@ -240,8 +240,8 @@ class Form extends React.Component {
     return (
       <div className={styles.mainContainer}>
         <div className={styles.Header}>
-          <button className={isScheduleOn ? styles.topButtonselected : styles.topButton} type="button" name="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
-          <button className={isScheduleOn ? styles.topButton : styles.topButtonselected} type="button" name="info" onClick={() => { toggle(event); }}>Request Info</button>
+          <button className={isScheduleOn ? styles.topButtonselected : styles.topButton} type="button" name="schedule" id="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
+          <button className={isScheduleOn ? styles.topButton : styles.topButtonselected} type="button" name="info" id="info" onClick={() => { toggle(event); }}>Request Info</button>
         </div>
         <div className={styles.formContainer} key="formContainer">
           <form onSubmit={this.handleSubmit} className={styles.Form} key="form">
