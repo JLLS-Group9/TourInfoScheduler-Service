@@ -1,84 +1,121 @@
-import React from 'react'
-import axios from 'axios'
-import Form from './form.jsx'
+/* eslint-disable import/extensions */
+/* eslint-disable no-console */
+import React from 'react';
+import axios from 'axios';
+import Form from './form.jsx';
+import as from './appStyles.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentView: 'schedule',
-      property: {}
-    }
+      property: {},
+    };
 
-    this.submitRequest = this.submitRequest.bind(this)
-    this.toggleView = this.toggleView.bind(this)
+    this.submitRequest = this.submitRequest.bind(this);
+    this.toggleView = this.toggleView.bind(this);
+    this.retrievePropertyInfo = this.retrievePropertyInfo.bind(this);
   }
 
   componentDidMount() {
-    this.retrievePropertyInfo(1)
+    this.retrievePropertyInfo();
   }
 
-  retrievePropertyInfo (id) {
-    console.log('retrieving info')
-    axios.get(`/api/homes/${id}/bookings`)
-    .then((response) => {
-      this.setState ({
-        property: response.data[0]
-      })
-      console.log(response.data[0])
-    })
+  retrievePropertyInfo() {
+    console.log('retrieving info');
+    axios.get(`${window.location.href}/bookings`)
+      .then((response) => {
+        this.setState({
+          property: response.data[0],
+        });
+        console.log(response.data[0]);
+      });
   }
 
-  scheduleTour (input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/scheduleTour`, {
-      input
+  scheduleTour(input) {
+    const { property: { propertyId } } = this.state;
+    console.log('scheduler', propertyId, input);
+    const request = {
+      email: input.email,
+      financing: input.financing,
+      name: input.name,
+      phone: input.phone,
+      date: input.date,
+      type: input.type,
+      time: input.time,
+    };
+    axios.put(`/api/homes/${propertyId}/scheduleTour`, {
+      request,
     })
-    .then((response) => {
-
-    })
+      .then((response) => {
+        this.setState({
+          property: response.data,
+        });
+        console.log(response);
+      });
   }
 
-  requestInfo (input) {
-    axios.put(`/api/homes/${this.state.property.propertyId}/requestInfo`, {
-      input
+  requestInfo(input) {
+    const { property } = this.state;
+    const request = {
+      name: input.name,
+      email: input.email,
+      financing: input.financing,
+      phone: input.phone,
+      message: input.message,
+      agent: input.agent,
+    };
+    console.log(request, input);
+    axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
+      request,
     })
-    .then((response) => {
-
-    })
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          property: response.data,
+        });
+      });
   }
 
   submitRequest(input) {
-    console.log(input)
-    if (this.state.currentView === 'schedule') {
+    const { currentView } = this.state;
+    console.log(input);
+    if (currentView === 'schedule') {
       this.scheduleTour(input);
     } else {
       this.requestInfo(input);
     }
   }
 
-  toggleView() {
-    if (this.state.currentView === 'schedule') {
+  toggleView(event) {
+    const { currentView } = this.state;
+    const click = event.target.name;
+    event.stopPropagation();
+    if (currentView !== click) {
       this.setState({
-        currentView: 'info'
-      })
-    } else {
-      this.setState ({
-        currentView: 'schedule'
-      })
+        currentView: click,
+      });
     }
-    console.log('toggleView', this.state.currentView)
+    console.log('toggleView', currentView);
   }
 
   render() {
+    const {
+      currentView,
+      property,
+    } = this.state;
     return (
-      <div>
-        Hello World, this is the App of TourInfo front-end
-        <Form submit={this.submitRequest} view={this.state.currentView} agents={this.state.property.agentsInfo}
-          toggle={this.toggleView} />
+      <div className={as.mainContainer}>
+        <Form
+          submit={this.submitRequest}
+          view={currentView}
+          property={property}
+          toggle={this.toggleView}
+        />
       </div>
-    )
+    );
   }
 }
-
 
 export default App;

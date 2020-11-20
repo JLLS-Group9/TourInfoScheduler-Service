@@ -1,0 +1,233 @@
+.mainContainer {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  margin: 1em auto;
+}
+
+.formContainer {
+  display: flex;
+  width: 300px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  width: 298px;
+  position: absolute;
+  box-shadow: 0px 10px 20px 0px lightgrey;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-top: 0;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 0px 1px 1px 1px;
+}
+
+.fieldsContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.formFields {
+  width: 50%;
+  padding: 0.25em;
+  font-size: 16px;
+  margin: 0.5em;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border-color: lightgrey;
+  border-style: solid;
+  outline: 0;
+  transition: box-shadow 0.15s ease 0s, border-color 0.15s ease 0s;
+}
+
+
+.formEmail {
+  color: lightgrey;
+  flex: 1 1;
+  padding: 0.25em;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  border-style: solid;
+  outline: 0;
+  margin: 0.5em;
+  transition: box-shadow 0.15s ease 0s, border-color 0.15s ease 0s;
+}
+
+
+.bigButton {
+  flex: 1 1;
+  width: 285px;
+  height: 40px;
+  background-color: #d93c23;
+  color: white;
+  font-size: 16px;
+  margin: 0.5em;
+  border-radius: 7px;
+  border-color: #d93c23;
+  border-style: solid;
+  font-weight: bolder;
+  outline: 0;
+}
+
+.bigButton:hover {
+  background-color: white;
+  color: #d93c23;
+  border-color: #d93c23;
+  border-style: solid;
+  cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007882;
+  outline: 0;
+  box-shadow: #008278 0px 0px 0px 2px;
+}
+
+.finLabel {
+  color: gray;
+  font-size: 12px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.finLabel:hover {
+  cursor: pointer;
+}
+
+.finCheckBox {
+  display: none;
+}
+
+.finCheckBox {
+	-webkit-appearance: none;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+	padding: 2px 3px 2px 3px;
+	border-radius: 3px;
+	display: inline;
+  position: relative;
+  margin: 0.5em 0.5em 0.5em 0.75em;
+}
+
+.finCheckBox:checked {
+  content: '\2713';
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  color: white;
+  background-color:  #007882;
+}
+
+.tourType {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.tourTypeText {
+  margin: 0.5em;
+  color: gray;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Video, .InPerson, .VideoSelected, .InPersonSelected {
+  flex: 1 1;
+  font-weight: bolder;
+  padding: 0.5em;
+  background-color: white;
+  border-color: lightgrey;
+  border-style: solid;
+  outline: 0;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Video:hover, .InPerson:hover, .VideoSelected:hover, .InPersonSelected:hover {
+  cursor: pointer;
+}
+
+.Video, .VideoSelected {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 0.5em 0.5em 0.5em 0em;
+}
+
+.InPerson, .InPersonSelected {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin: 0.5em 0 0.5em 0.5em;
+}
+
+.VideoSelected, .InPersonSelected {
+  background-color: #007882;
+  color: white;
+  border-color: #007882;
+}
+
+.Video:hover, .InPerson:hover {
+  background-color: lightgray;
+}
+
+
+.Times {
+  flex: 1 1;
+  color: black;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  height: 40px;
+  padding: 0.25em;
+  border-radius: 5px;
+  border-color: lightgrey;
+  border-style: solid;
+  margin: 0.5em;
+  font-weight: bolder;
+}
+
+.Header {
+  display: flex;
+}
+
+.topButton, .topButtonselected {
+  flex: 1 1;
+  font-size: 16px;
+  height: 40px;
+  color: #007882;
+  background-color: #FFFFFF;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  outline: none;
+  z-index: 1;
+}
+
+.topButton {
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid lightgray;
+}
+
+.topButtonselected {
+  border-top: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-bottom: 1px solid transparent;
+}
+
+.messageBox {
+  width: 90%;
+  height: 100px;
+  margin: 0.5em;
+  color: gray;
+  border-color: white;
+  border-radius: 5px;
+  border-color: lightgrey;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  border-style: solid;
+  outline: 0;
+}

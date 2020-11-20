@@ -1,110 +1,256 @@
-import React from 'react'
-import styles from './style.css'
+/* eslint-disable import/extensions */
+/* eslint-disable no-console */
+/* eslint-disable no-plusplus */
+import React from 'react';
+import styles from './formStyles.css';
+import Agents from './agentsList.jsx';
+import Dates from './dateCarousel.jsx';
+import Times from './timesDropDown.jsx';
+import Disclaimer from './disclaimer.jsx';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: '',
+      type: 'In-Person',
+      dateView: 'left',
       date: '',
       time: '',
       name: '',
       phone: '',
       email: '',
       message: '',
+      agent: '',
       financing: false,
-    }
+    };
 
-    this.handleInput = this.handleInput.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleFinancing = this.toggleFinancing.bind(this)
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleFinancing = this.toggleFinancing.bind(this);
+    this.toggleDates = this.toggleDates.bind(this);
+    this.toggleAgent = this.toggleAgent.bind(this);
+    this.toggleSliderView = this.toggleSliderView.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
+    const now = new Date();
+    const startDate = new Date();
+    let placeholderDate = '';
+    // if past 5PM pacific time, then default start date to next day
+    if (now.getHours() >= 17 || (now.getHours() >= 16 && now.getMinutes() >= 30)) {
+      startDate.setDate(now.getDate() + 1);
+    }
 
+    placeholderDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+
+    this.setState({
+      date: placeholderDate,
+    });
   }
 
   handleInput(event) {
-    this.setState ({
-      [event.target.name] : event.target.value
-    })
-    console.log(event.target.name, this.state[event.target.name])
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+    console.log('handle input', event.target.name, this.state[event.target.name]);
   }
 
-  handleSubmit () {
-    event.preventDefault()
-    console.log('Form- handle submit', this.state)
-    this.props.submit(this.state)
-    this.handleReset()
+  handleSubmit(event) {
+    const { submit } = this.props;
+    event.preventDefault();
+    console.log('Form- handle submit', this.state);
+    submit(this.state);
+    this.handleReset();
   }
 
   handleReset() {
-    console.log('entering handleReset')
+    console.log('entering handleReset');
     // let forms = Array.from(document.querySelectorAll('input'))
     // console.log(forms)
   }
 
-  toggleFinancing () {
-    console.log('toggling financing')
-    let checked = !this.state.financing;
+  toggleFinancing() {
+    const { financing } = this.state;
+    console.log('toggling financing');
+    const checked = !financing;
     this.setState({
-      financing: checked
-    })
+      financing: checked,
+    });
   }
 
-  render () {
-    let label = '';
-    let finLabel = '';
-    let scheduleDisplay;
-    let infoDisplay;
-    let picDisplay;
-    if (this.props.view === 'info') {
-      label = 'Request Info'
-      infoDisplay =
-      <span>
-      <input name="message" onChange={this.handleInput}></input><label>Message</label>
-      </span>
-      picDisplay =
-      <span>
-        <img src={this.props.agents[0].Picture}></img>
-        <img src={this.props.agents[1].Picture}></img>
-        <img src={this.props.agents[2].Picture}></img>
-        <img src={this.props.agents[3].Picture}></img>
-      </span>
-    } else {
-      label = 'Schedule a Tour'
-      scheduleDisplay =
-          <span>
-          <input name="type" onChange={this.handleInput}></input><label>Tour Type</label>
-          <input name="date" onChange={this.handleInput}></input><label>Date</label>
-          <input name="time" onChange={this.handleInput}></input><label>Time</label>
-          </span>
-    }
+  toggleDates(selectedDate) {
+    this.setState({
+      date: selectedDate,
+    });
+    console.log(selectedDate);
+  }
 
-    if (this.state.financing) {
-      finLabel = 'A licensed lender will contact you shortly.'
+  toggleAgent(agent) {
+    this.setState({
+      agent: agent.name,
+    });
+  }
+
+  toggleSliderView() {
+    const dateContainer = document.getElementById('track');
+    console.log(dateContainer.clientWidth);
+    const { dateView } = this.state;
+    console.log('click!');
+    if (dateView === 'left') {
+      this.setState({
+        dateView: 'right',
+      });
+      dateContainer.style.transform = `translateX(-${dateContainer.clientWidth * 0.75}px)`;
     } else {
-      finLabel = 'I want to talk about financing.'
+      this.setState({
+        dateView: 'left',
+      });
+      dateContainer.style.transform = 'translateX(0px)';
     }
+  }
+
+  renderMessageBox() {
+    const {
+      property: {
+        address, city, state, zipCode,
+      },
+    } = this.props;
+    const defaultMessage = `I am interested in ${address}, ${city}, ${state} ${zipCode}.`;
 
     return (
       <div>
-        <button onClick={() => {this.props.toggle()}}></button>
-      <form onSubmit={this.handleSubmit}>
-        {scheduleDisplay}
-        <input name="name" className={styles.test} onChange={this.handleInput}></input><label>Name</label>
-        <input name="email" className={styles.test} onChange={this.handleInput}></input><label>Email</label>
-        <input name="phone" className={styles.test}  onChange={this.handleInput}></input><label>Phone</label>
-        {infoDisplay}
-        <input type="checkbox" onClick={this.toggleFinancing}></input><label>{finLabel}</label>
-        <button type="submit">{label}</button>
-        {picDisplay}
-      </form>
+        <textarea
+          className={styles.messageBox}
+          name="message"
+          onChange={this.handleInput}
+          value={defaultMessage}
+        />
       </div>
-    )
+    );
+  }
+
+  renderScheduler() {
+    console.log('check should indicate schedule', this.state.type);
+    const { type } = this.state;
+    const scheduler = [];
+    const buttons = ['In-Person', 'Video'];
+    const newStyle = [];
+    if (type === 'In-Person') {
+      newStyle.push(styles.InPersonSelected, styles.Video);
+    } else {
+      newStyle.push(styles.InPerson, styles.VideoSelected);
+    }
+    buttons.forEach((element, index) => scheduler.push(
+      <button className={newStyle[index]} id={element} name="type" type="button" value={element} key={index} onClick={this.handleInput}>{element}</button>,
+    ));
+    return scheduler;
+  }
+
+  renderStandardInputs(finLabel, isScheduleOn) {
+    const params = ['name', 'phone', 'email'];
+    let rows = [];
+    rows.push(
+      <div key={0} className={styles.fieldsContainer}>
+        <input
+          name={params[0]}
+          className={styles.formFields}
+          onChange={this.handleInput}
+          placeholder={params[0].charAt(0).toUpperCase() + params[0].slice(1)}
+        />
+        <input
+          name={params[1]}
+          className={styles.formFields}
+          onChange={this.handleInput}
+          placeholder={params[1].charAt(0).toUpperCase() + params[1].slice(1)}
+        />
+      </div>,
+    );
+
+    rows.push(
+      <input
+        name={params[2]}
+        className={styles.formEmail}
+        onChange={this.handleInput}
+        placeholder={params[2].charAt(0).toUpperCase() + params[2].slice(1)}
+      />,
+    );
+
+    if (!isScheduleOn) {
+      rows.push(this.renderMessageBox());
+    }
+    rows = rows.concat([
+      <div className={styles.finBox}>
+        <input type="checkbox" id="checkbox" key="checkbox" className={styles.finCheckBox} onClick={this.toggleFinancing} />
+        <label key="fin" htmlFor="checkbox" className={styles.finLabel}>{finLabel}</label>
+      </div>,
+      <div><button type="submit" className={styles.bigButton}>{isScheduleOn ? 'Schedule a Tour' : 'Request Info'}</button></div>,
+    ]);
+    return rows;
+  }
+
+  render() {
+    const {
+      property: { agentsInfo, bookings, requestInfo },
+      toggle,
+      view,
+    } = this.props;
+
+    const {
+      financing,
+      date,
+      dateView,
+      type,
+      agent,
+    } = this.state;
+
+    const isScheduleOn = view === 'schedule';
+    let finLabel = '';
+    let formDisplay = [];
+
+    if (financing) {
+      finLabel = ' A licensed lender will contact you shortly.';
+    } else {
+      finLabel = ' I want to talk about financing.';
+    }
+
+    if (isScheduleOn) {
+      formDisplay = [
+        <span className={styles.tourTypeText} key="type">Tour Type</span>,
+        <div name="tourType" className={styles.tourType} key="tourType">
+          {this.renderScheduler()}
+        </div>,
+        <Dates selectedDate={date} toggleDates={this.toggleDates}
+          dateView={dateView} slideDates={this.toggleSliderView} key="dates" />,
+        <select name="time" className={styles.Times} onChange={this.handleInput} key="dropdownContainer">
+          {' '}
+          <Times selectedDate={date} bookings={bookings} type={type} key="times" />
+          {' '}
+        </select>,
+        this.renderStandardInputs(finLabel, isScheduleOn),
+        <Disclaimer view={isScheduleOn} key="Disclaimer" />,
+      ];
+    } else {
+      formDisplay = [
+        this.renderStandardInputs(finLabel, isScheduleOn),
+        <Disclaimer view={isScheduleOn} />,
+        <Agents agents={agentsInfo} toggleAgent={this.toggleAgent} selectedAgent={agent} />,
+      ];
+    }
+
+    return (
+      <div className={styles.mainContainer}>
+        <div className={styles.Header}>
+          <button className={isScheduleOn ? styles.topButtonselected : styles.topButton} type="button" name="schedule" id="schedule" onClick={() => { toggle(event); }}>Schedule a Tour</button>
+          <button className={isScheduleOn ? styles.topButton : styles.topButtonselected} type="button" name="info" id="info" onClick={() => { toggle(event); }}>Request Info</button>
+        </div>
+        <div className={styles.formContainer} key="formContainer">
+          <form onSubmit={this.handleSubmit} className={styles.Form} key="form">
+            {formDisplay}
+          </form>
+        </div>
+      </div>
+    );
   }
 }
-
-
 
 export default Form;
