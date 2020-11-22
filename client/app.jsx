@@ -24,12 +24,12 @@ class App extends React.Component {
 
   retrievePropertyInfo() {
     console.log('retrieving info');
-    axios.get(`${window.location.href}/bookings`)
+    axios.get(`${window.location.pathname}bookings`)
       .then((response) => {
+        console.log('got info', response.data[0], window.location.href);
         this.setState({
           property: response.data[0],
         });
-        console.log(response.data[0]);
       });
   }
 
