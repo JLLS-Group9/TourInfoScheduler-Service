@@ -280,12 +280,12 @@ var App = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       console.log('retrieving info');
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(window.location.href, "/bookings")).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(window.location.pathname, "bookings")).then(function (response) {
+        console.log('got info', response.data[0], window.location.href);
+
         _this2.setState({
           property: response.data[0]
         });
-
-        console.log(response.data[0]);
       });
     }
   }, {
@@ -1059,7 +1059,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('tour'));
 
 /***/ }),
 
@@ -3066,7 +3066,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "._2sh5FHd5xIbMprCIa9f8AA {\r\n  display: flex;\r\n  flex-direction: row;\r\n  padding: 1em 0.25em 1em 0.25em;\r\n  border: 20px;\r\n  position: relative;\r\n}\r\n\r\n\r\n._29J47q44_TljNyHOlMyPSJ {\r\n  display: inline-flex;\r\n  vertical-align: top;\r\n  white-space: normal;\r\n  flex-direction: row;\r\n  width: 100%;\r\n}\r\n\r\n._2eWiaMS6PgE-g8M-Fnu0x6 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex: 0 0 25%;\r\n  width: 100%;\r\n}\r\n\r\n.JurDhi-YxWK-T2L28gLCz {\r\n  flex: 1 1;\r\n  padding: 0.2em;\r\n}\r\n\r\n._3lzXoJNWzvW5imJQuOj4Yq {\r\n  font-weight: bolder;\r\n}\r\n\r\n\r\n._2-7Lv8Sbc6gcyqvH_qTCX {\r\n  display: flex;\r\n  flex-direction: column;\r\n  font-size : 14px;\r\n  margin-right: 0.25em;\r\n  margin-left: 0.25em;\r\n  padding: 0.5em;\r\n  border-radius: 9px;\r\n  outline: 0;\r\n  border: 1px solid lightgray;\r\n  background-color: white;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n._2-7Lv8Sbc6gcyqvH_qTCX:hover {\r\n  background-color: #f5f6f7;\r\n}\r\n\r\n._1A4_F6f7F8l5YpB7pqzmfa{\r\n  border-color: lightgray;\r\n}\r\n\r\n.FuxHE3usZu0kjHN8Uzuf6 {\r\n  border: 3px solid #007882;\r\n}\r\n\r\n._2rlSdKeeZg8A4lQ7keiLaY {\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  position: relative;\r\n\r\n}\r\n\r\n\r\n._1vn9qy-8wkfowIc0oa53js {\r\n  text-align: center;\r\n  justify-content: center;\r\n  top: 0;\r\n  right: 16px;\r\n  left: 16px;\r\n  bottom: 0;\r\n}\r\n\r\n._3zOoadxFiNLDJvvfGfdd9x {\r\n  display: none;\r\n  top: 40%;\r\n  position: absolute;\r\n  border: 1px solid lightgray;\r\n  vertical-align: middle;\r\n}\r\n\r\n._3o4DNxUbgERSZojI-NhSIr {\r\n  display: none;\r\n  position: absolute;\r\n  top: 40%;\r\n  left: 90%;\r\n  border: 1px solid lightgray;\r\n\r\n}\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk {\r\n  cursor: pointer;\r\n  background-color: #fff;\r\n  color: #3d414a;\r\n  border-radius: 100%;\r\n  font-size: 20px;\r\n  height: 25px;\r\n  justify-content: center;\r\n  transition: 0.3s all;\r\n  width: 25px;\r\n  z-index: 1;\r\n  outline: 0;\r\n}\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk:hover {\r\n  box-shadow: 0 1px 5px 0 lightgray;\r\n  -webkit-transform: scale(1.05);\r\n          transform: scale(1.05);\r\n}\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk:active {\r\n  background-color: lightgray;\r\n  transition: all 0.1s ease 0s;\r\n}\r\n\r\n._1pva8ny2nt28h36cdk6QGb {\r\n  overflow: hidden;\r\n  width: 100%;\r\n}\r\n\r\n.Kz39jqZUjyllay2m6ZX7K {\r\n  display: inline;\r\n  background-color:white;\r\n}\r\n\r\n\r\n._3fhXnbwsySkS0T120Xk8jV {\r\n  font-size: 0;\r\n  transition: all 0.5s ease 0s;\r\n  white-space: nowrap;\r\n  -webkit-overflow-scrolling: touch;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "._2sh5FHd5xIbMprCIa9f8AA {\r\n  display: flex;\r\n  flex-direction: row;\r\n  padding: 1em 0.25em 1em 0.25em;\r\n  border: 20px;\r\n  position: relative;\r\n}\r\n\r\n\r\n._29J47q44_TljNyHOlMyPSJ {\r\n  display: inline-flex;\r\n  vertical-align: top;\r\n  white-space: normal;\r\n  flex-direction: row;\r\n  width: 100%;\r\n}\r\n\r\n._2eWiaMS6PgE-g8M-Fnu0x6 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex: 0 0 25%;\r\n  width: 100%;\r\n}\r\n\r\n.JurDhi-YxWK-T2L28gLCz {\r\n  flex: 1 1;\r\n  padding: 0.2em;\r\n}\r\n\r\n._3lzXoJNWzvW5imJQuOj4Yq {\r\n  font-weight: bolder;\r\n}\r\n\r\n\r\n._2-7Lv8Sbc6gcyqvH_qTCX {\r\n  display: flex;\r\n  flex-direction: column;\r\n  font-size : 14px;\r\n  margin-right: 0.25em;\r\n  margin-left: 0.25em;\r\n  padding: 0.5em;\r\n  border-radius: 9px;\r\n  outline: 0;\r\n  border: 1px solid lightgray;\r\n  background-color: white;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n._2-7Lv8Sbc6gcyqvH_qTCX:hover {\r\n  background-color: #f5f6f7;\r\n}\r\n\r\n._1A4_F6f7F8l5YpB7pqzmfa{\r\n  border-color: lightgray;\r\n}\r\n\r\n.FuxHE3usZu0kjHN8Uzuf6 {\r\n  border: 3px solid #007882;\r\n}\r\n\r\n._2rlSdKeeZg8A4lQ7keiLaY {\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  position: relative;\r\n\r\n}\r\n\r\n\r\n._1vn9qy-8wkfowIc0oa53js {\r\n  text-align: center;\r\n  justify-content: center;\r\n  top: 0;\r\n  right: 16px;\r\n  left: 16px;\r\n  bottom: 0;\r\n}\r\n\r\n._3zOoadxFiNLDJvvfGfdd9x {\r\n  /* display: none; */\r\n  top: 40%;\r\n  position: absolute;\r\n  border: 1px solid lightgray;\r\n  vertical-align: middle;\r\n}\r\n\r\n._3o4DNxUbgERSZojI-NhSIr {\r\n  /* display: none; */\r\n  position: absolute;\r\n  top: 40%;\r\n  left: 90%;\r\n  border: 1px solid lightgray;\r\n}\r\n\r\n\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk {\r\n  cursor: pointer;\r\n  background-color: #fff;\r\n  color: #3d414a;\r\n  border-radius: 100%;\r\n  font-size: 20px;\r\n  height: 25px;\r\n  justify-content: center;\r\n  transition: 0.3s all;\r\n  width: 25px;\r\n  z-index: 1;\r\n  outline: 0;\r\n\r\n  -webkit-transition: opacity 0.5s ;\r\n  -moz-transition: opacity 0.5s ;\r\n  -ms-transition: opacity 0.5s ;\r\n  -o-transition: opacity 0.5s ;\r\n   opacity: 1;\r\n}\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk:hover {\r\n  box-shadow: 0 1px 5px 0 lightgray;\r\n  -webkit-transform: scale(1.05);\r\n          transform: scale(1.05);\r\n}\r\n\r\n.RkrG9DQ0axsM7-y9AY-Bk:active {\r\n  background-color: lightgray;\r\n  transition: all 0.1s ease 0s;\r\n}\r\n\r\n._1pva8ny2nt28h36cdk6QGb {\r\n  overflow: hidden;\r\n  width: 100%;\r\n}\r\n\r\n.Kz39jqZUjyllay2m6ZX7K {\r\n  display: inline;\r\n  background-color:white;\r\n}\r\n\r\n._2T99-spDPSKjDmRiAbZxHD {\r\n  opacity: 0;\r\n}\r\n\r\n._3fhXnbwsySkS0T120Xk8jV {\r\n  font-size: 0;\r\n  transition: all 0.5s ease 0s;\r\n  white-space: nowrap;\r\n  -webkit-overflow-scrolling: touch;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"main": "_2sh5FHd5xIbMprCIa9f8AA",
@@ -3084,6 +3084,7 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"carousel__control": "RkrG9DQ0axsM7-y9AY-Bk",
 	"carousel__screen": "_1pva8ny2nt28h36cdk6QGb",
 	"carousel__control__selected": "Kz39jqZUjyllay2m6ZX7K",
+	"carousel__control__unselected": "_2T99-spDPSKjDmRiAbZxHD",
 	"carousel__track": "_3fhXnbwsySkS0T120Xk8jV"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
