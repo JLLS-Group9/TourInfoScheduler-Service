@@ -20,7 +20,6 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "mongoose": "^5.10.13",
-    "nodemon": "^2.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "sinon": "^9.2.1"
@@ -46,6 +45,7 @@
     "jest-enzyme": "^7.1.2",
     "morgan": "^1.10.0",
     "node": "^15.2.0",
+    "nodemon": "^2.0.6",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.2.0"
