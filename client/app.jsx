@@ -107,12 +107,14 @@ class App extends React.Component {
     } = this.state;
     return (
       <div className={as.mainContainer}>
-        <Form
-          submit={this.submitRequest}
-          view={currentView}
-          property={property}
-          toggle={this.toggleView}
-        />
+        <div className={as.formContainer}>
+          <Form
+            submit={this.submitRequest}
+            view={currentView}
+            property={property}
+            toggle={this.toggleView}
+          />
+        </div>
       </div>
     );
   }
