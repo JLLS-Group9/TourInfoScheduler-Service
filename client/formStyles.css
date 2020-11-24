@@ -107,7 +107,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 .finCheckBox {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
+  font-size: 7px;
 	border: 1px solid #cacece;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 	padding: 2px 3px 2px 3px;
@@ -117,13 +118,13 @@ input:focus, textarea:focus, select:focus {
   margin: 0.5em 0.5em 0.5em 0.75em;
 }
 
-.finCheckBox:checked {
-  content: '\2713';
+
+.finCheckBox:active {
+  content: \2713;
   justify-content: center;
   text-align: center;
-  font-size: 15px;
-  color: white;
-  background-color:  #007882;
+  font-size: 7px;
+  color: #007882;
 }
 
 .tourType {
