@@ -24,6 +24,4 @@ coverage
 build/
 dist/
 
-#amazon s3 service
-seed_URL.js
 
