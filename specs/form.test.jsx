@@ -141,3 +141,4 @@ describe('conditional render on form to show render view', () => {
     expect(wrapper.find(Dates).exists()).to.equal(false);
   });
 });
+

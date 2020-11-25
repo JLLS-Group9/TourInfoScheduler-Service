@@ -56,6 +56,6 @@ table {
 .formContainer {
 	position: relative;
 	width: 992px;
-
+	display: flex;
 }
 

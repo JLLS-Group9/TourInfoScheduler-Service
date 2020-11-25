@@ -1,0 +1,1 @@
+sudo ssh -i "helloWorld.pem" ubuntu@ec2-3-101-16-179.us-west-1.compute.amazonaws.com

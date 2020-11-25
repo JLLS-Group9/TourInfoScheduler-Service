@@ -9,6 +9,8 @@ import Agents from '../client/agentsList.jsx';
 import Dates from '../client/dateCarousel.jsx';
 import Times from '../client/timesDropDown.jsx';
 import Disclaimer from '../client/disclaimer.jsx';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 Enzyme.configure({ adapter: new Adapter() });
 
