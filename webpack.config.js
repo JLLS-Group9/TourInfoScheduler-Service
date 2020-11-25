@@ -5,7 +5,7 @@ const DIST_DIR = path.join(__dirname, 'public');
 
 module.exports = {
 
-  mode: 'production',
+  mode: 'development',
 
   entry: `${SRC_DIR}/index.jsx`,
 
