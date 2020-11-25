@@ -52,26 +52,26 @@ class Form extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log('handle input', event.target.name, this.state[event.target.name]);
+    // console.log('handle input', event.target.name, this.state[event.target.name]);
   }
 
   handleSubmit(event) {
     const { submit } = this.props;
     event.preventDefault();
-    console.log('Form- handle submit', this.state);
+    // console.log('Form- handle submit', this.state);
     submit(this.state);
     this.handleReset();
   }
 
   handleReset() {
-    console.log('entering handleReset');
+    // console.log('entering handleReset');
     // let forms = Array.from(document.querySelectorAll('input'))
     // console.log(forms)
   }
 
   toggleFinancing() {
     const { financing } = this.state;
-    console.log('toggling financing');
+    // console.log('toggling financing');
     const checked = !financing;
     this.setState({
       financing: checked,
@@ -82,7 +82,7 @@ class Form extends React.Component {
     this.setState({
       date: selectedDate,
     });
-    console.log(selectedDate);
+    // console.log(selectedDate);
   }
 
   toggleAgent(agent) {
@@ -93,9 +93,9 @@ class Form extends React.Component {
 
   toggleSliderView() {
     const dateContainer = document.getElementById('track');
-    console.log(dateContainer.clientWidth);
+    // console.log(dateContainer.clientWidth);
     const { dateView } = this.state;
-    console.log('click!');
+    // console.log('click!');
     if (dateView === 'left') {
       this.setState({
         dateView: 'right',
@@ -130,7 +130,7 @@ class Form extends React.Component {
   }
 
   renderScheduler() {
-    console.log('check should indicate schedule', this.state.type);
+    // console.log('check should indicate schedule', this.state.type);
     const { type } = this.state;
     const scheduler = [];
     const buttons = ['In-Person', 'Video'];

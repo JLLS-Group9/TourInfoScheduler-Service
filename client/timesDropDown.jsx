@@ -11,10 +11,10 @@ const Times = ({ selectedDate, bookings, type }) => {
 
   const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
-  console.log('timeDropdown today time cutoff', formattedDate === selectedDate);
+  // console.log('timeDropdown today time cutoff', formattedDate === selectedDate);
 
   if (selectedDate === formattedDate) {
-    console.log('chosen date is today');
+    // console.log('chosen date is today');
     const time = `${today.getHours() + 2}${today.getMinutes()}`;
 
     for (const key in availableTimes) {

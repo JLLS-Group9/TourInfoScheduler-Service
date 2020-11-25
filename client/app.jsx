@@ -23,10 +23,10 @@ class App extends React.Component {
   }
 
   retrievePropertyInfo() {
-    console.log('retrieving info');
+    // console.log('retrieving info');
     axios.get(`${window.location.pathname}bookings`)
       .then((response) => {
-        console.log('got info', response.data[0], window.location.href);
+        // console.log('got info', response.data[0], window.location.href);
         this.setState({
           property: response.data[0],
         });
@@ -35,7 +35,7 @@ class App extends React.Component {
 
   scheduleTour(input) {
     const { property: { propertyId } } = this.state;
-    console.log('scheduler', propertyId, input);
+    // console.log('scheduler', propertyId, input);
     const request = {
       email: input.email,
       financing: input.financing,
@@ -66,7 +66,7 @@ class App extends React.Component {
       message: input.message,
       agent: input.agent,
     };
-    console.log(request, input);
+    // console.log(request, input);
     axios.put(`/api/homes/${property.propertyId}/requestInfo`, {
       request,
     })
@@ -80,7 +80,7 @@ class App extends React.Component {
 
   submitRequest(input) {
     const { currentView } = this.state;
-    console.log(input);
+    // console.log(input);
     if (currentView === 'schedule') {
       this.scheduleTour(input);
     } else {
