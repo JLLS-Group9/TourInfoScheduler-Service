@@ -108,7 +108,7 @@ class App extends React.Component {
     return (
       <div className={as.mainContainer}>
         <div className={as.formContainer}>
-        <img src="https://housephotostrulia.s3-us-west-1.amazonaws.com/static/2_under_GALLERY_next_to_TOUR.jpg" />
+        <img className={as.imgStyle} src="https://housephotostrulia.s3-us-west-1.amazonaws.com/static/2_under_GALLERY_next_to_TOUR.jpg" />
           <Form
             submit={this.submitRequest}
             view={currentView}
