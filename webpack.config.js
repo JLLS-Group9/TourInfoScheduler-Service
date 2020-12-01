@@ -17,8 +17,8 @@ module.exports = {
 
   watch: true,
 
+  plugins: [new CompressionPlugin()],
   module: {
-    plugins: [new CompressionPlugin()],
     rules: [
       {
         test: /\.m?js|jsx$/,
