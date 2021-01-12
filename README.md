@@ -30,16 +30,19 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Development
 
-### Installing Dependencies
+Developed using Babel webpack and Node.js. To start a development bundle and server, run:
 
-From within the root directory:
+```sh
+npm run build
+npm run start
+```
+
+## Installing Dependencies
 
 From within the root directory:
 
 ```sh
 npm install
-npm run build
-npm run start
 ```
 
 ## API Endpoints
