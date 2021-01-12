@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://git.io/JtvF7
+  - https://git.io/JtvFd
+  - https://git.io/JtvFb
+  - https://git.io/JtvFN
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
 2. [Requirements](#requirements)
 3. [Development](#development)
 4. [Installing Dependencies](#installing-dependencies) 
-5. [API Endpoints](#API-endpoints)
+5. [API Endpoints](#api-endpoints)
 
 ## Usage
 
