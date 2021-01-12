@@ -1,6 +1,6 @@
 # Home Sweet Home
 
-> Tour scheduling component for a home/rental listing property website
+ Tour scheduling component for a home/rental listing property website
 
 ## Related Projects
 
