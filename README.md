@@ -54,7 +54,12 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 
 - `POST` request to tour a single listing
 - Success status code: `201` on successful save
-- Request parameter of   `:id` from API endpoint will be used. No request object is required.
+- Request object should be a valid JSON object with following fields:
+
+```sh
+{}
+```
+
 - Response Object:
 ```sh
 { }
