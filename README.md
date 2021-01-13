@@ -96,7 +96,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
     zipCode: String,
     listingAgent: String,
     propertyType: String of 'Pending' or 'For Sale',
-    } ]
+} ]
 ```
 
 **`GET` /api/homes/:id/requestInfo**
@@ -124,7 +124,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
     zipCode: String,
     listingAgent: String,
     propertyType: String of 'Pending' or 'For Sale',
-    } ]
+} ]
 ```
 
 **`GET` /api/homes/:id/bookings**
