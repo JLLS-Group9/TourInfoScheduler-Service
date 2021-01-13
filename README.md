@@ -54,7 +54,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 
 - `POST` request to tour a single listing
 - Success status code: `201` on successful save
-- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Request parameter of   `:id` from API endpoint will be used. No request object is required.
 - Response Object:
 ```sh
 { }
@@ -63,7 +63,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 **`GET` /api/homes/:id/requestInfo**
 - `GET` request for a single listing
 - Success status code: `200`
-- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Request parameter of  `:id` from API endpoint will be used. No request object is required.
 - Response will be HTTP status code `200` and a JSON object that contains property, agent, booking information
 ```sh
 { }
@@ -72,7 +72,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 **`GET` /api/homes/:id/bookings**
 - `GET` request for a single listing
 - Success status code: `200`
-- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Request parameter of  `:id` from API endpoint will be used. No request object is required.
 - Response will be HTTP status code `200` and a JSON object that contains booking information
 ```sh
 { }
