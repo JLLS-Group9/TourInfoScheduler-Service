@@ -54,27 +54,28 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 
 - `POST` request to tour a single listing
 - Success status code: `201` on successful save
-- Request Object: a valid JSON object
+- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Response Object:
 ```sh
-{ owner: Integer, listings_name: String [dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number]}
+{ }
 ```
 
 **`GET` /api/homes/:id/requestInfo**
 - `GET` request for a single listing
 - Success status code: `200`
-- Request parameter of `:id` from API endpoint will be accepted. No request object is required.
-- Response will be HTTP status code `200` and a JSON object that contains property at the given ID with respective fees and all booked reservation dates
+- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Response will be HTTP status code `200` and a JSON object that contains property, agent, booking information
 ```sh
-{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}
+{ }
 ```
 
 **`GET` /api/homes/:id/bookings**
 - `GET` request for a single listing
 - Success status code: `200`
-- Request parameter of :listingid from API endpoint will be accepted. No request object is required.
-- Response will be HTTP status code `200` and a JSON object that contains property at the given ID with respective fees and all booked reservation dates
+- Request parameter of `:id` from API endpoint will be used. No request object is required.
+- Response will be HTTP status code `200` and a JSON object that contains booking information
 ```sh
-{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}
+{ }
 ```
 
 
