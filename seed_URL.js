@@ -1,1 +1,1 @@
-module.exports = 'https://s3-us-west-1.amazonaws.com/trulia.tour.scheduler/';
+module.exports = 'https://homesweet.s3.us-east-2.amazonaws.com/';
