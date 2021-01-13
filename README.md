@@ -67,12 +67,36 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 - Request object should be a valid JSON object with following fields:
 
 ```sh
-{}
+{ email: String,
+  financing: boolean,
+  name: String,
+  phone: numeric,
+  date: Date object,
+  type: String,
+  time: String}
 ```
 
 - Response Object:
 ```sh
-{ }
+[ { bookings: [],
+    requestInfo: [], 
+    agentsInfo: [{
+      email: String,
+      name: String,
+      phone: String,
+      picture: String of URL,
+      recentSales: Integer,
+      reviewScore: Integer,
+      reviewCount: String,
+    }],
+    propertyId: Integer,
+    addres: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    listingAgent: String,
+    propertyType: String of 'Pending' or 'For Sale',
+    } ]
 ```
 
 **`GET` /api/homes/:id/requestInfo**
@@ -80,8 +104,27 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 - Success status code: `200`
 - Request parameter of  `:id` from API endpoint will be used. No request object is required.
 - Successful response will be HTTP status code `200` and a JSON object that contains property, agent, booking information
+- Response Object:
 ```sh
-{ }
+[ { bookings: [],
+    requestInfo: [], 
+    agentsInfo: [{
+      email: String,
+      name: String,
+      phone: String,
+      picture: String of URL,
+      recentSales: Integer,
+      reviewScore: Integer,
+      reviewCount: String,
+    }],
+    propertyId: Integer,
+    addres: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    listingAgent: String,
+    propertyType: String of 'Pending' or 'For Sale',
+    } ]
 ```
 
 **`GET` /api/homes/:id/bookings**
@@ -90,7 +133,13 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 - Request parameter of  `:id` from API endpoint will be used. No request object is required.
 - Successful response will be HTTP status code `200` and a JSON object that contains booking information
 ```sh
-{ }
+{ name: String,
+  email: String,
+  financing: boolean,
+  phone: numeric,
+  message: Varchar,
+  agent: String
+}
 ```
 
 
