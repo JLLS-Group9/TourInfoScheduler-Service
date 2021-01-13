@@ -50,25 +50,28 @@ npm install
 API endpoints conform to a RESTful API architecture to retrieve and modify database-hosted information. All responses will include HTTP response codes to indicate status and errors and data will come in JSON pretty format. All requests must include a Content-Type of application/json and the body must be valid JSON.
 
 **`POST` /api/homes/:id/scheduleTour**
-- `POST` request to tour a single listing
-- Success status code: `201`
 - This endpoint allows you to create a new tour reservation for a house
-- Takes a valid JSON object and will return `201` HTTP code if reservation is saved successfully
-- Request field will be accepted as the following JSON object:
-```{ owner: Integer, listings_name: String [dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number]}```
+
+- `POST` request to tour a single listing
+- Success status code: `201` on successful save
+- Request Object: a valid JSON object
+```sh
+{ owner: Integer, listings_name: String [dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number]}```
 
 **`GET` /api/homes/:id/requestInfo**
 - `GET` request for a single listing
 - Success status code: `200`
 - Request parameter of `:id` from API endpoint will be accepted. No request object is required.
 - Response will be HTTP status code `200` and a JSON object that contains property at the given ID with respective fees and all booked reservation dates
-```{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}```
+```sh
+{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}```
 
 **`GET` /api/homes/:id/bookings**
 - `GET` request for a single listing
 - Success status code: `200`
 - Request parameter of :listingid from API endpoint will be accepted. No request object is required.
 - Response will be HTTP status code `200` and a JSON object that contains property at the given ID with respective fees and all booked reservation dates
-```{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}```
+```sh
+{ owner: String, listings_name: String, dailyPrice: Number, cleaningFee: Number, serviceFee: Number, taxes: Number, max_guests: Number, min_stay: Number, max_stay: Number, monthlyDiscount: Number, weeklyDiscount: Number, holidayPremium: Number, weekendPremium: Number, reserved: [{check-in: ISO Date, check out: ISO Date}]}```
 
 
