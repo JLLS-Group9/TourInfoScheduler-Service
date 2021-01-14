@@ -30,7 +30,7 @@
 ## Usage
 
 - Access the individual component through client/src/index.js
-- Change listings by modifying the numerical value after the site, e.g. from 
+- Change listings by modifying the numerical value after the site, e.g. from /api/homes/15 to /api/homes/20
 
 ## Requirements
 
